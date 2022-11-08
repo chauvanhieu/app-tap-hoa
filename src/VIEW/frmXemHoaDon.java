@@ -104,6 +104,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         loadGioHang();
         lb.setVisible(false);
         txtTienKhachDua.setVisible(false);
+        if (cbHinhThucThanhToan.getSelectedIndex() == 2) {
+            lb.setVisible(true);
+            txtTienKhachDua.setVisible(true);
+            txtTienKhachDua.setText(helper.LongToString(hoadon.getSoTienNhanDuoc()));
+        }
     }
 
     public void loadComboboxKhachHang() {
@@ -705,6 +710,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         lb.setText("Khách đưa :");
 
         txtTienKhachDua.setText("0");
+        txtTienKhachDua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTienKhachDuaKeyReleased(evt);
+            }
+        });
 
         panelComboKhachHang.setLayout(new java.awt.BorderLayout());
 
@@ -971,17 +981,9 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             return;
         }
         editMode(false);
-//        capNhatHoaDon(hoaDon hoadon,   // hóa đơn mới
-//            long tienKhachDua,        // tổng tiền trừ đi tiền nợ.  nếu như là hình thức nợ
-//            JTable tableGioHang,      // tên table giỏ hàng.
-//            ArrayList<chiTietHoaDon> dataGioHangCu,    //  data cũ
-//            ArrayList<chiTietHoaDon> dataGioHangMoi,      // data mới
-//            int hinhThucThanhToanCu,
-//            long tongTienHoaDonCu,
-//            String idKhachHangCu) {
-//        long tienKhachDua = helper.SoLong(txtTongTien.getText()) - helper.SoLong(txtGiaTriGiam.getText());
+
         int hinhThucThanhToanCu = hoadon.getHinhThucThanhToan();
-        long tongTienThanhToanCu = hoadon.getTongTien();
+        long tienNoCu = hoadon.getTongTien() - hoadon.getSoTienNhanDuoc();
         String idKhachHangCu = hoadon.getIdKhachHang();
 
         // tạo hóa đơn mới
@@ -1002,7 +1004,10 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         long giamGia = soTienGoc - helper.SoLong(txtTongTien.getText());
         long tongtien = helper.SoLong(txtTongTien.getText());
         long tienKhachDua = 0;
-        if (txtTienKhachDua.getText() != "" || !txtTienKhachDua.getText().equals("")) {
+//        if (txtTienKhachDua.getText() != "" || !txtTienKhachDua.getText().equals("")) {
+//            tienKhachDua = helper.SoLong(txtTienKhachDua.getText());
+//        }
+        if (cbHinhThucThanhToan.getSelectedIndex() == 2) {
             tienKhachDua = helper.SoLong(txtTienKhachDua.getText());
         }
         hoaDon hoadon = new hoaDon(
@@ -1017,18 +1022,14 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 tongtien,
                 cbChonGia.getSelectedIndex(),
                 frmXemHoaDon.hoadon.isTrangThai());
-        long soTienNhanDuoc = tongtien;
-        if (cbHinhThucThanhToan.getSelectedIndex() == 2) {
-            soTienNhanDuoc = helper.SoLong(txtTienKhachDua.getText());
-        }
-        hoadon.setSoTienNhanDuoc(soTienNhanDuoc);
+        System.out.println(tienKhachDua);
         MDHoaDon.capNhatHoaDon(hoadon,
                 tienKhachDua,
                 tableGioHang,
                 dataChiTietHoaDonCu,
                 dataChiTietHoaDonMoi,
                 hinhThucThanhToanCu,
-                tongTienThanhToanCu,
+                tienNoCu,
                 idKhachHangCu);
         JOptionPane.showMessageDialog(this, "CẬP NHẬT THÀNH CÔNG !");
     }//GEN-LAST:event_btnLuuActionPerformed
@@ -1223,6 +1224,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             lb.setVisible(false);
         }
     }//GEN-LAST:event_cbHinhThucThanhToanItemStateChanged
+
+    private void txtTienKhachDuaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachDuaKeyReleased
+        helper.setTextFieldMoney(txtTienKhachDua);
+
+    }//GEN-LAST:event_txtTienKhachDuaKeyReleased
 
     /**
      * @param args the command line arguments
