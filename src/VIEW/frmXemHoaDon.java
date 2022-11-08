@@ -289,7 +289,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             } else {   // Giảm số phần trăm
                 long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
                 long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
-                System.out.println(soTienGiam);
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
@@ -326,7 +325,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             } else {   // Giảm số phần trăm
                 long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
                 long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
-                System.out.println(soTienGiam);
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
@@ -335,40 +333,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
-//    public void loadComboboxKhachHang() {
-//        String[] columns = new String[]{"Mã khách hàng", "Tên", "Điện thoại", "Địa chỉ", "Công nợ"};
-//        int[] widths = new int[]{80, 300, 120, 360, 150};
-//        this.comboboxKhachHang = new DetailedComboBox(columns, widths, 1);
-//
-//        List<List<?>> tableData = new ArrayList<List<?>>();
-//        tableData.add(new ArrayList<>(
-//                Arrays.asList("KH01", "KHÁCH MỚI", "", "", "")));
-//        for (khachHang kh : dataKhachHang) {
-//            tableData.add(new ArrayList<>(
-//                    Arrays.asList(kh.getIdKhachHang(), kh.getName(), kh.getSoDienThoai(), kh.getDiaChi(), helper.LongToString(kh.getNo()))));
-//        }
-//        comboboxKhachHang.setTableData(tableData);
-//        comboboxKhachHang.setFont(new Font("Arial", Font.ITALIC, 16));
-//        int index = 0;
-//        for (int i = 0; i < dataKhachHang.size(); i++) {
-//            if (hoadon.getIdKhachHang().equals(dataKhachHang.get(i).getIdKhachHang())) {
-//                index = i;
-//                break;
-//            }
-//        }
-//        comboboxKhachHang.setSelectedIndex(index);
-//        comboboxKhachHang.setPopupAlignment(DetailedComboBox.Alignment.LEFT);
-//        comboboxKhachHang.addItemListener(new ItemListener() {
-//            @Override
-//            public void itemStateChanged(ItemEvent e) {
-//                List<?> rowData = comboboxKhachHang.getSelectedRow();
-//                idKhachHang = (String) rowData.get(0) + "";
-//            }
-//        });
-//        comboboxKhachHang.setVisible(true);
-//        panelComBoKhachHang.add(comboboxKhachHang);
-//    }
-//
     public void loadTableSanPham() {
         ArrayList<sanPham> data = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
@@ -393,7 +357,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         for (int i = 0; i < tableGioHang.getRowCount(); i++) {
             boolean check = (boolean) tableGioHang.getValueAt(i, 5);
             if (check == false) {
-//                model.removeRow(i);
                 dataChiTietHoaDon.remove(i);
             }
         }
@@ -974,6 +937,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tableSanPhamMouseExited
 
+    @SuppressWarnings("unchecked")
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
 
         if (cbHinhThucThanhToan.getSelectedIndex() == 2 && comboboxKhachHang.getSelectedIndex() == 0) {
@@ -1022,7 +986,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 tongtien,
                 cbChonGia.getSelectedIndex(),
                 frmXemHoaDon.hoadon.isTrangThai());
-        System.out.println(tienKhachDua);
         MDHoaDon.capNhatHoaDon(hoadon,
                 tienKhachDua,
                 tableGioHang,

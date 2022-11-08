@@ -232,11 +232,7 @@ public class MDHoaDon {
                 hoadon.getId()
         );
         if (hoadon.getHinhThucThanhToan() == 3) {
-            long tienNo = hoadon.getTongTien() - tienKhachDua;
-            System.out.println(tienNo);
-            System.out.println(hoadon.getTongTien());
-            System.out.println(tienKhachDua);
-            HELPER.SQLhelper.executeUpdate(sqlCongNoKhachHang, tienNo, hoadon.getIdKhachHang());
+            HELPER.SQLhelper.executeUpdate(sqlCongNoKhachHang, hoadon.getTongTien() - tienKhachDua, hoadon.getIdKhachHang());
         }
         // thêm chi tiết hóa đơn:
         int rows = tableGioHang.getRowCount();
