@@ -1,5 +1,6 @@
 package VIEW;
 
+import CLASS.sanPham;
 import CONTROLLER.CTRLSanPham;
 import MODEL.MDSanPham;
 import java.awt.event.ActionEvent;
@@ -10,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 public class frmThemNhanhSanPham extends javax.swing.JDialog {
-
+    
     public frmThemNhanhSanPham(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -20,7 +21,7 @@ public class frmThemNhanhSanPham extends javax.swing.JDialog {
         inputMap.put(KeyStroke.getKeyStroke("ENTER"), "KEY_ENTER");
         btnLuu.getActionMap().put("KEY_ENTER", new AbstractAction() {
             public void actionPerformed(ActionEvent evt) {
-
+                
                 if (txtBarcode.isFocusable()) {
                     btnLuu.doClick();
                 }
@@ -31,14 +32,14 @@ public class frmThemNhanhSanPham extends javax.swing.JDialog {
         esc.put(KeyStroke.getKeyStroke("ESCAPE"), "VK_ESCAPE");
         btnHuy.getActionMap().put("VK_ESCAPE", new AbstractAction() {
             public void actionPerformed(ActionEvent evt) {
-
+                
                 if (txtBarcode.isFocusable()) {
                     btnHuy.doClick();
                 }
             }
         });
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -174,11 +175,26 @@ public class frmThemNhanhSanPham extends javax.swing.JDialog {
         String ten = txtTenSanPham.getText();
         String barcode = txtBarcode.getText();
         long giaBan = HELPER.helper.SoLong(txtGiaBan.getText());
-//        CTRLSanPham.themNhanhSanPham(ten, giaBan, barcode);
-        if (CTRLSanPham.themNhanhSanPham(ten, giaBan, barcode) == true) {
-            JOptionPane.showMessageDialog(this, "Thêm thành công !");
-            this.setVisible(false);
-        }
+        sanPham sp = new sanPham(
+                MDSanPham.createId(),
+                ten,
+                barcode,
+                "empty.png",
+                5000,
+                giaBan,
+                5000,
+                10,
+                10,
+                "NCC01",
+                "DVT04",
+                "LSP01",
+                "",
+                true
+        );
+        MDSanPham.add(sp);
+        JOptionPane.showMessageDialog(this, "Thêm thành công !");
+        this.setVisible(false);
+        
 
     }//GEN-LAST:event_btnLuuActionPerformed
 
@@ -189,7 +205,7 @@ public class frmThemNhanhSanPham extends javax.swing.JDialog {
     private void txtBarcodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBarcodeKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBarcodeKeyReleased
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

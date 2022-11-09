@@ -52,7 +52,6 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon = new ArrayList<>();
     private ArrayList<String> listLoaiSanPham;
     private String path = "src/IMAGE/";
-    private ArrayList<khachHang> dataKhachHang;
     private String idKhachHang = "KH01";
     private long soTienGoc;
     private String idHoaDonBanHang = "";
@@ -61,7 +60,6 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         initComponents();
         this.acc = account;
         this.setName("Phiếu bán hàng");
-        dataKhachHang = MDKhachHang.getDataToComboBox();
         listLoaiSanPham = MDLoaiSanPham.getNames();
         // load combobox thông tin khách hàng
         loadComboboxKhachHang();
@@ -85,8 +83,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 
     public void themNhanhSanPham() {
         frmThemNhanhSanPham frm = new frmThemNhanhSanPham((Frame) this.getParent().getParent().getParent().getParent().getParent().getParent(), true);
-        frm.setVisible(true);
 
+        frm.setVisible(true);
+        loadTableSanPham();
     }
 
     public void loadComboboxLoaiSanPham() {
@@ -239,7 +238,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         List<List<?>> tableData = new ArrayList<List<?>>();
         tableData.add(new ArrayList<>(
                 Arrays.asList("KH01", "KHÁCH MỚI", "", "", "")));
+        ArrayList<khachHang> dataKhachHang = MDKhachHang.getDataToComboBox();
         for (khachHang kh : dataKhachHang) {
+            
             tableData.add(new ArrayList<>(
                     Arrays.asList(kh.getIdKhachHang(), kh.getName(), kh.getSoDienThoai(), kh.getDiaChi(), helper.LongToString(kh.getNo()))));
         }
@@ -256,6 +257,10 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         });
         comboboxKhachHang.setVisible(true);
         panelComBoKhachHang.add(comboboxKhachHang);
+    }
+
+    public void reloadComboKhachHang() {
+
     }
 
     @SuppressWarnings("unchecked")
@@ -291,7 +296,6 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         btnLuuIn = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton3 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         cbTuyChonGiamGia = new javax.swing.JComboBox<>();
         txtGiaTriGiam = new javax.swing.JTextField();
@@ -416,17 +420,17 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                         .addGap(0, 210, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTimKiemSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(iconBarcode)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8)
                                 .addComponent(btnEnter)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))))
+                                .addComponent(jButton1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTimKiemSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -442,8 +446,8 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtTimKiemSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbLoaiSanPham, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiemSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE))
         );
@@ -577,8 +581,6 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/new-user.png"))); // NOI18N
-
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel10.setText("Tùy chọn giảm :");
 
@@ -634,9 +636,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(panelComBoKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3)
-                                .addGap(18, 18, 18)
+                                .addGap(58, 58, 58)
                                 .addComponent(jLabel5))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -661,8 +661,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                     .addComponent(cbHinhThucThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
-                    .addComponent(panelComBoKhachHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3))
+                    .addComponent(panelComBoKhachHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -957,6 +956,10 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnThanhToanActionPerformed
+    public void setIDKhachHang(String id) {
+        this.idKhachHang = id;
+    }
+
     public void thanhToan() {
         if (cbHinhThucThanhToan.getSelectedIndex() == 2 && idKhachHang == "KH01") {
             JOptionPane.showMessageDialog(this, "Thanh toán nợ cần có thông tin khách hàng !");
@@ -1192,7 +1195,6 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbTuyChonGiamGia;
     private javax.swing.JLabel iconBarcode;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

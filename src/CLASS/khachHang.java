@@ -10,6 +10,7 @@ package CLASS;
  * @author Admin
  */
 public class khachHang {
+
     String idKhachHang;
     String name;
     String soDienThoai;
@@ -21,7 +22,14 @@ public class khachHang {
     public khachHang() {
     }
 
-    public khachHang(String idKhachHang, String name, String soDienThoai, String diaChi, String ghiChu, long no, boolean trangThai) {
+    public khachHang(
+            String idKhachHang,
+            String name,
+            String soDienThoai,
+            String diaChi,
+            String ghiChu,
+            long no,
+            boolean trangThai) {
         this.idKhachHang = idKhachHang;
         this.name = name;
         this.soDienThoai = soDienThoai;
@@ -86,7 +94,5 @@ public class khachHang {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
 
-    
 }

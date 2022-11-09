@@ -982,6 +982,11 @@ public class frmMAIN extends javax.swing.JFrame {
         btnThemKhachHang.setText("Thêm");
         btnThemKhachHang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnThemKhachHang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnThemKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemKhachHangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -2894,6 +2899,11 @@ public class frmMAIN extends javax.swing.JFrame {
             loadTableKhachHang();
         }
     }//GEN-LAST:event_tableKhachHangMousePressed
+
+    private void btnThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKhachHangActionPerformed
+        new frmEditorKhachHang(this, true).setVisible(true);
+        loadTableKhachHang();
+    }//GEN-LAST:event_btnThemKhachHangActionPerformed
 
     private void txtTimKiemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:

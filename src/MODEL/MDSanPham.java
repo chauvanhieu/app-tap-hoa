@@ -8,7 +8,7 @@ public class MDSanPham {
 
     public static void quickAdd(String ten, long giaBan, String barcode) {
         String sql = "insert into sanpham(id,name,barcode,giaBan,giasi,hinhAnh,idnhacungcap,idloaisanpham,iddonvitinh,soluong,soluongtoithieu,trangthai,ghichu) "
-                + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+                + " values(?,?,?,?,?,?,?,?,?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql,
                 createId(),
                 ten,

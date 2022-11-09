@@ -20,7 +20,7 @@ public class MDKhachHang {
 
     public static ArrayList<khachHang> getDataToComboBox() {
         ArrayList<khachHang> data = new ArrayList<>();
-        String sql = "SELECT * FROM khachhang WHERE id != 'KH01' ";
+        String sql = "SELECT * FROM khachhang WHERE id != 'KH01' and trangthai = 1";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {
             while (rs.next()) {
@@ -107,7 +107,7 @@ public class MDKhachHang {
     public static khachHang getKhachHang(String id) {
         String sql = "select * from khachHang where id = ?";
         khachHang kh = new khachHang();
-        ResultSet rs = HELPER.SQLhelper.executeQuery(sql,id);
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, id);
         try {
             while (rs.next()) {
                 kh = new khachHang(
@@ -180,6 +180,6 @@ public class MDKhachHang {
 
     public static void quickAdd(String id, String name, String sdt, String diachi) {
         String sql = "insert into khachhang(id,name,SoDienThoai,DiaChi,thoigian) values(?,?,?,?,?);";
-        HELPER.SQLhelper.executeUpdate(sql, id, name, sdt, diachi,HELPER.helper.getDateTime());
+        HELPER.SQLhelper.executeUpdate(sql, id, name, sdt, diachi, HELPER.helper.getDateTime());
     }
 }
