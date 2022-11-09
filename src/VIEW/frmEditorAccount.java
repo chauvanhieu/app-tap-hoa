@@ -47,7 +47,6 @@ public class frmEditorAccount extends javax.swing.JDialog {
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).getIdNhanVien().trim().equals(acc.getIdNhanVien())) {
                 index = i;
-                System.out.println(index);
                 break;
             }
         }

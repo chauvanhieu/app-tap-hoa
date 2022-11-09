@@ -670,7 +670,6 @@ public class frmEditorSanPham extends javax.swing.JDialog {
             hinhAnh = file.getName();
             ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + file.getName()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
             lbHinhAnh.setIcon(imageIcon);
-            System.out.println(hinhAnh);
         }
     }//GEN-LAST:event_btnChonAnhActionPerformed
 

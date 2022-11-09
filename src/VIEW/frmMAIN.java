@@ -1044,6 +1044,11 @@ public class frmMAIN extends javax.swing.JFrame {
                 tableKhachHangFocusLost(evt);
             }
         });
+        tableKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableKhachHangMousePressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(tableKhachHang);
         if (tableKhachHang.getColumnModel().getColumnCount() > 0) {
             tableKhachHang.getColumnModel().getColumn(0).setMaxWidth(200);
@@ -2883,6 +2888,14 @@ public class frmMAIN extends javax.swing.JFrame {
         model.setRowCount(0);
         tableChiTietHoaDonBanHang.setModel(model);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void tableKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKhachHangMousePressed
+        if (evt.getClickCount() == 2 && tableKhachHang.getSelectedRows().length == 1) {
+            String idKhachHang = tableKhachHang.getValueAt(tableKhachHang.getSelectedRow(), 0) + "";
+            new frmEditorKhachHang(this, true, idKhachHang).setVisible(true);
+            loadTableKhachHang();
+        }
+    }//GEN-LAST:event_tableKhachHangMousePressed
 
     private void txtTimKiemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:

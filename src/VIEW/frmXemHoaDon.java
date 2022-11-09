@@ -104,6 +104,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         loadGioHang();
         lb.setVisible(false);
         txtTienKhachDua.setVisible(false);
+        if (cbHinhThucThanhToan.getSelectedIndex() == 2) {
+            lb.setVisible(true);
+            txtTienKhachDua.setVisible(true);
+            txtTienKhachDua.setText(helper.LongToString(hoadon.getSoTienNhanDuoc()));
+        }
     }
 
     public void loadComboboxKhachHang() {
@@ -284,7 +289,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             } else {   // Giảm số phần trăm
                 long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
                 long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
-                System.out.println(soTienGiam);
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
@@ -321,7 +325,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             } else {   // Giảm số phần trăm
                 long giaTriPhanTram = helper.SoLong(txtGiaTriGiam.getText());
                 long soTienGiam = thanhTienBanDau * giaTriPhanTram / 100;
-                System.out.println(soTienGiam);
                 tongTienFinal = thanhTienBanDau - soTienGiam;
             }
         }
@@ -330,40 +333,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         txtTongTien.setText(helper.LongToString(tongTienFinal));
     }
 
-//    public void loadComboboxKhachHang() {
-//        String[] columns = new String[]{"Mã khách hàng", "Tên", "Điện thoại", "Địa chỉ", "Công nợ"};
-//        int[] widths = new int[]{80, 300, 120, 360, 150};
-//        this.comboboxKhachHang = new DetailedComboBox(columns, widths, 1);
-//
-//        List<List<?>> tableData = new ArrayList<List<?>>();
-//        tableData.add(new ArrayList<>(
-//                Arrays.asList("KH01", "KHÁCH MỚI", "", "", "")));
-//        for (khachHang kh : dataKhachHang) {
-//            tableData.add(new ArrayList<>(
-//                    Arrays.asList(kh.getIdKhachHang(), kh.getName(), kh.getSoDienThoai(), kh.getDiaChi(), helper.LongToString(kh.getNo()))));
-//        }
-//        comboboxKhachHang.setTableData(tableData);
-//        comboboxKhachHang.setFont(new Font("Arial", Font.ITALIC, 16));
-//        int index = 0;
-//        for (int i = 0; i < dataKhachHang.size(); i++) {
-//            if (hoadon.getIdKhachHang().equals(dataKhachHang.get(i).getIdKhachHang())) {
-//                index = i;
-//                break;
-//            }
-//        }
-//        comboboxKhachHang.setSelectedIndex(index);
-//        comboboxKhachHang.setPopupAlignment(DetailedComboBox.Alignment.LEFT);
-//        comboboxKhachHang.addItemListener(new ItemListener() {
-//            @Override
-//            public void itemStateChanged(ItemEvent e) {
-//                List<?> rowData = comboboxKhachHang.getSelectedRow();
-//                idKhachHang = (String) rowData.get(0) + "";
-//            }
-//        });
-//        comboboxKhachHang.setVisible(true);
-//        panelComBoKhachHang.add(comboboxKhachHang);
-//    }
-//
     public void loadTableSanPham() {
         ArrayList<sanPham> data = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
@@ -388,7 +357,6 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         for (int i = 0; i < tableGioHang.getRowCount(); i++) {
             boolean check = (boolean) tableGioHang.getValueAt(i, 5);
             if (check == false) {
-//                model.removeRow(i);
                 dataChiTietHoaDon.remove(i);
             }
         }
@@ -705,6 +673,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         lb.setText("Khách đưa :");
 
         txtTienKhachDua.setText("0");
+        txtTienKhachDua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTienKhachDuaKeyReleased(evt);
+            }
+        });
 
         panelComboKhachHang.setLayout(new java.awt.BorderLayout());
 
@@ -964,6 +937,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tableSanPhamMouseExited
 
+    @SuppressWarnings("unchecked")
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
 
         if (cbHinhThucThanhToan.getSelectedIndex() == 2 && comboboxKhachHang.getSelectedIndex() == 0) {
@@ -971,17 +945,9 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             return;
         }
         editMode(false);
-//        capNhatHoaDon(hoaDon hoadon,   // hóa đơn mới
-//            long tienKhachDua,        // tổng tiền trừ đi tiền nợ.  nếu như là hình thức nợ
-//            JTable tableGioHang,      // tên table giỏ hàng.
-//            ArrayList<chiTietHoaDon> dataGioHangCu,    //  data cũ
-//            ArrayList<chiTietHoaDon> dataGioHangMoi,      // data mới
-//            int hinhThucThanhToanCu,
-//            long tongTienHoaDonCu,
-//            String idKhachHangCu) {
-//        long tienKhachDua = helper.SoLong(txtTongTien.getText()) - helper.SoLong(txtGiaTriGiam.getText());
+
         int hinhThucThanhToanCu = hoadon.getHinhThucThanhToan();
-        long tongTienThanhToanCu = hoadon.getTongTien();
+        long tienNoCu = hoadon.getTongTien() - hoadon.getSoTienNhanDuoc();
         String idKhachHangCu = hoadon.getIdKhachHang();
 
         // tạo hóa đơn mới
@@ -1002,7 +968,10 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         long giamGia = soTienGoc - helper.SoLong(txtTongTien.getText());
         long tongtien = helper.SoLong(txtTongTien.getText());
         long tienKhachDua = 0;
-        if (txtTienKhachDua.getText() != "" || !txtTienKhachDua.getText().equals("")) {
+//        if (txtTienKhachDua.getText() != "" || !txtTienKhachDua.getText().equals("")) {
+//            tienKhachDua = helper.SoLong(txtTienKhachDua.getText());
+//        }
+        if (cbHinhThucThanhToan.getSelectedIndex() == 2) {
             tienKhachDua = helper.SoLong(txtTienKhachDua.getText());
         }
         hoaDon hoadon = new hoaDon(
@@ -1017,18 +986,13 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 tongtien,
                 cbChonGia.getSelectedIndex(),
                 frmXemHoaDon.hoadon.isTrangThai());
-        long soTienNhanDuoc = tongtien;
-        if (cbHinhThucThanhToan.getSelectedIndex() == 2) {
-            soTienNhanDuoc = helper.SoLong(txtTienKhachDua.getText());
-        }
-        hoadon.setSoTienNhanDuoc(soTienNhanDuoc);
         MDHoaDon.capNhatHoaDon(hoadon,
                 tienKhachDua,
                 tableGioHang,
                 dataChiTietHoaDonCu,
                 dataChiTietHoaDonMoi,
                 hinhThucThanhToanCu,
-                tongTienThanhToanCu,
+                tienNoCu,
                 idKhachHangCu);
         JOptionPane.showMessageDialog(this, "CẬP NHẬT THÀNH CÔNG !");
     }//GEN-LAST:event_btnLuuActionPerformed
@@ -1223,6 +1187,11 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             lb.setVisible(false);
         }
     }//GEN-LAST:event_cbHinhThucThanhToanItemStateChanged
+
+    private void txtTienKhachDuaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachDuaKeyReleased
+        helper.setTextFieldMoney(txtTienKhachDua);
+
+    }//GEN-LAST:event_txtTienKhachDuaKeyReleased
 
     /**
      * @param args the command line arguments
