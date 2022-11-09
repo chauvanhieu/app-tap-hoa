@@ -12,6 +12,43 @@ import javax.swing.table.DefaultTableModel;
 
 public class MDHoaDon {
 
+    public static void getHoaDonTheoKhachHang(JTable table, String idKhachHang) {
+        String sql = "select hoadon.id as 'idhoadon', khachhang.name as 'tenkhachhang', nhanvien.name as 'tennhanvien',hoadon.TongTienThanhToan as 'tongtien',"
+                + "hoadon.GiamGia as 'tiengiamgia', hoadon.HinhThucThanhToan as 'hinhthucthanhtoan',hoadon.ThoiGian as 'thoigian',hoadon.GhiChu as 'ghichu'"
+                + "from hoadon "
+                + " join khachhang on khachhang.ID=hoadon.IDkhachHang "
+                + " join nhanvien on nhanvien.id=hoadon.IDnhanvien "
+                + " where hoadon.IDkhachHang = ?";
+
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, idKhachHang);
+        try {
+            while (rs.next()) {
+                String hinhthuc = "";
+                if (rs.getInt("hinhthucthanhtoan") == 1) {
+                    hinhthuc = "Tiền mặt";
+                } else if (rs.getInt("hinhthucthanhtoan") == 2) {
+                    hinhthuc = "Chuyển khoản";
+                } else if (rs.getInt("hinhthucthanhtoan") == 3) {
+                    hinhthuc = "Nợ";
+                }
+                model.addRow(new Object[]{
+                    rs.getString("idhoadon"),
+                    rs.getString("tenkhachhang"),
+                    rs.getString("tennhanvien"),
+                    HELPER.helper.LongToString(rs.getLong("tongtien")),
+                    HELPER.helper.LongToString(rs.getLong("tiengiamgia")),
+                    hinhthuc,
+                    rs.getString("thoigian"),
+                    rs.getString("ghichu"),});
+            }
+        } catch (Exception e) {
+        }
+        
+        table.setModel(model);
+    }
+
     public static void showHoaDonCuaNhanVien(String idNhanVien, JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
