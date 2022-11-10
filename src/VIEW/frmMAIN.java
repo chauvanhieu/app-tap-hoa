@@ -3149,7 +3149,11 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTimKiemHoaDonTrichKhoActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        String keyword = txtTimKiemHoaDonTrichKho.getText().trim();
+        String dateFrom = helper.LayNgayString(dateFromTrichKho.getDate(), "yyyy-MM-dd");
+        String dateTo = helper.LayNgayString(dateToTrichKho.getDate(), "yyyy-MM-dd");
+        MDTrichKho.loadTableHoaDonTrichKho(tableHoaDonTrichKho, keyword, dateFrom, dateTo);
+        clearTableChiTietTrichKho();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void tableHoaDonTrichKhoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableHoaDonTrichKhoFocusLost

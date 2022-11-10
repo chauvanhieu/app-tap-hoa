@@ -50,6 +50,32 @@ public class MDTrichKho {
         table.setModel(model);
     }
 
+    public static void loadTableHoaDonTrichKho(JTable table, String keyword, String dateFrom, String dateTo) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        String sql = "select trichkho.*,nhanvien.name as 'tennhanvien' from trichkho "
+                + "join nhanvien on nhanvien.id=trichkho.IDNhanVien "
+                + "where "
+                + "(trichkho.IDNhanVien like '%" + keyword + "%' or "
+                + "trichkho.ID like '%" + keyword + "%' or "
+                + "nhanvien.name like '%" + keyword + "%')  "
+                + "and "
+                + "(date(trichkho.ThoiGian) BETWEEN ? and ?) "
+                + "order by trichkho.thoigian desc";
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, dateFrom, dateTo);
+        model.setRowCount(0);
+        try {
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("id"),
+                    rs.getString("tennhanvien"),
+                    rs.getString("thoigian"),
+                    rs.getString("ghichu"),});
+            }
+        } catch (Exception e) {
+        }
+        table.setModel(model);
+    }
+
     public static void updateHoaDonTrichKho(String idhoadon, ArrayList<chiTietHoaDon> dataCu, ArrayList<chiTietHoaDon> dataMoi) {
         String sqlResetSoLuong = " update sanpham set soluong = soluong + ? where id = ?";
         String sqlXoaChiTietHoaDonCu = "delete from chitiethoadon where idhoadon = ? ";
