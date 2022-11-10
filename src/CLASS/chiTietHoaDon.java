@@ -9,7 +9,16 @@ public class chiTietHoaDon {
     int tonKho;
     long donGia;
     long giaSi;
+    long giaNhap;
     boolean trangThai;
+
+    public long getGiaNhap() {
+        return giaNhap;
+    }
+
+    public void setGiaNhap(long giaNhap) {
+        this.giaNhap = giaNhap;
+    }
 
     public chiTietHoaDon(
             String idSanPham,
@@ -19,7 +28,9 @@ public class chiTietHoaDon {
             int tonKho,
             long donGia,
             long giaSi,
+            long giaNhap,
             boolean trangThai) {
+        this.giaNhap = giaNhap;
         this.idSanPham = idSanPham;
         this.tonKho = tonKho;
         this.tenSanPham = tenSanPham;
@@ -52,6 +63,10 @@ public class chiTietHoaDon {
 
     public long getThanhTien() {
         return soLuong * donGia;
+    }
+
+    public long getThanhTienGiaNhap() {
+        return soLuong * giaNhap;
     }
 
     public String getIdSanPham() {
