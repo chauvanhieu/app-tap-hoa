@@ -8,7 +8,6 @@ import MODEL.MDChiTietHoaDon;
 import MODEL.MDLoaiSanPham;
 import MODEL.MDSanPham;
 import MODEL.MDTrichKho;
-import static VIEW.panelTrichKhoSanPham.acc;
 import java.awt.AWTException;
 import java.awt.Font;
 import java.awt.Frame;
@@ -29,19 +28,21 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class frmXemPhieuTrichKho extends javax.swing.JDialog {
-
+    
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon;
     private ArrayList<String> listLoaiSanPham = MDLoaiSanPham.getNames();
     private String path = "src/IMAGE/";
     public static String idHoaDon;
     private hoaDonTrichKho hoadon;
-
+    private ArrayList<chiTietHoaDon> dataChiTietHoaDonCu;
+    
     public frmXemPhieuTrichKho(java.awt.Frame parent, boolean modal, String idhoadon) {
         initComponents();
         this.hoadon = MDTrichKho.getHoaDon(idhoadon);
         dataChiTietHoaDon = MDChiTietHoaDon.getChiTietHoaDonTrichKho(idhoadon);
+        dataChiTietHoaDonCu = (ArrayList<chiTietHoaDon>) dataChiTietHoaDon.clone();
         UIManager.put("Table.consistentHomeEndKeyBehavior", true);
-
+        
         helper.addIconSearch(txtTimKiemSanPham);
         // add key listener cho nút quét mã vạch
         setKeyPress();
@@ -49,18 +50,18 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         setModelTableSanPham();
         loadTableSanPham();
         txtBarcode.requestFocus();
-
+        
         loadGioHang();
         editMode(false);
     }
-
+    
     public void themNhanhSanPham() {
         frmThemNhanhSanPham frm = new frmThemNhanhSanPham((Frame) this.getParent().getParent().getParent().getParent().getParent().getParent(), true);
-
+        
         frm.setVisible(true);
         loadTableSanPham();
     }
-
+    
     public void loadGioHang() {
         DefaultTableModel model = (DefaultTableModel) tableGioHang.getModel();
         model.setRowCount(0);
@@ -76,10 +77,10 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         }
         tableGioHang.setModel(model);
     }
-
+    
     public void addGioHang(chiTietHoaDon sp) {
         boolean isTonTai = true;
-
+        
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
                 themNhanhSanPham();
@@ -101,11 +102,11 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
                 } else {
                     //chưa tồn tại
                     isTonTai = false;
-
+                    
                 }
             }
         }
-
+        
         if (isTonTai == true) {
             for (chiTietHoaDon item : dataChiTietHoaDon) {
                 if (item.getIdSanPham().equals(sp.getIdSanPham())) {
@@ -118,7 +119,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         }
         loadGioHang();
     }
-
+    
     public void enterBarcode() {
         if (txtBarcode.isFocusable() == false) {
             return;
@@ -128,7 +129,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
             return;
         }
         chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
-
+        
         if (sp == null) {
             if (JOptionPane.showConfirmDialog(null, "Sản phẩm chưa có. Thêm mới sản phẩm ?") == 0) {
                 themNhanhSanPham();
@@ -145,7 +146,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         addGioHang(sp);
         txtBarcode.requestFocus();
     }
-
+    
     public void loadComboboxLoaiSanPham() {
         cbLoaiSanPham.removeAllItems();
         cbLoaiSanPham.addItem("Tất cả");
@@ -154,22 +155,22 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         }
         cbLoaiSanPham.setSelectedIndex(0);
     }
-
+    
     public void setKeyPress() {
         // nút enter
         InputMap inputMap = btnEnter.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(KeyStroke.getKeyStroke("ENTER"), "KEY_ENTER");
         btnEnter.getActionMap().put("KEY_ENTER", new AbstractAction() {
             public void actionPerformed(ActionEvent evt) {
-
+                
                 if (txtBarcode.isFocusable()) {
                     btnEnter.doClick();
                 }
             }
         });
-
+        
     }
-
+    
     public void editMode(boolean mode) {
         txtBarcode.setEnabled(mode);
         txtGhiChu.setEnabled(mode);
@@ -182,20 +183,20 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         btnThemSanPham.setEnabled(mode);
         btnSua.setEnabled(!mode);
     }
-
+    
     public void loadTableSanPhamKeyReleased(String keyword) {
         ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         cbLoaiSanPham.setSelectedIndex(0);
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
-
+        
         for (sanPham item : dataSanPhamTable) {
             if (item.getIdSanPham().toLowerCase().contains(keyword.toLowerCase())
                     || item.getName().toLowerCase().contains(keyword.toLowerCase())
                     || item.getBarcode().toLowerCase().contains(keyword.toLowerCase())
                     || helper.removeAccent(item.getIdSanPham().toLowerCase()).contains(keyword.toLowerCase())
                     || helper.removeAccent(item.getName().toLowerCase()).contains(keyword.toLowerCase())) {
-
+                
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
@@ -210,7 +211,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         }
         tableSanPham.setModel(model);
     }
-
+    
     public void loadTableSanPham() {
         ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
@@ -229,13 +230,13 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         }
         tableSanPham.setModel(model);
     }
-
+    
     public void loadTableSanPham(String loaiSanPham) {
         ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : dataSanPhamTable) {
-
+            
             if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
@@ -251,7 +252,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         }
         tableSanPham.setModel(model);
     }
-
+    
     public void setModelTableSanPham() {
         DefaultTableCellRenderer centerRendere = new DefaultTableCellRenderer();
         centerRendere.setHorizontalAlignment(JLabel.CENTER);
@@ -260,7 +261,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         }
         tableGioHang.setFont(new Font("Arial", Font.CENTER_BASELINE, 13));
         tableGioHang.setRowHeight(40);
-
+        
         String[] column = {"Hình ảnh", "Mã", "Sản phẩm", "Mã vạch", "ĐVT", "Tồn kho", "Giá"};
         Object[][] rows = {};
         DefaultTableModel model = new DefaultTableModel(rows, column) {
@@ -269,12 +270,12 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
                 switch (column) {
                     case 0:
                         return ImageIcon.class;
-
+                    
                     default:
                         return Object.class;
                 }
             }
-
+            
             public boolean isCellEditable(int rowIndex,
                     int columnIndex) {
                 return false;
@@ -299,9 +300,9 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         tableSanPham.getColumnModel().getColumn(4).setPreferredWidth(30);
         tableSanPham.getColumnModel().getColumn(5).setPreferredWidth(30);
         tableSanPham.getColumnModel().getColumn(6).setPreferredWidth(60);
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -665,7 +666,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
     public void taoHoaDon() {
         hoaDonTrichKho hoadon = new hoaDonTrichKho(
                 MDTrichKho.createID(),
-                acc.getIdNhanVien(),
+                this.hoadon.getNhanVien(),
                 helper.getDateTime(),
                 txtGhiChu.getText().trim()
         );
@@ -713,9 +714,9 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
             int indexRow = tableSanPham.getSelectedRow();
             String id = tableSanPham.getValueAt(indexRow, 1) + "";
             chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDonbyID(id);
-
+            
             addGioHang(sp);
-
+            
         }
     }//GEN-LAST:event_tableSanPhamMousePressed
 
@@ -753,15 +754,15 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
                 dataChiTietHoaDon.remove(i);
             }
         }
-
+        
         loadGioHang();
     }//GEN-LAST:event_tableGioHangKeyReleased
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-
-       
-            editMode(false);
-       
+        
+        editMode(false);
+        MDTrichKho.updateHoaDonTrichKho(hoadon.getId(), dataChiTietHoaDonCu, dataChiTietHoaDon);
+        JOptionPane.showMessageDialog(this, "Cập nhật thành công !");
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnLuuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLuuKeyPressed

@@ -33,7 +33,8 @@ public class MDTrichKho {
     public static void loadTableHoaDonTrichKho(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         String sql = " select trichkho.*,nhanvien.name as 'tennhanvien' from trichkho "
-                + "join nhanvien on nhanvien.id=trichkho.IDNhanVien";
+                + "join nhanvien on nhanvien.id=trichkho.IDNhanVien"
+                + " order by trichkho.thoigian desc";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         model.setRowCount(0);
         try {
@@ -48,7 +49,32 @@ public class MDTrichKho {
         }
         table.setModel(model);
     }
-    
+
+    public static void updateHoaDonTrichKho(String idhoadon, ArrayList<chiTietHoaDon> dataCu, ArrayList<chiTietHoaDon> dataMoi) {
+        String sqlResetSoLuong = " update sanpham set soluong = soluong + ? where id = ?";
+        String sqlXoaChiTietHoaDonCu = "delete from chitiethoadon where idhoadon = ? ";
+        String sqlCapNhatChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban,trangthai) values(?,?,?,?,2)";
+        String sqlCapNhatTonKho = "update sanpham set soluong = soluong - ? where id = ?";
+
+        for (chiTietHoaDon item : dataCu) {
+            HELPER.SQLhelper.executeUpdate(sqlResetSoLuong, item.getSoLuong(), item.getIdSanPham());
+        }
+        HELPER.SQLhelper.executeUpdate(sqlXoaChiTietHoaDonCu, idhoadon);
+        for (chiTietHoaDon item : dataMoi) {
+            HELPER.SQLhelper.executeUpdate(sqlResetSoLuong, item.getSoLuong(), item.getIdSanPham());
+        }
+
+        for (chiTietHoaDon item : dataMoi) {
+            HELPER.SQLhelper.executeUpdate(sqlCapNhatChiTietHoaDon,
+                    idhoadon,
+                    item.getIdSanPham(),
+                    item.getSoLuong(),
+                    item.getGiaNhap()
+            );
+            HELPER.SQLhelper.executeUpdate(sqlCapNhatTonKho, item.getSoLuong(), item.getIdSanPham());
+        }
+    }
+
     public static void loadChiTietTrichKho(JTable table, String id) {
         String sql = "select chitiethoadon.soluong as 'soluong',(chitiethoadon.soluong*sanpham.GiaNhap) as 'thanhtien', "
                 + "sanpham.name as 'tensanpham',sanpham.GiaNhap as 'gianhap',donvitinh.Name as 'donvitinh' from chitiethoadon "
