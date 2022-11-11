@@ -1223,6 +1223,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             map.put("thoiGian", hoadon.getThoiGian());
 
             JasperPrint printer = JasperFillManager.fillReport(jasper, map, con);
+            
             JasperViewer.viewReport(printer, false);
         } catch (Exception e) {
             System.out.println("");
