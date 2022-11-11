@@ -25,6 +25,10 @@ public class hoaDonNhapHang {
         this.trangThai = trangThai;
     }
 
+    public hoaDonNhapHang clone() {
+        return this;
+    }
+
     public hoaDonNhapHang() {
     }
 

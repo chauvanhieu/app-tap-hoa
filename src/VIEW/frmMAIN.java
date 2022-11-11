@@ -1,5 +1,6 @@
 package VIEW;
 
+import CLASS.chiTietHoaDon;
 import CLASS.donViTinh;
 import CLASS.khachHang;
 import CLASS.loaiSanPham;
@@ -3472,7 +3473,13 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_tableHoaDonNhapHangMouseClicked
 
     private void tableHoaDonNhapHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHoaDonNhapHangMousePressed
-        // TODO add your handling code here:
+        if (evt.getClickCount() == 2 && tableHoaDonNhapHang.getSelectedRows().length == 1) {
+            String id = tableHoaDonNhapHang.getValueAt(tableHoaDonNhapHang.getSelectedRow(), 0) + "";
+
+            new frmXemHoaDonNhapHang(this, true, id).setVisible(true);
+            loadTableHoaDonNhapHang();
+            clearTable(tableChiTietNhapHang);
+        }
     }//GEN-LAST:event_tableHoaDonNhapHangMousePressed
 
     private void tableChiTietNhapHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableChiTietNhapHangFocusLost

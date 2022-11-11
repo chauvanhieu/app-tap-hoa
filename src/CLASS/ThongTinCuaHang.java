@@ -9,7 +9,7 @@ package CLASS;
  * @author Admin
  */
 public class ThongTinCuaHang {
-    
+
     String TenCuaHang;
     String DiaChi;
     String SoDienThoai;
@@ -59,14 +59,17 @@ public class ThongTinCuaHang {
     public ThongTinCuaHang() {
     }
 
-    public ThongTinCuaHang(String TenCuaHang, String DiaChi, String SoDienThoai, String Email, String FooterContent) {
+    public ThongTinCuaHang(
+            String TenCuaHang,
+            String DiaChi,
+            String SoDienThoai,
+            String Email,
+            String FooterContent) {
         this.TenCuaHang = TenCuaHang;
         this.DiaChi = DiaChi;
         this.SoDienThoai = SoDienThoai;
         this.Email = Email;
         this.FooterContent = FooterContent;
     }
-    
-    
-                    
+
 }

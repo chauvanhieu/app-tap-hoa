@@ -19,6 +19,86 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MDNhapHang {
 
+    public static void update(hoaDonNhapHang hoadon, hoaDonNhapHang hoadoncu,
+            ArrayList<chiTietHoaDon> dataCu, ArrayList<chiTietHoaDon> dataMoi
+    ) {
+        /*
+        reset tồn kho
+        reset công nợ nhà cung cấp
+        xóa chi tiết cũ
+        
+        
+        Thêm lại chi tiết hóa đơn mới
+        cộng tồn kho sản phẩm
+        Sửa hóa đơn
+        cập nhật nợ nhà cung cấp
+         */
+        String sqlXoaChiTiet = "delete from chitiethoadon where idhoadon = ?";
+        String sqlResetCongNoNhaCungCap = "update nhacungcap set congno = congno - ? where id = ?";
+        String sqlResetTonKho = "update sanpham set soluong = soluong - ? where id = ?";
+        String sqlCapNhatCongNo = " update khachhang set congno = congno + ? where id = ? ";
+        String sqlTaoChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban,trangthai) values(?,?,?,?,3)";
+        String sqlThemSoluongSanPham = "update sanpham set soluong=soluong + ? where id = ?";
+        String sqlCapNhatHoaDon = "update nhatkynhaphang set idnhacungcap = ?,tongtien=?,thanhtoan=?,ghichu=?,trangthai=?";
+
+        for (chiTietHoaDon item : dataCu) {
+            HELPER.SQLhelper.executeUpdate(sqlResetTonKho, item.getSoLuongNhapHang(), item.getIdSanPham());
+        }
+
+        HELPER.SQLhelper.executeUpdate(sqlXoaChiTiet, hoadon.getId());
+
+        HELPER.SQLhelper.executeUpdate(sqlResetCongNoNhaCungCap,
+                hoadoncu.getTongTien() - hoadoncu.getThanhToan(),
+                hoadoncu.getIdNhaCungCap());
+
+        HELPER.SQLhelper.executeUpdate(sqlCapNhatHoaDon,
+                hoadon.getIdNhaCungCap(),
+                hoadon.getTongTien(),
+                hoadon.getThanhToan(),
+                hoadon.getGhiChu(),
+                hoadon.isTrangThai() == true ? 1 : 0
+        );
+        HELPER.SQLhelper.executeUpdate(sqlCapNhatCongNo,
+                hoadon.getTongTien() - hoadon.getThanhToan(),
+                hoadon.getIdNhaCungCap()
+        );
+        for (chiTietHoaDon item : dataMoi) {
+            HELPER.SQLhelper.executeUpdate(sqlTaoChiTietHoaDon,
+                    hoadon.getId(),
+                    item.getIdSanPham(),
+                    item.getSoLuongNhapHang(),
+                    item.getGiaNhap()
+            );
+            HELPER.SQLhelper.executeUpdate(sqlThemSoluongSanPham,
+                    item.getSoLuongNhapHang(),
+                    item.getIdSanPham()
+            );
+        }
+    }
+
+    public static hoaDonNhapHang getHoaDon(String id) {
+        String sql = "select * from nhatkynhaphang where id = ?";
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, id);
+        hoaDonNhapHang hoadon = null;
+
+        try {
+            while (rs.next()) {
+                hoadon = new hoaDonNhapHang(
+                        rs.getString("id"),
+                        rs.getString("thoigian"),
+                        rs.getString("idnhanvien"),
+                        rs.getString("idnhacungcap"),
+                        rs.getString("ghichu"),
+                        rs.getLong("tongtien"),
+                        rs.getLong("thanhtoan"),
+                        rs.getInt("trangthai") == 1 ? true : false
+                );
+            }
+        } catch (Exception e) {
+        }
+        return hoadon;
+    }
+
     public static void loadTable(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
@@ -29,7 +109,7 @@ public class MDNhapHang {
                 + "join nhanvien on nhanvien.id = nhatkynhaphang.IDnhanvien\n"
                 + "join nhacungcap on nhacungcap.id = nhatkynhaphang.IDNhaCungCap\n"
                 //                + "where nhatkynhaphang.TrangThai=1\n"
-                + " order by nhatkynhaphang.TrangThai desc "
+                + " order by nhatkynhaphang.thoigian desc "
                 + "limit 50";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {
@@ -67,7 +147,6 @@ public class MDNhapHang {
                 + "                nhacungcap.name like '%" + keyword + "%' or\n"
                 + "               nhatkynhaphang.idnhacungcap like '%" + keyword + "%'   \n"
                 + "                 ) \n"
-                + "                order by nhatkynhaphang.TrangThai desc \n"
                 + " order by nhatkynhaphang.thoigian desc "
                 + "               limit 50";
         if (keyword.trim().equals("")) {
@@ -79,7 +158,6 @@ public class MDNhapHang {
                     + "                join nhacungcap on nhacungcap.id = nhatkynhaphang.IDNhaCungCap\n"
                     + "                where \n"
                     + "                date(nhatkynhaphang.thoigian) between ?  and ?  "
-                    + "                order by nhatkynhaphang.TrangThai desc \n"
                     + " order by nhatkynhaphang.thoigian desc "
                     + "               limit 50";
         }
@@ -148,7 +226,7 @@ public class MDNhapHang {
         String sqlTaoHoaDon = "insert into nhatkynhaphang values(?,?,?,?,?,?,?,?)";
         String sqlTaoChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban,trangthai) values(?,?,?,?,3)";
         String sqlCapNhatSanPham = "update sanpham set soluong = soluong + ? where id = ?";
-
+        String sqlCongNoNhaCungCap = "update nhacungcap set congno = congno + ? where id = ?";
         HELPER.SQLhelper.executeUpdate(sqlTaoHoaDon,
                 hoadon.getId(),
                 hoadon.getThoiGian(),
@@ -170,5 +248,8 @@ public class MDNhapHang {
             HELPER.SQLhelper.executeUpdate(sqlCapNhatSanPham, item.getSoLuongNhapHang(), item.getIdSanPham());
         }
 
+        HELPER.SQLhelper.executeUpdate(sqlCongNoNhaCungCap,
+                hoadon.getTongTien() - hoadon.getThanhToan(),
+                hoadon.getIdNhaCungCap());
     }
 }
