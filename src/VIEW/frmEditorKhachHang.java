@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package VIEW;
 
 import CLASS.khachHang;
+import CONTROLLER.CTRLKhachHang;
 import HELPER.helper;
 import MODEL.MDHoaDon;
 import MODEL.MDKhachHang;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class frmEditorKhachHang extends javax.swing.JDialog {
     
@@ -23,6 +22,67 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         loadDuLieu();
         helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
         editMode(mode);
+        
+        btnLuu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // sửa
+                editMode(mode);
+                String name = txtName.getText().trim();
+                String soDienThoai = txtSDT.getText().trim();
+                String diaChi = txtSDT.getText().trim();
+                String ghiChu = txtSDT.getText().trim();
+                long congNo = helper.SoLong(txtCongNo.getText());
+                boolean trangThai = cbTrangThaiLamViec.getSelectedIndex() == 0 ? true : false;
+                khachHang khach = new khachHang(
+                        txtID.getText(),
+                        name,
+                        soDienThoai,
+                        diaChi,
+                        ghiChu,
+                        congNo,
+                        trangThai
+                );
+                CTRLKhachHang.checkUpdate(khach);
+            }
+        });
+        
+    }
+    
+    public frmEditorKhachHang(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        
+        helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
+        
+        txtID.setText(MDKhachHang.createId());
+        btnSua.setEnabled(false);
+        
+        btnLuu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Thêm
+
+                editMode(mode);
+                String name = txtName.getText().trim();
+                String soDienThoai = txtSDT.getText().trim();
+                String diaChi = txtSDT.getText().trim();
+                String ghiChu = txtSDT.getText().trim();
+                long congNo = helper.SoLong(txtCongNo.getText());
+                khachHang khach = new khachHang(
+                        txtID.getText(),
+                        name,
+                        soDienThoai,
+                        diaChi,
+                        ghiChu,
+                        congNo,
+                        true
+                );
+                CTRLKhachHang.checkAdd(khach);
+                setVisible(false);
+            }
+        });
+        
     }
     
     public void editMode(boolean mode) {
@@ -34,7 +94,6 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         cbTrangThaiLamViec.setEnabled(mode);
         btnLuu.setEnabled(mode);
         btnSua.setEnabled(!mode);
-        btnXoa.setEnabled(mode);
     }
     
     public void loadDuLieu() {
@@ -71,7 +130,6 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         cbTrangThaiLamViec = new javax.swing.JComboBox<>();
         jLabel30 = new javax.swing.JLabel();
         txtNote = new javax.swing.JTextField();
-        btnXoa = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnLuu = new javax.swing.JButton();
         jLabel32 = new javax.swing.JLabel();
@@ -111,27 +169,15 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
 
         cbTrangThaiLamViec.setEditable(true);
         cbTrangThaiLamViec.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cbTrangThaiLamViec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang làm", "Đã nghĩ" }));
+        cbTrangThaiLamViec.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt động", "Đã xóa" }));
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel30.setText("Ghi chú :");
 
-        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnXoa.setForeground(new java.awt.Color(0, 153, 255));
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/remove-user.png"))); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
         btnSua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSua.setForeground(new java.awt.Color(0, 153, 255));
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/edit-user.png"))); // NOI18N
-        btnSua.setText("Sữa");
+        btnSua.setText("Sửa");
         btnSua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +188,11 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
 
         btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLuu.setForeground(new java.awt.Color(51, 153, 255));
+        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/save.png"))); // NOI18N
         btnLuu.setText("Lưu");
+        btnLuu.setFocusable(false);
+        btnLuu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLuu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
@@ -151,6 +201,12 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel32.setText("Công nợ :");
+
+        txtCongNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCongNoKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -178,22 +234,19 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
                     .addComponent(jLabel32))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtCongNo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtCongNo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel29)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbTrangThaiLamViec, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
-                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(385, 385, 385)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnSua)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnXoa)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbTrangThaiLamViec, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAddress)
+                    .addComponent(txtName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,29 +257,29 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
                     .addComponent(jLabel22)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24)
-                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(txtNote, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30)
-                    .addComponent(jLabel32)
-                    .addComponent(txtCongNo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29)
-                    .addComponent(cbTrangThaiLamViec, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnXoa, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSua))
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24)
+                            .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel23))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(txtNote, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel32)
+                            .addComponent(txtCongNo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel29)
+                            .addComponent(cbTrangThaiLamViec, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnLuu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(15, 15, 15))))
         );
 
         tableDanhSachHoaDonBanHang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -292,12 +345,12 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
+                .addGap(23, 23, 23)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel31)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -305,17 +358,13 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-
-    }//GEN-LAST:event_btnXoaActionPerformed
-
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         editMode(!mode);
 
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        editMode(mode);
+
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void tableDanhSachHoaDonBanHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangFocusLost
@@ -335,6 +384,10 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMousePressed
+
+    private void txtCongNoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCongNoKeyReleased
+        helper.setTextFieldMoney(txtCongNo);
+    }//GEN-LAST:event_txtCongNoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -381,7 +434,6 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbTrangThaiLamViec;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

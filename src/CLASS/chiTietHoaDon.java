@@ -7,9 +7,19 @@ public class chiTietHoaDon {
     String donViTinh;
     int soLuong;
     int tonKho;
+    int soLuongNhapHang;
     long donGia;
     long giaSi;
+    long giaNhap;
     boolean trangThai;
+
+    public long getGiaNhap() {
+        return giaNhap;
+    }
+
+    public void setGiaNhap(long giaNhap) {
+        this.giaNhap = giaNhap;
+    }
 
     public chiTietHoaDon(
             String idSanPham,
@@ -17,17 +27,29 @@ public class chiTietHoaDon {
             String donViTinh,
             int soLuong,
             int tonKho,
+            int soLuongNhapHang,
             long donGia,
             long giaSi,
+            long giaNhap,
             boolean trangThai) {
+        this.giaNhap = giaNhap;
         this.idSanPham = idSanPham;
         this.tonKho = tonKho;
+        this.soLuongNhapHang = soLuongNhapHang;
         this.tenSanPham = tenSanPham;
         this.donViTinh = donViTinh;
         this.soLuong = soLuong;
         this.donGia = donGia;
         this.trangThai = trangThai;
         this.giaSi = giaSi;
+    }
+
+    public int getSoLuongNhapHang() {
+        return soLuongNhapHang;
+    }
+
+    public void setSoLuongNhapHang(int soLuongNhapHang) {
+        this.soLuongNhapHang = soLuongNhapHang;
     }
 
     public int getTonKho() {
@@ -52,6 +74,10 @@ public class chiTietHoaDon {
 
     public long getThanhTien() {
         return soLuong * donGia;
+    }
+
+    public long getThanhTienGiaNhap() {
+        return soLuong * giaNhap;
     }
 
     public String getIdSanPham() {
@@ -79,18 +105,15 @@ public class chiTietHoaDon {
     }
 
     public int getSoLuong() {
-
         if (soLuong > tonKho) {
             setSoLuong(tonKho);
             return tonKho;
         }
-
         return soLuong;
     }
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
-
     }
 
     public long getDonGia() {

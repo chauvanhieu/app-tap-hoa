@@ -25,8 +25,39 @@ public class MDChiTietHoaDon {
                         rs.getString("dvt"),
                         1,
                         rs.getInt("soluong"),
+                        1,
                         rs.getLong("giaban"),
                         rs.getLong("giaSi"),
+                        rs.getLong("giaNhap"),
+                        true
+                );
+            }
+        } catch (Exception e) {
+        }
+        return chiTiet;
+    }
+
+    public static chiTietHoaDon getSanPhamChiTietHoaDon(String barcode, String idNhaCungCap) {
+        String sql = "select sanpham.*, donvitinh.Name as 'dvt' from sanpham "
+                + " join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
+                + "where sanpham.Barcode = ? and sanpham.idnhacungcap = ?";
+        chiTietHoaDon chiTiet = null;
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, barcode, idNhaCungCap);
+        try {
+            while (rs.next()) {
+                if (rs.getInt("trangthai") == 0) {
+                    return null;
+                }
+                chiTiet = new chiTietHoaDon(
+                        rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("dvt"),
+                        1,
+                        rs.getInt("soluong"),
+                        1,
+                        rs.getLong("giaban"),
+                        rs.getLong("giaSi"),
+                        rs.getLong("giaNhap"),
                         true
                 );
             }
@@ -39,11 +70,11 @@ public class MDChiTietHoaDon {
         ArrayList<chiTietHoaDon> data = new ArrayList<>();
 
         hoaDon hoadon = getHoaDon(idHoaDon);
-        String sql = "select chitiethoadon.*, sanpham.name as 'tensanpham',sanpham.GiaBan as 'giabanle', donvitinh.name as 'tendonvitinh',sanpham.SoLuong as 'tonkho',sanpham.giaSi as 'giaBanSi' from chitiethoadon "
+        String sql = "select chitiethoadon.*,sanpham.gianhap as 'gianhap', sanpham.name as 'tensanpham',sanpham.GiaBan as 'giabanle', donvitinh.name as 'tendonvitinh',sanpham.SoLuong as 'tonkho',sanpham.giaSi as 'giaBanSi' from chitiethoadon "
                 + "join sanpham on sanpham.id = chitiethoadon.idsanpham "
                 + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
                 + " "
-                + "where chitiethoadon.idhoadon = ? and chitiethoadon.trangthai=1";
+                + "where chitiethoadon.idhoadon = ? ";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql, idHoaDon);
         try {
             while (rs.next()) {
@@ -54,8 +85,10 @@ public class MDChiTietHoaDon {
                             rs.getString("tendonvitinh"),//donvitinh
                             rs.getInt("soluong"),//soluong
                             rs.getInt("tonkho"),//tonkho
+                            rs.getInt("soluong"),//soluong
                             rs.getLong("giaban"),//giaban
                             rs.getLong("giabansi"),//giasi
+                            rs.getLong("gianhap"),
                             true));
                 } else {  // giá sĩ
                     data.add(new chiTietHoaDon(
@@ -64,10 +97,43 @@ public class MDChiTietHoaDon {
                             rs.getString("tendonvitinh"),//donvitinh
                             rs.getInt("soluong"),//soluong
                             rs.getInt("tonkho"),//tonkho
+                            rs.getInt("soluong"),//soluong
                             rs.getLong("giabanle"),//giaban
                             rs.getLong("giaban"),//giasi
+                            rs.getLong("gianhap"),
                             true));
                 }
+            }
+        } catch (Exception e) {
+        }
+        return data;
+    }
+
+    public static ArrayList<chiTietHoaDon> getChiTietHoaDonTrichKho(String idHoaDon) {
+        ArrayList<chiTietHoaDon> data = new ArrayList<>();
+
+        hoaDon hoadon = getHoaDon(idHoaDon);
+        String sql = "select chitiethoadon.*,sanpham.gianhap as 'gianhap', sanpham.name as 'tensanpham',sanpham.GiaBan as 'giabanle', donvitinh.name as 'tendonvitinh',sanpham.SoLuong as 'tonkho',sanpham.giaSi as 'giaBanSi' from chitiethoadon "
+                + "join sanpham on sanpham.id = chitiethoadon.idsanpham "
+                + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
+                + " "
+                + "where chitiethoadon.idhoadon = ? ";
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, idHoaDon);
+        try {
+            while (rs.next()) {
+                // giá lẽ
+                data.add(new chiTietHoaDon(
+                        rs.getString("idsanpham"), //id sanpham
+                        rs.getString("tensanpham"),//tensanpham
+                        rs.getString("tendonvitinh"),//donvitinh
+                        rs.getInt("soluong"),//soluong
+                        rs.getInt("tonkho"),//tonkho
+                        rs.getInt("soluong"),//soluong
+                        rs.getLong("giaban"),//giaban
+                        rs.getLong("giabansi"),//giasi
+                        rs.getLong("gianhap"),
+                        true));
+
             }
         } catch (Exception e) {
         }
@@ -94,8 +160,10 @@ public class MDChiTietHoaDon {
                         rs.getString("dvt"),
                         1,
                         rs.getInt("soluong"),
+                        1,
                         rs.getLong("giaban"),
                         rs.getLong("giaSi"),
+                        rs.getLong("gianhap"),
                         true
                 );
 
@@ -104,7 +172,7 @@ public class MDChiTietHoaDon {
         }
         return chiTiet;
     }
-    
+
     public static chiTietHoaDon getSanPhamChiTietHoaDonbyIDGiaNhap(String idsp) {
         String sql = "select sanpham.*, donvitinh.Name as 'dvt' from sanpham "
                 + " join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
@@ -116,17 +184,19 @@ public class MDChiTietHoaDon {
                 if (rs.getInt("trangthai") == 0) {
                     return null;
                 }
-                if (rs.getInt("soluong") < 1) {
-                    return null;
-                }
+//                if (rs.getInt("soluong") < 1) {
+//                    return null;
+//                }
                 chiTiet = new chiTietHoaDon(
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("dvt"),
                         1,
                         rs.getInt("soluong"),
+                        1,
                         rs.getLong("gianhap"),
                         rs.getLong("giaSi"),
+                        rs.getLong("gianhap"),
                         true
                 );
 
