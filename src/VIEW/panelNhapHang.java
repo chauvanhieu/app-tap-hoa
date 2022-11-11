@@ -37,12 +37,13 @@ import src.CLASS.Account;
 public class panelNhapHang extends javax.swing.JPanel {
 
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon = new ArrayList<>();
-
+    private ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
     private String path = "src/IMAGE/";
     private String idNhaCungCap = "";
     private DetailedComboBox comboBoxNhaCungCap;
     private ArrayList<nhaCungCap> dataNhaCungCap = MDNhaCungCap.getAll();
     public static Account acc;
+    private ArrayList<sanPham> dataSanPhamTimKiem = new ArrayList<sanPham>();
 
     public panelNhapHang(Account acc) {
         this.acc = acc;
@@ -448,10 +449,36 @@ public class panelNhapHang extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void loadTableSanPham(String idNhaCungCap) {
-        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
+    public void loadResultSanPham(String keyword) {
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
+        for (sanPham item : dataSanPhamTimKiem) {
+            String rs = item.getBarcode() + " " + item.getIdSanPham() + " " + item.getName();
+
+            if (rs.contains(keyword)
+                    || rs.toLowerCase().contains(keyword.toLowerCase())
+                    || helper.removeAccent(rs.toLowerCase()).contains(helper.removeAccent(keyword.toLowerCase()))) {
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                model.addRow(new Object[]{
+                    imageIcon,
+                    item.getIdSanPham(),
+                    item.getName(),
+                    item.getBarcode(),
+                    item.getIdDonViTinh(),
+                    item.getSoLuong(),
+                    helper.LongToString(item.getGiaNhap())
+                });
+
+            }
+        }
+        tableSanPham.setModel(model);
+    }
+
+    public void loadTableSanPham(String idNhaCungCap) {
+        DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
+        model.setRowCount(0);
+        dataSanPhamTimKiem = new ArrayList<sanPham>();
+
         for (sanPham item : dataSanPhamTable) {
             if (item.getIdNhaCungCap().equals(idNhaCungCap)) {
                 ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
@@ -464,6 +491,8 @@ public class panelNhapHang extends javax.swing.JPanel {
                     item.getSoLuong(),
                     helper.LongToString(item.getGiaNhap())
                 });
+                dataSanPhamTimKiem.add(item);
+
             }
         }
         tableSanPham.setModel(model);
@@ -672,6 +701,8 @@ public class panelNhapHang extends javax.swing.JPanel {
                 List<?> rowData = comboBoxNhaCungCap.getSelectedRow();
                 idNhaCungCap = rowData.get(0) + "";
                 loadTableSanPham(idNhaCungCap);
+                dataChiTietHoaDon = new ArrayList<chiTietHoaDon>();
+                loadGioHang();
             }
         });
         comboBoxNhaCungCap.setVisible(true);
@@ -776,7 +807,7 @@ public class panelNhapHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEnterActionPerformed
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
-
+        loadResultSanPham(txtTimKiem.getText());
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void tableSanPhamFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableSanPhamFocusGained

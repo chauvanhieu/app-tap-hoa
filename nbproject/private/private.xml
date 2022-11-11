@@ -6,9 +6,13 @@
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmMAIN.java</file>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDNhapHang.java</file>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmXemHoaDonNhapHang.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDHoaDon.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDTrichKho.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/panelNhapHang.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/panelTaoHoaDonBanHang.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/NewMain.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/CLASS/chiTietHoaDon.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmEditorThongTinCuaHang.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/CLASS/ThongTinCuaHang.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDThongTinCuaHang.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDChiTietHoaDon.java</file>
         </group>
     </open-files>
 </project-private>

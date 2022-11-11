@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class MDChiTietHoaDon {
-    
+
     public static chiTietHoaDon getSanPhamChiTietHoaDon(String barcode) {
         String sql = "select sanpham.*, donvitinh.Name as 'dvt' from sanpham "
                 + " join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
@@ -25,6 +25,7 @@ public class MDChiTietHoaDon {
                         rs.getString("dvt"),
                         1,
                         rs.getInt("soluong"),
+                        rs.getInt("soluong"),
                         1,
                         rs.getLong("giaban"),
                         rs.getLong("giaSi"),
@@ -36,7 +37,7 @@ public class MDChiTietHoaDon {
         }
         return chiTiet;
     }
-    
+
     public static chiTietHoaDon getSanPhamChiTietHoaDon(String barcode, String idNhaCungCap) {
         String sql = "select sanpham.*, donvitinh.Name as 'dvt' from sanpham "
                 + " join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
@@ -55,6 +56,7 @@ public class MDChiTietHoaDon {
                         1,
                         rs.getInt("soluong"),
                         1,
+                        1,
                         rs.getLong("giaban"),
                         rs.getLong("giaSi"),
                         rs.getLong("giaNhap"),
@@ -65,7 +67,7 @@ public class MDChiTietHoaDon {
         }
         return chiTiet;
     }
-    
+
     public static ArrayList<chiTietHoaDon> getChiTietHoaDonNhapHang(String id) {
         ArrayList<chiTietHoaDon> data = new ArrayList<>();
         String sql = "select sanpham.ID as 'idsanpham',sanpham.name as 'tensanpham' , donvitinh.name as 'donvitinh',sanpham.SoLuong as 'tonkho',\n"
@@ -86,6 +88,7 @@ public class MDChiTietHoaDon {
                         rs.getInt("soluongnhaphang"),
                         0,
                         0,
+                        0,
                         rs.getLong("gianhap"),
                         true
                 ));
@@ -94,10 +97,10 @@ public class MDChiTietHoaDon {
         }
         return data;
     }
-    
+
     public static ArrayList<chiTietHoaDon> getChiTietHoaDon(String idHoaDon) {
         ArrayList<chiTietHoaDon> data = new ArrayList<>();
-        
+
         hoaDon hoadon = getHoaDon(idHoaDon);
         String sql = "select chitiethoadon.*,sanpham.gianhap as 'gianhap', sanpham.name as 'tensanpham',sanpham.GiaBan as 'giabanle', donvitinh.name as 'tendonvitinh',sanpham.SoLuong as 'tonkho',sanpham.giaSi as 'giaBanSi' from chitiethoadon "
                 + "join sanpham on sanpham.id = chitiethoadon.idsanpham "
@@ -115,6 +118,7 @@ public class MDChiTietHoaDon {
                             rs.getInt("soluong"),//soluong
                             rs.getInt("tonkho"),//tonkho
                             rs.getInt("soluong"),//soluong
+                            rs.getInt("soluong"),//soluong
                             rs.getLong("giaban"),//giaban
                             rs.getLong("giabansi"),//giasi
                             rs.getLong("gianhap"),
@@ -127,6 +131,7 @@ public class MDChiTietHoaDon {
                             rs.getInt("soluong"),//soluong
                             rs.getInt("tonkho"),//tonkho
                             rs.getInt("soluong"),//soluong
+                            rs.getInt("soluong"),//soluong
                             rs.getLong("giabanle"),//giaban
                             rs.getLong("giaban"),//giasi
                             rs.getLong("gianhap"),
@@ -137,10 +142,10 @@ public class MDChiTietHoaDon {
         }
         return data;
     }
-    
+
     public static ArrayList<chiTietHoaDon> getChiTietHoaDonTrichKho(String idHoaDon) {
         ArrayList<chiTietHoaDon> data = new ArrayList<>();
-        
+
         hoaDon hoadon = getHoaDon(idHoaDon);
         String sql = "select chitiethoadon.*,sanpham.gianhap as 'gianhap', sanpham.name as 'tensanpham',sanpham.GiaBan as 'giabanle', donvitinh.name as 'tendonvitinh',sanpham.SoLuong as 'tonkho',sanpham.giaSi as 'giaBanSi' from chitiethoadon "
                 + "join sanpham on sanpham.id = chitiethoadon.idsanpham "
@@ -158,17 +163,50 @@ public class MDChiTietHoaDon {
                         rs.getInt("soluong"),//soluong
                         rs.getInt("tonkho"),//tonkho
                         rs.getInt("soluong"),//soluong
+                        rs.getInt("soluong"),//soluong
                         rs.getLong("giaban"),//giaban
                         rs.getLong("giabansi"),//giasi
                         rs.getLong("gianhap"),
                         true));
-                
+
             }
         } catch (Exception e) {
         }
         return data;
     }
-    
+
+    public static ArrayList<chiTietHoaDon> getChiTietHoaDonTraHang(String idHoaDon) {
+        ArrayList<chiTietHoaDon> data = new ArrayList<>();
+
+        hoaDon hoadon = getHoaDon(idHoaDon);
+        String sql = "select chitiethoadon.*,sanpham.gianhap as 'gianhap', sanpham.name as 'tensanpham',sanpham.GiaBan as 'giabanle', donvitinh.name as 'tendonvitinh',sanpham.SoLuong as 'tonkho',sanpham.giaSi as 'giaBanSi' from chitiethoadon "
+                + "join sanpham on sanpham.id = chitiethoadon.idsanpham "
+                + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
+                + " "
+                + "where chitiethoadon.idhoadon = ? ";
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, idHoaDon);
+        try {
+            while (rs.next()) {
+                // giá lẽ
+                data.add(new chiTietHoaDon(
+                        rs.getString("idsanpham"), //id sanpham
+                        rs.getString("tensanpham"),//tensanpham
+                        rs.getString("tendonvitinh"),//donvitinh
+                        rs.getInt("soluong"),//soluong
+                        rs.getInt("tonkho"),//tonkho
+                        rs.getInt("soluong"),//soluong
+                        rs.getInt("soluong"),//soluong
+                        rs.getLong("giaban"),//giaban
+                        rs.getLong("giabansi"),//giasi
+                        rs.getLong("gianhap"),
+                        true));
+
+            }
+        } catch (Exception e) {
+        }
+        return data;
+    }
+
     public static chiTietHoaDon getSanPhamChiTietHoaDonbyID(String idsp) {
         String sql = "select sanpham.*, donvitinh.Name as 'dvt' from sanpham "
                 + " join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
@@ -190,18 +228,19 @@ public class MDChiTietHoaDon {
                         1,
                         rs.getInt("soluong"),
                         1,
+                        1,
                         rs.getLong("giaban"),
                         rs.getLong("giaSi"),
                         rs.getLong("gianhap"),
                         true
                 );
-                
+
             }
         } catch (Exception e) {
         }
         return chiTiet;
     }
-    
+
     public static chiTietHoaDon getSanPhamChiTietHoaDonbyIDGiaNhap(String idsp) {
         String sql = "select sanpham.*, donvitinh.Name as 'dvt' from sanpham "
                 + " join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
@@ -223,12 +262,13 @@ public class MDChiTietHoaDon {
                         1,
                         rs.getInt("soluong"),
                         1,
+                        1,
                         rs.getLong("gianhap"),
                         rs.getLong("giaSi"),
                         rs.getLong("gianhap"),
                         true
                 );
-                
+
             }
         } catch (Exception e) {
         }
