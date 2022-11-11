@@ -100,7 +100,7 @@
                     <Column editable="false" title="Sa&#x309;n ph&#xe2;&#x309;m" type="java.lang.Object"/>
                     <Column editable="false" title="&#x110;&#x1a1;n vi&#x323; ti&#x301;nh" type="java.lang.Object"/>
                     <Column editable="true" title="S&#xf4;&#x301; l&#x1b0;&#x1a1;&#x323;ng" type="java.lang.Integer"/>
-                    <Column editable="true" title="Gi&#xe1;" type="java.lang.Object"/>
+                    <Column editable="true" title="Gi&#xe1; nh&#xe2;&#x323;p" type="java.lang.Object"/>
                     <Column editable="false" title="Tha&#x300;nh ti&#xea;&#x300;n" type="java.lang.Object"/>
                     <Column editable="true" title="Xo&#x301;a ?" type="java.lang.Boolean"/>
                   </Table>
@@ -290,6 +290,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="L&#x1b0;u &amp; in (F10)"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton6">
               <Properties>

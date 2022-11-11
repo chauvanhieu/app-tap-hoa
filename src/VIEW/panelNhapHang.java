@@ -1,12 +1,14 @@
 package VIEW;
 
 import CLASS.chiTietHoaDon;
+import CLASS.hoaDonNhapHang;
 import CLASS.nhaCungCap;
 import CLASS.sanPham;
 import COMPONENT.DetailedComboBox;
 import HELPER.helper;
 import MODEL.MDChiTietHoaDon;
 import MODEL.MDNhaCungCap;
+import MODEL.MDNhapHang;
 import MODEL.MDSanPham;
 import java.awt.AWTException;
 import java.awt.Font;
@@ -30,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import src.CLASS.Account;
 
 public class panelNhapHang extends javax.swing.JPanel {
 
@@ -39,8 +42,10 @@ public class panelNhapHang extends javax.swing.JPanel {
     private String idNhaCungCap = "";
     private DetailedComboBox comboBoxNhaCungCap;
     private ArrayList<nhaCungCap> dataNhaCungCap = MDNhaCungCap.getAll();
+    public static Account acc;
 
-    public panelNhapHang() {
+    public panelNhapHang(Account acc) {
+        this.acc = acc;
         initComponents();
         loadComboBoxNhaCungCap();
         setModelTableSanPham();
@@ -100,7 +105,7 @@ public class panelNhapHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Sản phẩm", "Đơn vị tính", "Số lượng", "Giá", "Thành tiền", "Xóa ?"
+                "Sản phẩm", "Đơn vị tính", "Số lượng", "Giá nhập", "Thành tiền", "Xóa ?"
             }
         ) {
             Class[] types = new Class [] {
@@ -170,6 +175,11 @@ public class panelNhapHang extends javax.swing.JPanel {
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 102, 204));
         jButton5.setText("Lưu & in (F10)");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 0, 51));
@@ -463,12 +473,15 @@ public class panelNhapHang extends javax.swing.JPanel {
         if (txtBarcode.isFocusable() == false) {
             return;
         }
+        if (idNhaCungCap.equals("")) {
+            return;
+        }
         String barcode = txtBarcode.getText();
         if (barcode.length() < 7) {
             return;
         }
 
-        chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode);
+        chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode, idNhaCungCap);
 
         if (sp == null) {
             JOptionPane.showMessageDialog(this, "CHƯA CÓ SẢN PHẨM NÀY");
@@ -476,12 +489,13 @@ public class panelNhapHang extends javax.swing.JPanel {
             txtBarcode.setText("");
             txtBarcode.requestFocus();
             return;
-        } else {
-            if (sp.getTonKho() == 0) {
-                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
-                return;
-            }
         }
+//        else {
+//            if (sp.getTonKho() == 0) {
+//                JOptionPane.showMessageDialog(this, "Sản phẩm đã hết hàng !");
+//                return;
+//            }
+//        }
         addGioHang(sp);
         txtBarcode.requestFocus();
     }
@@ -553,7 +567,7 @@ public class panelNhapHang extends javax.swing.JPanel {
         if (isTonTai == true) {
             for (chiTietHoaDon item : dataChiTietHoaDon) {
                 if (item.getIdSanPham().equals(sp.getIdSanPham())) {
-                    item.setSoLuong(item.getSoLuong() + 1);
+                    item.setSoLuongNhapHang(item.getSoLuongNhapHang() + 1);
                     break;
                 }
             }
@@ -568,14 +582,14 @@ public class panelNhapHang extends javax.swing.JPanel {
         model.setRowCount(0);
         long thanhTienBanDau = 0;
         for (chiTietHoaDon item : dataChiTietHoaDon) {
-            thanhTienBanDau += item.getThanhTien();
+            thanhTienBanDau += item.getGiaNhap() * item.getSoLuongNhapHang();
 
             model.addRow(new Object[]{
                 item.getTenSanPham(),
                 item.getDonViTinh(),
-                item.getSoLuong(),
-                helper.LongToString(item.getDonGia()),
-                helper.LongToString(item.getThanhTien()),
+                item.getSoLuongNhapHang(),
+                helper.LongToString(item.getGiaNhap()),
+                helper.LongToString(item.getGiaNhap() * item.getSoLuongNhapHang()),
                 item.isTrangThai()
             });
         }
@@ -693,8 +707,8 @@ public class panelNhapHang extends javax.swing.JPanel {
         int rowCount = tableGioHang.getRowCount();
         for (int i = 0; i < rowCount; i++) {
 
-            dataChiTietHoaDon.get(i).setDonGia(helper.SoLong(tableGioHang.getValueAt(i, 3) + ""));
-            dataChiTietHoaDon.get(i).setSoLuong(Integer.parseInt(tableGioHang.getValueAt(i, 2) + ""));
+//            dataChiTietHoaDon.get(i).setGiaNhap(helper.SoLong(tableGioHang.getValueAt(i, 3) + ""));
+            dataChiTietHoaDon.get(i).setSoLuongNhapHang(Integer.parseInt(tableGioHang.getValueAt(i, 2) + ""));
             if (dataChiTietHoaDon.get(i).getSoLuong() < 1 || dataChiTietHoaDon.get(i).getDonGia() < 0) {
                 dataChiTietHoaDon.remove(i);
             }
@@ -709,8 +723,32 @@ public class panelNhapHang extends javax.swing.JPanel {
             cập nhật tiền nợ nhà cung cấp
             cập nhật số lượng các sản phẩm
             cập nhật trạng thái chi tiết hoá đơn là 2
-            
-        */
+         */
+        if (dataChiTietHoaDon.size() > 0) {
+            // thanh toán
+            hoaDonNhapHang hoadon = new hoaDonNhapHang(
+                    MDNhapHang.createID(),
+                    helper.getDateTime(),
+                    acc.getIdNhanVien(),
+                    idNhaCungCap,
+                    txtGhiChu.getText().trim(),
+                    helper.SoLong(txtTongTien.getText()),
+                    helper.SoLong(txtTienThanhToan.getText()),
+                    true);
+            MDNhapHang.nhapHang(hoadon, dataChiTietHoaDon);
+            JOptionPane.showMessageDialog(this, "Nhập hàng thành công !");
+            Robot robot;
+            try {
+                robot = new Robot();
+                robot.keyPress(KeyEvent.VK_ESCAPE);
+            } catch (AWTException ex) {
+                Logger.getLogger(panelTaoHoaDonBanHang.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa có sản phẩm nào !");
+        }
+
+
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnThanhToanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnThanhToanKeyPressed
@@ -778,6 +816,10 @@ public class panelNhapHang extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_txtTienThanhToanKeyReleased
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

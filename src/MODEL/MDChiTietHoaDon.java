@@ -25,6 +25,36 @@ public class MDChiTietHoaDon {
                         rs.getString("dvt"),
                         1,
                         rs.getInt("soluong"),
+                        1,
+                        rs.getLong("giaban"),
+                        rs.getLong("giaSi"),
+                        rs.getLong("giaNhap"),
+                        true
+                );
+            }
+        } catch (Exception e) {
+        }
+        return chiTiet;
+    }
+
+    public static chiTietHoaDon getSanPhamChiTietHoaDon(String barcode, String idNhaCungCap) {
+        String sql = "select sanpham.*, donvitinh.Name as 'dvt' from sanpham "
+                + " join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
+                + "where sanpham.Barcode = ? and sanpham.idnhacungcap = ?";
+        chiTietHoaDon chiTiet = null;
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, barcode, idNhaCungCap);
+        try {
+            while (rs.next()) {
+                if (rs.getInt("trangthai") == 0) {
+                    return null;
+                }
+                chiTiet = new chiTietHoaDon(
+                        rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("dvt"),
+                        1,
+                        rs.getInt("soluong"),
+                        1,
                         rs.getLong("giaban"),
                         rs.getLong("giaSi"),
                         rs.getLong("giaNhap"),
@@ -55,6 +85,7 @@ public class MDChiTietHoaDon {
                             rs.getString("tendonvitinh"),//donvitinh
                             rs.getInt("soluong"),//soluong
                             rs.getInt("tonkho"),//tonkho
+                            rs.getInt("soluong"),//soluong
                             rs.getLong("giaban"),//giaban
                             rs.getLong("giabansi"),//giasi
                             rs.getLong("gianhap"),
@@ -66,6 +97,7 @@ public class MDChiTietHoaDon {
                             rs.getString("tendonvitinh"),//donvitinh
                             rs.getInt("soluong"),//soluong
                             rs.getInt("tonkho"),//tonkho
+                            rs.getInt("soluong"),//soluong
                             rs.getLong("giabanle"),//giaban
                             rs.getLong("giaban"),//giasi
                             rs.getLong("gianhap"),
@@ -96,6 +128,7 @@ public class MDChiTietHoaDon {
                         rs.getString("tendonvitinh"),//donvitinh
                         rs.getInt("soluong"),//soluong
                         rs.getInt("tonkho"),//tonkho
+                        rs.getInt("soluong"),//soluong
                         rs.getLong("giaban"),//giaban
                         rs.getLong("giabansi"),//giasi
                         rs.getLong("gianhap"),
@@ -127,6 +160,7 @@ public class MDChiTietHoaDon {
                         rs.getString("dvt"),
                         1,
                         rs.getInt("soluong"),
+                        1,
                         rs.getLong("giaban"),
                         rs.getLong("giaSi"),
                         rs.getLong("gianhap"),
@@ -150,15 +184,16 @@ public class MDChiTietHoaDon {
                 if (rs.getInt("trangthai") == 0) {
                     return null;
                 }
-                if (rs.getInt("soluong") < 1) {
-                    return null;
-                }
+//                if (rs.getInt("soluong") < 1) {
+//                    return null;
+//                }
                 chiTiet = new chiTietHoaDon(
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("dvt"),
                         1,
                         rs.getInt("soluong"),
+                        1,
                         rs.getLong("gianhap"),
                         rs.getLong("giaSi"),
                         rs.getLong("gianhap"),
