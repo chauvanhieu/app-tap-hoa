@@ -12,7 +12,6 @@ import MODEL.MDNhaCungCap;
 import MODEL.MDSanPham;
 import java.awt.AWTException;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;

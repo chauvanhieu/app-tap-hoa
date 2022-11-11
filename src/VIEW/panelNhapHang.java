@@ -492,7 +492,6 @@ public class panelNhapHang extends javax.swing.JPanel {
                     helper.LongToString(item.getGiaNhap())
                 });
                 dataSanPhamTimKiem.add(item);
-
             }
         }
         tableSanPham.setModel(model);
