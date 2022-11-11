@@ -336,7 +336,7 @@ public class MDHoaDon {
                 + " join nhanvien on nhanvien.id = hoadon.idnhanvien "
                 + " join khachhang on khachhang.id = hoadon.idkhachhang"
                 + " where hoadon.trangthai=1 "
-                + "order by hoadon.thoigian desc";
+                + "order by hoadon.thoigian desc LIMIT 50";
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);

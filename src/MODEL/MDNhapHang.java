@@ -9,12 +9,123 @@ import CLASS.hoaDonNhapHang;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import java.sql.ResultSet;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Admin
  */
 public class MDNhapHang {
+
+    public static void loadTable(JTable table) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        String sql = "select nhatkynhaphang.thoigian as 'thoigian', nhatkynhaphang.ID as 'id' ,nhanvien.name as 'tennhanvien' ,nhacungcap.name as 'nhacungcap',\n"
+                + "nhatkynhaphang.TongTien as 'tongtien', nhatkynhaphang.ThanhToan as 'thanhtoan', nhatkynhaphang.GhiChu as 'ghichu',\n"
+                + "nhatkynhaphang.TrangThai as 'trangthai'\n"
+                + "from nhatkynhaphang\n"
+                + "join nhanvien on nhanvien.id = nhatkynhaphang.IDnhanvien\n"
+                + "join nhacungcap on nhacungcap.id = nhatkynhaphang.IDNhaCungCap\n"
+                //                + "where nhatkynhaphang.TrangThai=1\n"
+                + " order by nhatkynhaphang.TrangThai desc "
+                + "limit 50";
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+        try {
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("id"),
+                    rs.getString("thoigian"),
+                    rs.getString("tennhanvien"),
+                    rs.getString("nhacungcap"),
+                    HELPER.helper.SoString(rs.getLong("tongtien")),
+                    HELPER.helper.SoString(rs.getLong("thanhtoan")),
+                    rs.getString("ghichu"),
+                    rs.getInt("trangthai") == 1 ? true : false
+                });
+            }
+        } catch (Exception e) {
+        }
+        table.setModel(model);
+    }
+
+    public static void loadTable(JTable table, String keyword, String dateFrom, String dateTo) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        String sql = "select nhatkynhaphang.thoigian as 'thoigian', nhatkynhaphang.ID as 'id' ,nhanvien.name as 'tennhanvien' ,nhacungcap.name as 'nhacungcap',\n"
+                + "               nhatkynhaphang.TongTien as 'tongtien', nhatkynhaphang.ThanhToan as 'thanhtoan', nhatkynhaphang.GhiChu as 'ghichu',\n"
+                + "               nhatkynhaphang.TrangThai as 'trangthai'\n"
+                + "               from nhatkynhaphang\n"
+                + "                join nhanvien on nhanvien.id = nhatkynhaphang.IDnhanvien\n"
+                + "                join nhacungcap on nhacungcap.id = nhatkynhaphang.IDNhaCungCap\n"
+                + "                where \n"
+                + "               ( date(nhatkynhaphang.thoigian) between ?  and ? ) and \n"
+                + "                ( nhatkynhaphang.id like '%" + keyword + "%' or \n"
+                + "                nhatkynhaphang.idnhanvien like '%" + keyword + "%'  or \n"
+                + "                 nhanvien.name like '%" + keyword + "%' or \n"
+                + "                nhacungcap.name like '%" + keyword + "%' or\n"
+                + "               nhatkynhaphang.idnhacungcap like '%" + keyword + "%'   \n"
+                + "                 ) \n"
+                + "                order by nhatkynhaphang.TrangThai desc \n"
+                + " order by nhatkynhaphang.thoigian desc "
+                + "               limit 50";
+        if (keyword.trim().equals("")) {
+            sql = "select nhatkynhaphang.thoigian as 'thoigian', nhatkynhaphang.ID as 'id' ,nhanvien.name as 'tennhanvien' ,nhacungcap.name as 'nhacungcap',\n"
+                    + "               nhatkynhaphang.TongTien as 'tongtien', nhatkynhaphang.ThanhToan as 'thanhtoan', nhatkynhaphang.GhiChu as 'ghichu',\n"
+                    + "               nhatkynhaphang.TrangThai as 'trangthai'\n"
+                    + "               from nhatkynhaphang\n"
+                    + "                join nhanvien on nhanvien.id = nhatkynhaphang.IDnhanvien\n"
+                    + "                join nhacungcap on nhacungcap.id = nhatkynhaphang.IDNhaCungCap\n"
+                    + "                where \n"
+                    + "                date(nhatkynhaphang.thoigian) between ?  and ?  "
+                    + "                order by nhatkynhaphang.TrangThai desc \n"
+                    + " order by nhatkynhaphang.thoigian desc "
+                    + "               limit 50";
+        }
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, dateFrom, dateTo);
+        try {
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("id"),
+                    rs.getString("thoigian"),
+                    rs.getString("tennhanvien"),
+                    rs.getString("nhacungcap"),
+                    HELPER.helper.SoString(rs.getLong("tongtien")),
+                    HELPER.helper.SoString(rs.getLong("thanhtoan")),
+                    rs.getString("ghichu"),
+                    rs.getInt("trangthai") == 1 ? true : false
+                });
+            }
+        } catch (Exception e) {
+        }
+        table.setModel(model);
+    }
+
+    public static void loadChiTietHoaDon(JTable table, String idHoaDon) {
+        String sql = "select chitiethoadon.soluong as 'soluong',(chitiethoadon.soluong*sanpham.GiaNhap) as 'thanhtien', "
+                + "sanpham.name as 'tensanpham',sanpham.GiaNhap as 'gianhap',donvitinh.Name as 'donvitinh' from chitiethoadon "
+                + "join sanpham on sanpham.ID=chitiethoadon.idsanpham "
+                + "join donvitinh on donvitinh.id=sanpham.IDDonViTinh "
+                + " "
+                + "where chitiethoadon.idhoadon = ?";
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, idHoaDon);
+        try {
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("tensanpham"),
+                    rs.getInt("soluong"),
+                    rs.getString("donvitinh"),
+                    HELPER.helper.SoString(rs.getLong("gianhap")),
+                    HELPER.helper.SoString(rs.getLong("thanhtien"))
+                });
+            }
+        } catch (Exception e) {
+        }
+        table.setModel(model);
+    }
 
     public static String createID() {
         String id = "NH";
