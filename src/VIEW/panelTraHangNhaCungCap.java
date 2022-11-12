@@ -172,7 +172,9 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel8.setText("Tổng tiền :");
 
+        txtTongTien.setEditable(false);
         txtTongTien.setText("0");
+        txtTongTien.setFocusable(false);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel9.setText("Cách thanh toán :");

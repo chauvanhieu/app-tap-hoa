@@ -77,7 +77,6 @@ public class panelNhapHang extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         txtGhiChu = new javax.swing.JTextArea();
         btnThanhToan = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
@@ -161,7 +160,7 @@ public class panelNhapHang extends javax.swing.JPanel {
 
         btnThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnThanhToan.setForeground(new java.awt.Color(0, 204, 0));
-        btnThanhToan.setText("Thanh toán (F9)");
+        btnThanhToan.setText("Nhập hàng");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThanhToanActionPerformed(evt);
@@ -170,15 +169,6 @@ public class panelNhapHang extends javax.swing.JPanel {
         btnThanhToan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnThanhToanKeyPressed(evt);
-            }
-        });
-
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 102, 204));
-        jButton5.setText("Lưu & in (F10)");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
             }
         });
 
@@ -240,12 +230,10 @@ public class panelNhapHang extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnThanhToan)
+                .addGap(98, 98, 98)
+                .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -268,13 +256,10 @@ public class panelNhapHang extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -541,27 +526,6 @@ public class panelNhapHang extends javax.swing.JPanel {
             }
         });
 
-        // nút F9
-        InputMap f9 = btnThanhToan.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        f9.put(KeyStroke.getKeyStroke("F9"), "VK_F9");
-        btnThanhToan.getActionMap().put("VK_F9", new AbstractAction() {
-            public void actionPerformed(ActionEvent evt) {
-
-                btnThanhToan.doClick();
-
-            }
-        });
-
-        //nút F10
-        InputMap f10 = jButton5.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        f10.put(KeyStroke.getKeyStroke("F10"), "VK_F10");
-        jButton5.getActionMap().put("VK_F10", new AbstractAction() {
-            public void actionPerformed(ActionEvent evt) {
-
-                jButton5.doClick();
-
-            }
-        });
     }
 
     public void addGioHang(chiTietHoaDon sp) {
@@ -847,15 +811,10 @@ public class panelNhapHang extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtTienThanhToanKeyReleased
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnter;
     private javax.swing.JButton btnThanhToan;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

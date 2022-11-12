@@ -651,7 +651,7 @@ public class frmMAIN extends javax.swing.JFrame {
         panelMain = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem31 = new javax.swing.JMenuItem();
+        thongtin = new javax.swing.JMenuItem();
         jMenuItem30 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -2812,14 +2812,14 @@ public class frmMAIN extends javax.swing.JFrame {
 
         jMenu1.setText("Hệ thống");
 
-        jMenuItem31.setText("Thông tin cửa hàng");
-        jMenuItem31.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
+        thongtin.setText("Thông tin cửa hàng");
+        thongtin.setMargin(new java.awt.Insets(6, 6, 6, 6));
+        thongtin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem31ActionPerformed(evt);
+                thongtinActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem31);
+        jMenu1.add(thongtin);
 
         jMenuItem30.setText("Đổi giao diện");
         jMenuItem30.setMargin(new java.awt.Insets(6, 6, 6, 6));
@@ -3092,13 +3092,13 @@ public class frmMAIN extends javax.swing.JFrame {
 
         popupWaiting popup = new popupWaiting(this, false);
         popup.setVisible(true);
-        Timer loadingPage = new Timer(30, new ActionListener() {
+        Timer loadingPage = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int values = popup.prog.getValue();
                 if (values < 100) {
-                    popup.prog.setValue(values + 5);
-                    if (popup.prog.getValue() == 95) {
+                    popup.prog.setValue(values + 7);
+                    if (popup.prog.getValue() == 98) {
                         panelTaoHoaDonBanHang panel = new panelTaoHoaDonBanHang(acc);
                         if (tabbed.getTabCount() == 0) {
                             panelMain.removeAll();
@@ -3604,10 +3604,10 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTimKiemSanPhamPnlSanPhamKeyPressed
 
 
-    private void jMenuItem31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem31ActionPerformed
+    private void thongtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thongtinActionPerformed
 //        openTab(frmEditorThongTinCuaHang, "Thông Tin Cửa Hàng");
         new frmEditorThongTinCuaHang(this, true).setVisible(true);
-    }//GEN-LAST:event_jMenuItem31ActionPerformed
+    }//GEN-LAST:event_thongtinActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         String keyword = txtTimKiemHoaDonBanHang.getText().trim();
@@ -3997,7 +3997,6 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem30;
-    private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
@@ -4096,6 +4095,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JTable tableTaiKhoan;
     private javax.swing.JTable tableThuNoKhachHang;
     private javax.swing.JTable tableTraNoNhaCungCap;
+    private javax.swing.JMenuItem thongtin;
     private javax.swing.JTextField txtTimKiemHoaDonBanHang;
     private javax.swing.JTextField txtTimKiemHoaDonNhapHang;
     private javax.swing.JTextField txtTimKiemHoaDonTraHang;

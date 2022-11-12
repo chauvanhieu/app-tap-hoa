@@ -226,7 +226,6 @@ public class helper {
     public static void setupTheme(int userTheme) {
         switch (userTheme) {
             case 1:
-                FlatLightLaf.setup();
                 break;
             case 2:
                 FlatHighContrastIJTheme.setup();
