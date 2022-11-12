@@ -45,7 +45,7 @@ public class MDHoaDon {
             }
         } catch (Exception e) {
         }
-        
+
         table.setModel(model);
     }
 
@@ -90,9 +90,7 @@ public class MDHoaDon {
         HELPER.SQLhelper.executeUpdate(sql, id);
     }
 
-    public static void updateHoaDon() {
-
-    }
+    
 
     public static String craeteID() {
         String id = "HD";

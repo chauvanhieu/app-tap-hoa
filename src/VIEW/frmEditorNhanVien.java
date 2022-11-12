@@ -465,7 +465,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         if (tableDanhSachHoaDonBanHang.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             String idhoadon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
             this.setVisible(false);
-            new frmXemHoaDon(null, true, acc, idhoadon).setVisible(true);
+            new frmXemHoaDonBanHang(null, true, acc, idhoadon).setVisible(true);
             MDHoaDon.showHoaDonCuaNhanVien(idNhanVien, tableDanhSachHoaDonBanHang);
         }
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMousePressed

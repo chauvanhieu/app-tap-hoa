@@ -180,6 +180,32 @@ public class MDNhapHang {
         table.setModel(model);
     }
 
+    public static void showHoaDonNhapHangTheoNhaCungCap(JTable table, String idNhaCungCap) {
+        String sql = "select nhatkynhaphang.ID as 'id' , nhanvien.name as 'nhanvien' , \n"
+                + " nhatkynhaphang.TongTien as 'tongtien', nhatkynhaphang.ThanhToan as 'thanhtoan',\n"
+                + " nhatkynhaphang.ThoiGian as 'thoigian', nhatkynhaphang.GhiChu as 'ghichu' from nhatkynhaphang\n"
+                + " join nhanvien on nhanvien.id = nhatkynhaphang.IDnhanvien\n"
+                + " where nhatkynhaphang.IDNhaCungCap = ? \n"
+                + " order by nhatkynhaphang.ThoiGian desc";
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, idNhaCungCap);
+        try {
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("id"),
+                    rs.getString("nhanvien"),
+                    HELPER.helper.SoString(rs.getLong("tongtien")),
+                    HELPER.helper.SoString(rs.getLong("thanhtoan")),
+                    rs.getString("thoigian"),
+                    rs.getString("ghichu")
+                });
+            }
+        } catch (Exception e) {
+        }
+        table.setModel(model);
+    }
+
     public static void loadChiTietHoaDon(JTable table, String idHoaDon) {
         String sql = "select chitiethoadon.soluong as 'soluong',(chitiethoadon.soluong*sanpham.GiaNhap) as 'thanhtien', "
                 + "sanpham.name as 'tensanpham',sanpham.GiaNhap as 'gianhap',donvitinh.Name as 'donvitinh' from chitiethoadon "

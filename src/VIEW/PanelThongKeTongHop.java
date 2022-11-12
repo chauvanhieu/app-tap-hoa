@@ -561,7 +561,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         Component panel = (JPanel) this.getParent();
         if (tableHoaDonTrongNgay.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             String idhoadon = tableHoaDonTrongNgay.getValueAt(tableHoaDonTrongNgay.getSelectedRow(), 0) + "";
-            new frmXemHoaDon((Frame) this.getParent().getParent().getParent().getParent().getParent().getParent(), true, acc, idhoadon).setVisible(true);
+            new frmXemHoaDonBanHang((Frame) this.getParent().getParent().getParent().getParent().getParent().getParent(), true, acc, idhoadon).setVisible(true);
 
         }
     }//GEN-LAST:event_tableHoaDonTrongNgayMousePressed

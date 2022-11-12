@@ -68,8 +68,7 @@ public class MDNhaCungCap {
     public static nhaCungCap getNhaCungCap(String id) {
         String sql = "select * from NhaCungCap where id = ?";
         nhaCungCap ncc = new nhaCungCap();
-        HELPER.SQLhelper.executeQuery(sql);
-        ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, id);
         try {
             while (rs.next()) {
                 ncc = new nhaCungCap(

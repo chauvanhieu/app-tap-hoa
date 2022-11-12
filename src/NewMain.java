@@ -1,9 +1,6 @@
 
-import CLASS.chiTietHoaDon;
-import CLASS.hoaDonNhapHang;
-import MODEL.MDChiTietHoaDon;
-import MODEL.MDNhapHang;
-import java.util.ArrayList;
+import CLASS.hoaDonTraHang;
+import MODEL.MDTraHang;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,10 +13,8 @@ import java.util.ArrayList;
 public class NewMain {
 
     public static void main(String[] args) {
-        ArrayList<chiTietHoaDon> data = MDChiTietHoaDon.getChiTietHoaDonNhapHang("NH11115724");
-        for (chiTietHoaDon item : data) {
-            System.out.println(item.getGiaNhap());
-        }
+        hoaDonTraHang hoadon = MDTraHang.getHoaDon("TH12111799");
+        System.out.println(hoadon.getIdNhaCungCap());
 
     }
 

@@ -3,16 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmMAIN.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDNhapHang.java</file>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmXemHoaDonNhapHang.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/panelTaoHoaDonBanHang.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/NewMain.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/CLASS/chiTietHoaDon.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmEditorThongTinCuaHang.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/CLASS/ThongTinCuaHang.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDThongTinCuaHang.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDChiTietHoaDon.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmXemPhieuTrichKho.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/panelTraHangNhaCungCap.java</file>
         </group>
     </open-files>
 </project-private>

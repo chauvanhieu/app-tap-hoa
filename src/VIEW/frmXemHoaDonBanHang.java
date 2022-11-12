@@ -43,7 +43,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class frmXemHoaDon extends javax.swing.JDialog {
+public class frmXemHoaDonBanHang extends javax.swing.JDialog {
 
     public static Account acc;
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon;
@@ -58,7 +58,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     private long soTienGoc;
     private ThongTinCuaHang admin = MDThongTinCuaHang.getThongTin();
 
-    public frmXemHoaDon(java.awt.Frame parent, boolean modal, Account account, String idhoaDon) {
+    public frmXemHoaDonBanHang(java.awt.Frame parent, boolean modal, Account account, String idhoaDon) {
 
         this.acc = account;
         this.hoadon = MDHoaDon.getHoaDon(idhoaDon);
@@ -553,7 +553,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                     .addComponent(jScrollPane3)
                     .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 270, Short.MAX_VALUE)
+                        .addGap(0, 226, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cbLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -978,7 +978,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             tienKhachDua = helper.SoLong(txtTienKhachDua.getText());
         }
         hoaDon hoadon = new hoaDon(
-                frmXemHoaDon.hoadon.getId(),
+                frmXemHoaDonBanHang.hoadon.getId(),
                 idNhanVien,
                 idKhachHang,
                 thoiGian,
@@ -988,7 +988,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 giamGia,
                 tongtien,
                 cbChonGia.getSelectedIndex(),
-                frmXemHoaDon.hoadon.isTrangThai());
+                frmXemHoaDonBanHang.hoadon.isTrangThai());
         MDHoaDon.capNhatHoaDon(hoadon,
                 tienKhachDua,
                 tableGioHang,
@@ -1172,7 +1172,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             try {
                 throw e;
             } catch (Exception ex) {
-                Logger.getLogger(frmXemHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmXemHoaDonBanHang.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -1212,27 +1212,28 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmXemHoaDon.class
+            java.util.logging.Logger.getLogger(frmXemHoaDonBanHang.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmXemHoaDon.class
+            java.util.logging.Logger.getLogger(frmXemHoaDonBanHang.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmXemHoaDon.class
+            java.util.logging.Logger.getLogger(frmXemHoaDonBanHang.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmXemHoaDon.class
+            java.util.logging.Logger.getLogger(frmXemHoaDonBanHang.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmXemHoaDon dialog = new frmXemHoaDon(new javax.swing.JFrame(), true, acc, hoadon.getId());
+                frmXemHoaDonBanHang dialog = new frmXemHoaDonBanHang(new javax.swing.JFrame(), true, acc, hoadon.getId());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -1167,6 +1167,11 @@ public class frmMAIN extends javax.swing.JFrame {
         btnThemNhaCungCap.setText("Thêm");
         btnThemNhaCungCap.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnThemNhaCungCap.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnThemNhaCungCap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemNhaCungCapActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1224,6 +1229,11 @@ public class frmMAIN extends javax.swing.JFrame {
         tableNhaCungCap.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tableNhaCungCapFocusLost(evt);
+            }
+        });
+        tableNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableNhaCungCapMousePressed(evt);
             }
         });
         jScrollPane5.setViewportView(tableNhaCungCap);
@@ -3157,7 +3167,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private void tableDanhSachHoaDonBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangMousePressed
         if (tableDanhSachHoaDonBanHang.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             String idhoadon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
-            new frmXemHoaDon(this, true, acc, idhoadon).setVisible(true);
+            new frmXemHoaDonBanHang(this, true, acc, idhoadon).setVisible(true);
             loadTableSanPham();
             loadTableDanhSachHoaDonBanHang();
             loadTableKhachHang();
@@ -3741,22 +3751,46 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_tableHoaDonTraHangFocusLost
 
     private void tableHoaDonTraHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHoaDonTraHangMouseClicked
-        // TODO add your handling code here:
+        try {
+            String idhoadon = tableHoaDonTraHang.getValueAt(tableHoaDonTraHang.getSelectedRow(), 0) + "";
+            MDTraHang.loadChiTietHoaDon(tableChiTietTraHang, idhoadon);
+        } catch (Exception e) {
+            return;
+        }
     }//GEN-LAST:event_tableHoaDonTraHangMouseClicked
 
     private void tableHoaDonTraHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableHoaDonTraHangMousePressed
-        // TODO add your handling code here:
+        if (evt.getClickCount() == 2 && tableHoaDonTraHang.getSelectedRows().length == 1) {
+            String idhoadon = tableHoaDonTraHang.getValueAt(tableHoaDonTraHang.getSelectedRow(), 0) + "";
+            new frmXemHoaDonTraHang(this, true, idhoadon).setVisible(true);
+            loadTableHoaDonTraHang();
+        }
     }//GEN-LAST:event_tableHoaDonTraHangMousePressed
-
+    public void loadTableHoaDonTraHang() {
+        MDTraHang.loadTable(tableHoaDonTraHang);
+        clearTable(tableChiTietTraHang);
+    }
     private void tableChiTietTraHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableChiTietTraHangFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_tableChiTietTraHangFocusLost
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
         openTab(panelHoaDonTraHangNCC, "Danh sách hóa đơn trả hàng :");
-        clearTable(tableChiTietTraHang);
-        MDTraHang.loadTable(tableHoaDonTraHang);
+        loadTableHoaDonTraHang();
     }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void tableNhaCungCapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableNhaCungCapMousePressed
+        if (evt.getClickCount() == 2 && tableNhaCungCap.getSelectedRows().length == 1) {
+            String id = tableNhaCungCap.getValueAt(tableNhaCungCap.getSelectedRow(), 0) + "";
+            new frmEditorNhaCungCap(this, true, id).setVisible(true);
+            loadTableNhaCungCap();
+        }
+    }//GEN-LAST:event_tableNhaCungCapMousePressed
+
+    private void btnThemNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhaCungCapActionPerformed
+        new frmEditorNhaCungCap(this, true).setVisible(true);
+        loadTableNhaCungCap();
+    }//GEN-LAST:event_btnThemNhaCungCapActionPerformed
     public void loadTableHoaDonTrichKho() {
         MDTrichKho.loadTableHoaDonTrichKho(tableHoaDonTrichKho);
     }

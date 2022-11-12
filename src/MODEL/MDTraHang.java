@@ -10,7 +10,107 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class MDTraHang {
+     
+   public static hoaDonTraHang getHoaDon(String id) {
+        String sql = "SELECT * FROM nhatkytrahangncc WHERE id = ?";
+        hoaDonTraHang hoadon = null;
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, id);
+        try {
+            while (rs.next()) {
+                hoadon = new hoaDonTraHang(
+                        rs.getString("id"),
+                        rs.getString("thoigian"),
+                        rs.getString("idnhanvien"),
+                        rs.getString("idncc"),
+                        rs.getString("ghichu"),
+                        rs.getLong("tongtien"),
+                        rs.getInt("hinhthuc"),
+                        rs.getInt("trangthai") == 1 ? true : false
+                );
+            }
+        } catch (Exception e) {
+        }
+        
+        return hoadon;
+    }
+    
+    public static void update(hoaDonTraHang hoadon, hoaDonTraHang hoadoncu,
+            ArrayList<chiTietHoaDon> dataCu, ArrayList<chiTietHoaDon> dataMoi) {
 
+        /*
+        reset số lượng tồn kho
+        reset công nợ nhà cung cấp nếu hình thức thanh toán trừ công nợ
+        xóa chi tiết hóa đơn
+        
+        cập nhật hóa đơn
+        cập nhật lại tồn kho sản phẩm
+        cập nhật lại công nợ nếu thanh toán trừ vào nợ
+         */
+        String sqlResetTonKho = "update sanpham set soluong = soluong + ? where id = ?";
+        String sqlResetCongNo = "update nhacungcap set congno = congno + ? where id = ?";
+        String sqlXoaChiTietHoaDon = "delete from chitiethoadon where idhoadon = ?";
+        String sqlCapNhatHoaDon = "update nhatkytrahangncc set idncc=? , tongtien=?,hinhthuc=?, ghichu=? ,trangthai=? where id = ?";
+        String sqlCapNhatTonKho = "update sanpham set soluong  = soluong - ? where id = ?";
+        String sqlCapNhatCongNo = "update nhacungcap set congno = congno - ? where id = ?";
+        String sqlChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban,trangthai) values(?,?,?,?,4)";
+        
+        for (chiTietHoaDon item : dataCu) {
+            HELPER.SQLhelper.executeUpdate(sqlResetTonKho, item.getSoLuongTraHang(), item.getIdSanPham());
+            HELPER.SQLhelper.executeUpdate(sqlXoaChiTietHoaDon, hoadoncu.getId());
+        }
+        if (hoadoncu.getHinhThuc() == 1) {
+            HELPER.SQLhelper.executeUpdate(sqlResetCongNo, hoadoncu.getTongTien(), hoadoncu.getIdNhaCungCap());
+        }
+        HELPER.SQLhelper.executeUpdate(sqlCapNhatHoaDon,
+                hoadon.getIdNhaCungCap(),
+                hoadon.getTongTien(),
+                hoadon.getHinhThuc(),
+                hoadon.getGhiChu(),
+                hoadon.isTrangThai() == true ? 1 : 0,
+                hoadoncu.getId()
+        );
+        for (chiTietHoaDon item : dataMoi) {
+            HELPER.SQLhelper.executeUpdate(sqlCapNhatTonKho,
+                    item.getSoLuongTraHang(), item.getIdSanPham()
+            );
+            HELPER.SQLhelper.executeUpdate(sqlChiTietHoaDon,
+                    hoadoncu.getId(),
+                    item.getIdSanPham(),
+                    item.getSoLuongTraHang(),
+                    item.getGiaNhap()
+            );
+        }
+        if (hoadon.getHinhThuc() == 1) {
+            HELPER.SQLhelper.executeUpdate(sqlCapNhatCongNo, hoadon.getTongTien(), hoadon.getIdNhaCungCap());
+        }
+        
+    }
+    
+    public static void loadChiTietHoaDon(JTable table, String idHoaDon) {
+        String sql = "select chitiethoadon.soluong as 'soluong',(chitiethoadon.soluong*sanpham.GiaNhap) as 'thanhtien', "
+                + "sanpham.name as 'tensanpham',sanpham.GiaNhap as 'gianhap',donvitinh.Name as 'donvitinh' from chitiethoadon "
+                + "join sanpham on sanpham.ID=chitiethoadon.idsanpham "
+                + "join donvitinh on donvitinh.id=sanpham.IDDonViTinh "
+                + " "
+                + "where chitiethoadon.idhoadon = ?";
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, idHoaDon);
+        try {
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("tensanpham"),
+                    rs.getInt("soluong"),
+                    rs.getString("donvitinh"),
+                    HELPER.helper.SoString(rs.getLong("gianhap")),
+                    HELPER.helper.SoString(rs.getLong("thanhtien"))
+                });
+            }
+        } catch (Exception e) {
+        }
+        table.setModel(model);
+    }
+    
     public static String createID() {
         String id = "TH";
         String date = HELPER.helper.LayNgayString(new Date(), "ddMM");
@@ -22,7 +122,7 @@ public class MDTraHang {
         }
         return id + date + random;
     }
-
+    
     public static void traHang(hoaDonTraHang hoadon, ArrayList<chiTietHoaDon> data) {
 
         /*
@@ -38,7 +138,7 @@ public class MDTraHang {
         String sqlChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban,trangthai) values(?,?,?,?,4)";
         String sqlTruTonKho = "update sanpham set soluong = soluong - ? where id = ?";
         String sqlCapNhatCongNo = "update nhacungcap set congno = congno - ? where id = ?";
-
+        
         HELPER.SQLhelper.executeUpdate(sqlTaoHoaDon,
                 hoadon.getId(),
                 hoadon.getThoiGian(),
@@ -62,7 +162,7 @@ public class MDTraHang {
             HELPER.SQLhelper.executeUpdate(sqlTruTonKho, item.getSoLuongTraHang(), item.getIdSanPham());
         }
     }
-
+    
     public static void loadTable(JTable table) {
         String sql = "select nhatkytrahangncc.id as 'id', nhatkytrahangncc.ThoiGian as 'thoigian',nhanvien.name as 'nhanvien',\n"
                 + " nhacungcap.name as 'nhacungcap',nhatkytrahangncc.TongTien as 'tongtien',nhatkytrahangncc.GhiChu as 'ghichu'\n"
@@ -91,5 +191,5 @@ public class MDTraHang {
         }
         table.setModel(model);
     }
-
+    
 }
