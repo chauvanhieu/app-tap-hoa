@@ -39,7 +39,7 @@ public class MDNhapHang {
         String sqlCapNhatCongNo = " update khachhang set congno = congno + ? where id = ? ";
         String sqlTaoChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban,trangthai) values(?,?,?,?,3)";
         String sqlThemSoluongSanPham = "update sanpham set soluong = soluong + ? where id = ?";
-        String sqlCapNhatHoaDon = "update nhatkynhaphang set idnhacungcap = ?,tongtien=?,thanhtoan=?,ghichu=?,trangthai=?";
+        String sqlCapNhatHoaDon = "update nhatkynhaphang set idnhacungcap = ?,tongtien=?,thanhtoan=?,ghichu=?,trangthai=? where id = ?";
 
         // xóa chi tiết hóa đơn cũ
         HELPER.SQLhelper.executeUpdate(sqlXoaChiTiet, hoadon.getId());
@@ -58,7 +58,8 @@ public class MDNhapHang {
                 hoadon.getTongTien(),
                 hoadon.getThanhToan(),
                 hoadon.getGhiChu(),
-                hoadon.isTrangThai() == true ? 1 : 0
+                hoadon.isTrangThai() == true ? 1 : 0,
+                hoadoncu.getId()
         );
         HELPER.SQLhelper.executeUpdate(sqlCapNhatCongNo,
                 hoadon.getTongTien() - hoadon.getThanhToan(),

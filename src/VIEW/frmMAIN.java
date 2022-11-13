@@ -8,6 +8,7 @@ import CLASS.nhanVien;
 import CLASS.sanPham;
 import HELPER.helper;
 import MODEL.MDAccount;
+import MODEL.MDChiTietHoaDon;
 import MODEL.MDCongNo;
 import MODEL.MDDonViTinh;
 import MODEL.MDHoaDon;
@@ -101,7 +102,7 @@ public class frmMAIN extends javax.swing.JFrame {
         listLoaiSanPham = MDLoaiSanPham.getNames();
         //Load ComboBox Loại Sản Phẩm
         loadComboboxLoaiSanPham();
-        
+
     }
 
     public void loadTableThuNoKhachHang() {
@@ -3734,9 +3735,8 @@ public class frmMAIN extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtTimKiemKhachHangPnlKHKeyReleased
 
-    
     //đọc danh sách loại sản phẩm
-        public void loadComboboxLoaiSanPham() {
+    public void loadComboboxLoaiSanPham() {
         comboBoxNhomHang.removeAllItems();
         comboBoxNhomHang.addItem("Tất cả");
         for (String name : listLoaiSanPham) {
@@ -3744,10 +3744,9 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         comboBoxNhomHang.setSelectedIndex(0);
     }
-        
-    
+
     //Gom nhóm Loại sản phẩm
-        public void loadTableSanPham(String loaiSanPham) {
+    public void loadTableSanPham(String loaiSanPham) {
         ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         DefaultTableModel model = (DefaultTableModel) tableSanPhamPnlSanPham.getModel();
         model.setRowCount(0);
@@ -3768,7 +3767,7 @@ public class frmMAIN extends javax.swing.JFrame {
         }
         tableSanPhamPnlSanPham.setModel(model);
     }
-    
+
     private void comboBoxNhomHangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxNhomHangItemStateChanged
         // TODO add your handling code here:
         String loaSanPham = comboBoxNhomHang.getSelectedItem() + "";
