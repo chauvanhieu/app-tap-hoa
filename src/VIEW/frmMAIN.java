@@ -49,6 +49,7 @@ public class frmMAIN extends javax.swing.JFrame {
     public static Account acc;
     public static Component thisFrame;
     private String path = "src/IMAGE/";
+    private ArrayList<String> listLoaiSanPham;
 
     public frmMAIN(Account acount) {
 
@@ -96,6 +97,11 @@ public class frmMAIN extends javax.swing.JFrame {
         // set table text center
         setTableTextCenter();
         addKeyEsc();
+        //đọc danh sách Loại sản phẩm
+        listLoaiSanPham = MDLoaiSanPham.getNames();
+        //Load ComboBox Loại Sản Phẩm
+        loadComboboxLoaiSanPham();
+        
     }
 
     public void loadTableThuNoKhachHang() {
@@ -1434,7 +1440,6 @@ public class frmMAIN extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel11.setText("Nhóm hàng :");
 
-        comboBoxNhomHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Bia", "Nước ngọt", "Bánh", "Sữa", "Gia vị", "Đồ gia dụng", "Đồ Ăn" }));
         comboBoxNhomHang.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboBoxNhomHangItemStateChanged(evt);
@@ -3672,7 +3677,7 @@ public class frmMAIN extends javax.swing.JFrame {
 
     public void loadTableSanPhamKeyReleased(String keyword) {
         ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
-
+        comboBoxNhomHang.setSelectedIndex(0);
         DefaultTableModel model = (DefaultTableModel) tableSanPhamPnlSanPham.getModel();
         model.setRowCount(0);
 
@@ -3683,7 +3688,7 @@ public class frmMAIN extends javax.swing.JFrame {
                     || helper.removeAccent(item.getIdSanPham().toLowerCase()).contains(keyword.toLowerCase())
                     || helper.removeAccent(item.getName().toLowerCase()).contains(keyword.toLowerCase())) {
 
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -3729,6 +3734,41 @@ public class frmMAIN extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtTimKiemKhachHangPnlKHKeyReleased
 
+    
+    //đọc danh sách loại sản phẩm
+        public void loadComboboxLoaiSanPham() {
+        comboBoxNhomHang.removeAllItems();
+        comboBoxNhomHang.addItem("Tất cả");
+        for (String name : listLoaiSanPham) {
+            comboBoxNhomHang.addItem(name);
+        }
+        comboBoxNhomHang.setSelectedIndex(0);
+    }
+        
+    
+    //Gom nhóm Loại sản phẩm
+        public void loadTableSanPham(String loaiSanPham) {
+        ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
+        DefaultTableModel model = (DefaultTableModel) tableSanPhamPnlSanPham.getModel();
+        model.setRowCount(0);
+        for (sanPham item : dataSanPhamTable) {
+
+            if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                model.addRow(new Object[]{
+                    imageIcon,
+                    item.getIdSanPham(),
+                    item.getName(),
+                    item.getBarcode(),
+                    item.getIdDonViTinh(),
+                    item.getSoLuong(),
+                    helper.LongToString(item.getGiaBan())
+                });
+            }
+        }
+        tableSanPhamPnlSanPham.setModel(model);
+    }
+    
     private void comboBoxNhomHangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxNhomHangItemStateChanged
         // TODO add your handling code here:
         String loaSanPham = comboBoxNhomHang.getSelectedItem() + "";

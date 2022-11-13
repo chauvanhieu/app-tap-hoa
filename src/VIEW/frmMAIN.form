@@ -1297,16 +1297,7 @@
             <Component class="javax.swing.JComboBox" name="comboBoxNhomHang">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="8">
-                    <StringItem index="0" value="T&#xe2;&#x301;t ca&#x309;"/>
-                    <StringItem index="1" value="Bia"/>
-                    <StringItem index="2" value="N&#x1b0;&#x1a1;&#x301;c ngo&#x323;t"/>
-                    <StringItem index="3" value="Ba&#x301;nh"/>
-                    <StringItem index="4" value="S&#x1b0;&#x303;a"/>
-                    <StringItem index="5" value="Gia vi&#x323;"/>
-                    <StringItem index="6" value="&#x110;&#xf4;&#x300; gia du&#x323;ng"/>
-                    <StringItem index="7" value="&#x110;&#xf4;&#x300; &#x102;n"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
