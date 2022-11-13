@@ -745,6 +745,7 @@ public class frmXemHoaDonTraHang extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         editMode(true);
+        dataChiTietHoaDonCu = MDChiTietHoaDon.getChiTietHoaDonTraHang(hoadon.getId());
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
