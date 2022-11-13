@@ -39,7 +39,6 @@ public class MDNhaCungCap {
                     rs.getInt("trangthai") == 1 ? true : false,});
             }
         } catch (Exception ex) {
-            System.out.println("Loi lay du lieu " + ex.getMessage());
         }
         table.setModel(model);
     }
@@ -68,8 +67,7 @@ public class MDNhaCungCap {
     public static nhaCungCap getNhaCungCap(String id) {
         String sql = "select * from NhaCungCap where id = ?";
         nhaCungCap ncc = new nhaCungCap();
-        HELPER.SQLhelper.executeQuery(sql);
-        ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
+        ResultSet rs = HELPER.SQLhelper.executeQuery(sql, id);
         try {
             while (rs.next()) {
                 ncc = new nhaCungCap(

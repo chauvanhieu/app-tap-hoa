@@ -65,7 +65,6 @@ public class MDAccount {
                 ));
             }
         } catch (Exception ex) {
-            System.out.println("Loi lay du lieu " + ex.getMessage());
         }
         return data;
     }
@@ -94,7 +93,6 @@ public class MDAccount {
                 arr.add(acc);
             }
         } catch (Exception ex) {
-            System.out.println("Loi lay du lieu " + ex.getMessage());
         }
         return arr;
     }

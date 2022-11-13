@@ -26,9 +26,7 @@ public class SQLhelper {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD);
-            System.out.println("Ket Noi SQL Thanh Cong!");
         } catch (Exception ex) {
-            System.out.println("Ket Noi SQL Loi!");
             ex.printStackTrace();
         }
         return conn;
@@ -39,9 +37,7 @@ public class SQLhelper {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost/fpolymarket", "root", "");
-            System.out.println("Kết nối thành công!");
         } catch (Exception ex) {
-            System.out.println("Mission fail!");
             ex.printStackTrace();
         }
         return conn;

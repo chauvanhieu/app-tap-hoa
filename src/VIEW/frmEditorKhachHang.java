@@ -379,7 +379,7 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         if (evt.getClickCount() == 2 && tableDanhSachHoaDonBanHang.getSelectedRows().length == 1) {
             String idHoaDon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
             this.setVisible(false);
-            new frmXemHoaDon(null, true, null, idHoaDon).setVisible(true);
+            new frmXemHoaDonBanHang(null, true, null, idHoaDon).setVisible(true);
             loadDuLieu();
         }
 

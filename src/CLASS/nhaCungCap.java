@@ -10,18 +10,26 @@ package CLASS;
  * @author Admin
  */
 public class nhaCungCap {
-    String idNhaCungCap ;
-    String name ;
-    String soDienThoai ;
-    String diaChi ;
-    String ghiChu ;
-    long congNo ;
-    boolean trangThai ;
+
+    String idNhaCungCap;
+    String name;
+    String soDienThoai;
+    String diaChi;
+    String ghiChu;
+    long congNo;
+    boolean trangThai;
 
     public nhaCungCap() {
     }
 
-    public nhaCungCap(String idNhaCungCap, String name, String soDienThoai, String diaChi, String ghiChu, long congNo, boolean trangThai) {
+    public nhaCungCap(
+            String idNhaCungCap,
+            String name,
+            String soDienThoai,
+            String diaChi,
+            String ghiChu,
+            long congNo,
+            boolean trangThai) {
         this.idNhaCungCap = idNhaCungCap;
         this.name = name;
         this.soDienThoai = soDienThoai;
@@ -86,7 +94,5 @@ public class nhaCungCap {
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
-    
+
 }

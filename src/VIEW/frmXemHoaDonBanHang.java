@@ -1,5 +1,6 @@
 package VIEW;
 
+import CLASS.ThongTinCuaHang;
 import CLASS.chiTietHoaDon;
 import CLASS.hoaDon;
 import CLASS.khachHang;
@@ -11,6 +12,7 @@ import MODEL.MDHoaDon;
 import MODEL.MDKhachHang;
 import MODEL.MDLoaiSanPham;
 import MODEL.MDSanPham;
+import MODEL.MDThongTinCuaHang;
 import src.CLASS.Account;
 
 import java.awt.Font;
@@ -41,7 +43,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class frmXemHoaDon extends javax.swing.JDialog {
+public class frmXemHoaDonBanHang extends javax.swing.JDialog {
 
     public static Account acc;
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon;
@@ -50,13 +52,13 @@ public class frmXemHoaDon extends javax.swing.JDialog {
     private ArrayList<String> listLoaiSanPham = MDLoaiSanPham.getNames();
     private String path = "src/IMAGE/";
     private ArrayList<khachHang> dataKhachHang = MDKhachHang.getDataToComboBox();
-//    private static String idHoaDon = "";
     private static hoaDon hoadon;
     private DetailedComboBox comboboxKhachHang;
     public static String idKhachHang;
     private long soTienGoc;
+    private ThongTinCuaHang admin = MDThongTinCuaHang.getThongTin();
 
-    public frmXemHoaDon(java.awt.Frame parent, boolean modal, Account account, String idhoaDon) {
+    public frmXemHoaDonBanHang(java.awt.Frame parent, boolean modal, Account account, String idhoaDon) {
 
         this.acc = account;
         this.hoadon = MDHoaDon.getHoaDon(idhoaDon);
@@ -338,7 +340,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : data) {
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             model.addRow(new Object[]{
                 imageIcon,
                 item.getIdSanPham(),
@@ -551,7 +553,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                     .addComponent(jScrollPane3)
                     .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 270, Short.MAX_VALUE)
+                        .addGap(0, 226, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cbLoaiSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -696,46 +698,47 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator2)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(15, 15, 15)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(31, 31, 31)
-                            .addComponent(jLabel8))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbTuyChonGiamGia, 0, 177, Short.MAX_VALUE)
-                            .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                            .addComponent(panelComboKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(lb))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel9))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGap(15, 15, 15)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGap(31, 31, 31)
+                                    .addComponent(jLabel8))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtGiaTriGiam)
-                            .addComponent(cbHinhThucThanhToan, 0, 182, Short.MAX_VALUE)
-                            .addComponent(txtTienKhachDua, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(jScrollPane4))
-                .addGap(4, 4, 4))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbTuyChonGiamGia, 0, 177, Short.MAX_VALUE)
+                                    .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(panelComboKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(lb))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cbHinhThucThanhToan, javax.swing.GroupLayout.Alignment.LEADING, 0, 172, Short.MAX_VALUE)
+                                    .addComponent(txtGiaTriGiam, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTienKhachDua)))
+                            .addComponent(jScrollPane4)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -975,7 +978,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             tienKhachDua = helper.SoLong(txtTienKhachDua.getText());
         }
         hoaDon hoadon = new hoaDon(
-                frmXemHoaDon.hoadon.getId(),
+                frmXemHoaDonBanHang.hoadon.getId(),
                 idNhanVien,
                 idKhachHang,
                 thoiGian,
@@ -985,7 +988,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 giamGia,
                 tongtien,
                 cbChonGia.getSelectedIndex(),
-                frmXemHoaDon.hoadon.isTrangThai());
+                frmXemHoaDonBanHang.hoadon.isTrangThai());
         MDHoaDon.capNhatHoaDon(hoadon,
                 tienKhachDua,
                 tableGioHang,
@@ -1088,7 +1091,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
         ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         for (sanPham item : dataSanPhamTable) {
             if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -1150,20 +1153,18 @@ public class frmXemHoaDon extends javax.swing.JDialog {
 
     @SuppressWarnings("unchecked")
     private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
-//        hoaDon hoaDon = MDHoaDon.getHoaDon(hoadon.getId());
         try {
             Hashtable map = new Hashtable();
             JasperReport jasper = JasperCompileManager.compileReport("src/REPORT/hoaDonBanHang.jrxml");
-            map.put("tenCuaHang", "Tạp hóa FPOLY MARKET");
-            map.put("diaChiCuaHang", "317 Phan Bội Châu, TP.BMT");
+            map.put("tenCuaHang", admin.getTenCuaHang());
+            map.put("diaChiCuaHang", admin.getDiaChi());
             map.put("idHoaDon", hoadon.getId());
-            map.put("soDienThoaiCuaHang", "0909 79 79 79");
+            map.put("soDienThoaiCuaHang", admin.getSoDienThoai());
             map.put("soTienGiamGia", HELPER.helper.SoString(hoadon.getGiamGia()) + " đ");
             map.put("soTienThanhToan", HELPER.helper.SoString(hoadon.getTongTien()) + " đ");
             map.put("tenNhanVien", hoadon.getIdNhanVien());
             map.put("tenKhachHang", hoadon.getIdKhachHang());
             map.put("thoiGian", hoadon.getThoiGian());
-
             Connection con = HELPER.SQLhelper.getConnection();
             JasperPrint printer = JasperFillManager.fillReport(jasper, map, con);
             JasperViewer.viewReport(printer, false);
@@ -1171,7 +1172,7 @@ public class frmXemHoaDon extends javax.swing.JDialog {
             try {
                 throw e;
             } catch (Exception ex) {
-                Logger.getLogger(frmXemHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frmXemHoaDonBanHang.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -1211,27 +1212,28 @@ public class frmXemHoaDon extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmXemHoaDon.class
+            java.util.logging.Logger.getLogger(frmXemHoaDonBanHang.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmXemHoaDon.class
+            java.util.logging.Logger.getLogger(frmXemHoaDonBanHang.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmXemHoaDon.class
+            java.util.logging.Logger.getLogger(frmXemHoaDonBanHang.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmXemHoaDon.class
+            java.util.logging.Logger.getLogger(frmXemHoaDonBanHang.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmXemHoaDon dialog = new frmXemHoaDon(new javax.swing.JFrame(), true, acc, hoadon.getId());
+                frmXemHoaDonBanHang dialog = new frmXemHoaDonBanHang(new javax.swing.JFrame(), true, acc, hoadon.getId());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

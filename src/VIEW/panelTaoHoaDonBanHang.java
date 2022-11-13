@@ -1,5 +1,6 @@
 package VIEW;
 
+import CLASS.ThongTinCuaHang;
 import MODEL.MDChiTietHoaDon;
 import CLASS.chiTietHoaDon;
 import CLASS.hoaDon;
@@ -11,6 +12,7 @@ import MODEL.MDHoaDon;
 import MODEL.MDKhachHang;
 import MODEL.MDLoaiSanPham;
 import MODEL.MDSanPham;
+import MODEL.MDThongTinCuaHang;
 import src.CLASS.Account;
 
 import java.awt.AWTException;
@@ -47,6 +49,8 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 
+    private Connection con = HELPER.SQLhelper.getConnection();
+    private ThongTinCuaHang admin = MDThongTinCuaHang.getThongTin();
     private DetailedComboBox comboboxKhachHang;
     public static Account acc;
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon = new ArrayList<>();
@@ -146,7 +150,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                     || helper.removeAccent(item.getIdSanPham().toLowerCase()).contains(keyword.toLowerCase())
                     || helper.removeAccent(item.getName().toLowerCase()).contains(keyword.toLowerCase())) {
 
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -166,7 +170,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : dataSanPhamTable) {
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             model.addRow(new Object[]{
                 imageIcon,
                 item.getIdSanPham(),
@@ -240,7 +244,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
                 Arrays.asList("KH01", "KHÁCH MỚI", "", "", "")));
         ArrayList<khachHang> dataKhachHang = MDKhachHang.getDataToComboBox();
         for (khachHang kh : dataKhachHang) {
-            
+
             tableData.add(new ArrayList<>(
                     Arrays.asList(kh.getIdKhachHang(), kh.getName(), kh.getSoDienThoai(), kh.getDiaChi(), helper.LongToString(kh.getNo()))));
         }
@@ -1150,32 +1154,82 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
             if (comboboxKhachHang.getSelectedIndex() == 0) {
                 idKhachHang = "KH01";
             }
-            thanhToan();
-            hoaDon hoaDon = MDHoaDon.getHoaDon(idHoaDonBanHang);
-            try {
-                Hashtable map = new Hashtable();
-                JasperReport jasper = JasperCompileManager.compileReport("src/REPORT/hoaDonBanHang.jrxml");
-                map.put("tenCuaHang", "Tạp hóa FPOLY MARKET");
-                map.put("diaChiCuaHang", "317 Phan Bội Châu, TP.BMT");
-                map.put("idHoaDon", hoaDon.getId());
-                map.put("soDienThoaiCuaHang", "0909 79 79 79");
-                map.put("soTienGiamGia", HELPER.helper.SoString(hoaDon.getGiamGia()) + " đ");
-                map.put("soTienThanhToan", HELPER.helper.SoString(hoaDon.getTongTien()) + " đ");
-                map.put("tenNhanVien", hoaDon.getIdNhanVien());
-                map.put("tenKhachHang", hoaDon.getIdKhachHang());
-                map.put("thoiGian", hoaDon.getThoiGian());
+            luuIn();
 
-                Connection con = HELPER.SQLhelper.getConnection();
-                JasperPrint printer = JasperFillManager.fillReport(jasper, map, con);
-                JasperViewer.viewReport(printer, false);
-            } catch (Exception e) {
-                System.out.println("");
-            }
         } else {
             JOptionPane.showMessageDialog(this, "Chưa có sản phẩm !");
         }
     }//GEN-LAST:event_btnLuuInActionPerformed
+    public void luuIn() {
+        if (cbHinhThucThanhToan.getSelectedIndex() == 2 && idKhachHang == "KH01") {
+            JOptionPane.showMessageDialog(this, "Thanh toán nợ cần có thông tin khách hàng !");
+            return;
+        }
+        String idNhanVien = acc.getIdNhanVien();
+        String idKhachHang = this.idKhachHang;
+        String thoiGian = helper.getDateTime();
+        int hinhThucThanhToan = cbHinhThucThanhToan.getSelectedIndex() + 1;
+        /*
+        1.tiền mặt
+        2.chuyển khoản
+        3.nợ
+         */
+        String ghiChu = txtGhiChu.getText().trim();
+        long giamGia = soTienGoc - helper.SoLong(txtTongTien.getText());
+        long tongtien = helper.SoLong(txtTongTien.getText());
+        long tienKhachDua = txtTienKhachDua.getText() == "" ? 0 : helper.SoLong(txtTienKhachDua.getText());
+        hoaDon hoadon = new hoaDon(
+                MDHoaDon.craeteID(),
+                idNhanVien,
+                idKhachHang,
+                thoiGian,
+                hinhThucThanhToan,
+                0,
+                ghiChu,
+                giamGia,
+                tongtien,
+                cbChonGia.getSelectedIndex(),
+                true);
+        long soTienNhanDuoc = tongtien;
+        if (cbHinhThucThanhToan.getSelectedIndex() == 2) {
+            soTienNhanDuoc = helper.SoLong(txtTienKhachDua.getText());
+        }
+        hoadon.setSoTienNhanDuoc(soTienNhanDuoc);
+        MDHoaDon.taoHoaDon(
+                hoadon,
+                tienKhachDua,
+                tableGioHang,
+                dataChiTietHoaDon);
+        idHoaDonBanHang = hoadon.getId();
+        JOptionPane.showMessageDialog(this, "THANH TOÁN THÀNH CÔNG !");
+        Robot robot;
+        try {
+            robot = new Robot();
+            robot.keyPress(KeyEvent.VK_ESCAPE);
+        } catch (AWTException ex) {
+            Logger.getLogger(panelTaoHoaDonBanHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Hashtable map = new Hashtable();
+            JasperReport jasper = JasperCompileManager.compileReport("src/REPORT/hoaDonBanHang.jrxml");
+            map.put("tenCuaHang", admin.getTenCuaHang());
+            map.put("diaChiCuaHang", admin.getDiaChi());
+            map.put("idHoaDon", hoadon.getId());
+            map.put("soDienThoaiCuaHang", admin.getSoDienThoai());
+            map.put("soTienGiamGia", HELPER.helper.SoString(hoadon.getGiamGia()) + " đ");
+            map.put("soTienThanhToan", HELPER.helper.SoString(hoadon.getTongTien()) + " đ");
+            map.put("tenNhanVien", hoadon.getIdNhanVien());
+            map.put("tenKhachHang", hoadon.getIdKhachHang());
+            map.put("thoiGian", hoadon.getThoiGian());
 
+            JasperPrint printer = JasperFillManager.fillReport(jasper, map, con);
+
+            JasperViewer.viewReport(printer, false);
+        } catch (Exception e) {
+            return;
+        }
+
+    }
     private void txtBarcodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBarcodeKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBarcodeKeyReleased
