@@ -1928,7 +1928,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jScrollPane11" pref="492" max="32767" attributes="0"/>
+                  <Component id="jScrollPane11" pref="486" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -1948,70 +1948,128 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbFilterThuNo1" min="-2" pref="158" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtTimKiemThuNoKhachHang1" min="-2" pref="219" max="-2" attributes="0"/>
-                      <EmptySpace pref="340" max="32767" attributes="0"/>
-                      <Component id="btnTimKiemNhanVien2" min="-2" pref="88" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel32" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel30" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="dateFromTraNoNcc" min="-2" pref="150" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="dateToTraNoNcc" min="-2" pref="150" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="txtTimKiemTraNoNcc" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButton12" min="-2" pref="107" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabel14" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnTimKiemNhanVien2" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTimKiemThuNoKhachHang1" alignment="2" min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="cbFilterThuNo1" alignment="2" min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="txtTimKiemTraNoNcc" alignment="2" pref="38" max="32767" attributes="0"/>
+                                  <Component id="jLabel30" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="dateFromTraNoNcc" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="dateToTraNoNcc" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="jLabel31" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel32" alignment="2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jButton12" alignment="0" min="-2" pref="81" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="txtTimKiemThuNoKhachHang1">
-              <Events>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimKiemThuNoKhachHang1KeyReleased"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnTimKiemNhanVien2">
+            <Component class="javax.swing.JButton" name="jButton12">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/ICON/reload.png"/>
+                  <Image iconType="3" name="/ICON/check-hoa-don.png"/>
+                </Property>
+                <Property name="horizontalTextPosition" type="int" value="0"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel30">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="TI&#x300;M HO&#x301;A &#x110;&#x1a0;N :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtTimKiemTraNoNcc">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTimKiemNhanVien2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimKiemTraNoNccActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel14">
+            <Component class="com.toedter.calendar.JDateChooser" name="dateToTraNoNcc">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="16" style="1"/>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ti&#x300;m theo :"/>
+                <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new Date()" type="code"/>
+                </Property>
+                <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="15" style="0"/>
+                </Property>
+                <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbFilterThuNo1">
+            <Component class="javax.swing.JLabel" name="jLabel31">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="T&#xe2;&#x301;t ca&#x309;"/>
-                    <StringItem index="1" value="Nh&#xe2;n vi&#xea;n"/>
-                    <StringItem index="2" value="Kha&#x301;ch ha&#x300;ng"/>
-                  </StringArray>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
+                <Property name="text" type="java.lang.String" value="&#x110;&#xca;&#x301;N NGA&#x300;Y :"/>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="dateFromTraNoNcc">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="date" type="java.util.Date" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new Date()" type="code"/>
+                </Property>
+                <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="15" style="0"/>
+                </Property>
+                <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel32">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#x1af;&#x300; NGA&#x300;Y :"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -2029,9 +2087,9 @@
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="4">
-                    <Column editable="false" title="Th&#x1a1;&#x300;i gian" type="java.lang.Object"/>
-                    <Column editable="false" title="Nh&#xe2;n vi&#xea;n thu ti&#xea;&#x300;n" type="java.lang.Object"/>
                     <Column editable="false" title="Nha&#x300; Cung C&#xe2;&#x301;p" type="java.lang.Object"/>
+                    <Column editable="false" title="Nh&#xe2;n vi&#xea;n thu ti&#xea;&#x300;n" type="java.lang.Object"/>
+                    <Column editable="false" title="Th&#x1a1;&#x300;i gian" type="java.lang.Object"/>
                     <Column editable="false" title="S&#xf4;&#x301; ti&#xea;&#x300;n tra&#x309;" type="java.lang.Object"/>
                     <Column editable="false" title="Ghi chu&#x301;" type="java.lang.Object"/>
                   </Table>
@@ -2059,7 +2117,7 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title value="Ghi chu&#x301;"/>
+                      <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>

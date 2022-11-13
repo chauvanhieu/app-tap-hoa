@@ -180,7 +180,6 @@ public class helper {
         try {
             return dateFormat.parse(ngay);
         } catch (ParseException ex) {
-            System.out.println("Lỗi chuyển ngày");
             return null;
         }
     }
@@ -196,7 +195,6 @@ public class helper {
         try {
             return NumberFormat.getNumberInstance().parse(so).doubleValue();
         } catch (ParseException ex) {
-            System.out.println("Lỗi chuyển số");
             return 0;
         }
     }
@@ -210,7 +208,6 @@ public class helper {
         try {
             return NumberFormat.getNumberInstance().parse(so).longValue();
         } catch (ParseException ex) {
-            System.out.println("Lỗi chuyển số");
             return 0;
         }
     }

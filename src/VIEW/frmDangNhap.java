@@ -215,7 +215,7 @@ public class frmDangNhap extends javax.swing.JFrame {
                     public void actionPerformed(ActionEvent e) {
                         int values = frmLoading.progBar.getValue();
                         if (values < 100) {
-                            frmLoading.progBar.setValue(values + 1);
+                            frmLoading.progBar.setValue(values + 10);
                             if (frmLoading.progBar.getValue() > 99) {
                                 new frmMAIN(account).setVisible(true);
                             }

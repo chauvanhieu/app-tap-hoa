@@ -83,7 +83,6 @@ public class MDDonViTinh {
                         rs.getInt("trangthai") == 1 ? true : false));
             }
         } catch (Exception ex) {
-            System.out.println("Loi lay du lieu " + ex.getMessage());
         }
         return data;
     }
@@ -102,7 +101,6 @@ public class MDDonViTinh {
                     rs.getInt("trangthai") == 1 ? true : false,});
             }
         } catch (Exception ex) {
-            System.out.println("Loi lay du lieu " + ex.getMessage());
         }
         table.setModel(model);
     }

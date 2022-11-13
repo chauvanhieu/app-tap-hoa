@@ -1226,7 +1226,7 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
 
             JasperViewer.viewReport(printer, false);
         } catch (Exception e) {
-            System.out.println("");
+            return;
         }
 
     }
