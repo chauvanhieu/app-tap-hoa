@@ -36,7 +36,6 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import src.CLASS.Account;
 
 /**
  *
@@ -44,11 +43,12 @@ import src.CLASS.Account;
  */
 public class frmXemHoaDonNhapHang extends javax.swing.JDialog {
 
-    private ArrayList<chiTietHoaDon> dataChiTietHoaDon = new ArrayList<>();
-    private ArrayList<chiTietHoaDon> dataChiTietHoaDonCu = new ArrayList<>();
+    private ArrayList<chiTietHoaDon> dataChiTietHoaDon = new ArrayList<chiTietHoaDon>();
+
     private ArrayList<sanPham> dataSanPhamTimKiem = new ArrayList<sanPham>();
     private String path = "src/IMAGE/";
     private String idNhaCungCap = "";
+    private ArrayList<chiTietHoaDon> dataChiTietHoaDonCu = new ArrayList<chiTietHoaDon>();
     private DetailedComboBox comboBoxNhaCungCap;
     private ArrayList<nhaCungCap> dataNhaCungCap = MDNhaCungCap.getAll();
     private static String idHoaDon;
@@ -60,8 +60,10 @@ public class frmXemHoaDonNhapHang extends javax.swing.JDialog {
         idHoaDon = id;
         hoadon = MDNhapHang.getHoaDon(id);
         hoadonCu = hoadon.clone();
+
+        this.dataChiTietHoaDonCu = MDChiTietHoaDon.getChiTietHoaDonNhapHang(idHoaDon);
         this.dataChiTietHoaDon = MDChiTietHoaDon.getChiTietHoaDonNhapHang(idHoaDon);
-        this.dataChiTietHoaDonCu = (ArrayList<chiTietHoaDon>) dataChiTietHoaDon.clone();
+
         initComponents();
         loadComboBoxNhaCungCap();
         setModelTableSanPham();
@@ -82,7 +84,6 @@ public class frmXemHoaDonNhapHang extends javax.swing.JDialog {
     }
 
     public void loadDuLieu() {
-        loadGioHang();
         txtTienThanhToan.setText(helper.SoString(hoadon.getThanhToan()));
         txtConLai.setText(helper.SoString(hoadon.getTongTien() - hoadon.getThanhToan()));
         // load combobox nhà cung cấp
@@ -93,8 +94,14 @@ public class frmXemHoaDonNhapHang extends javax.swing.JDialog {
             }
         }
         comboBoxNhaCungCap.setSelectedIndex(index);
-        dataChiTietHoaDon = dataChiTietHoaDonCu;
+        for (chiTietHoaDon item : dataChiTietHoaDonCu) {
+            dataChiTietHoaDon.add(item);
+        }
         loadGioHang();
+        for (chiTietHoaDon item : dataChiTietHoaDonCu) {
+            System.out.println("data cũ sau khi load dữ liệu");
+            System.out.println(item.getSoLuongNhapHang() + " " + item.getTenSanPham());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -744,28 +751,39 @@ public class frmXemHoaDonNhapHang extends javax.swing.JDialog {
     }
     private void tableGioHangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableGioHangKeyReleased
         int rowCount = tableGioHang.getRowCount();
+
+        for (chiTietHoaDon item : dataChiTietHoaDonCu) {
+            System.out.println("data cũ sau khi set lại 1");
+            System.out.println(item.getSoLuongNhapHang() + " " + item.getTenSanPham());
+        }
+
         for (int i = 0; i < rowCount; i++) {
 
-            //            dataChiTietHoaDon.get(i).setGiaNhap(helper.SoLong(tableGioHang.getValueAt(i, 3) + ""));
             dataChiTietHoaDon.get(i).setSoLuongNhapHang(Integer.parseInt(tableGioHang.getValueAt(i, 2) + ""));
-            if (dataChiTietHoaDon.get(i).getSoLuong() < 1 || dataChiTietHoaDon.get(i).getDonGia() < 0) {
+            if (dataChiTietHoaDon.get(i).getSoLuongNhapHang() < 1 || dataChiTietHoaDon.get(i).getDonGia() < 0) {
                 dataChiTietHoaDon.remove(i);
             }
 
+        }
+
+        for (chiTietHoaDon item : dataChiTietHoaDonCu) {
+            System.out.println("data cũ sau khi set lại 2");
+            System.out.println(item.getSoLuongNhapHang() + " " + item.getTenSanPham());
         }
 
         loadGioHang();
     }//GEN-LAST:event_tableGioHangKeyReleased
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        /*
-        cập nhật tiền nợ nhà cung cấp
-        cập nhật số lượng các sản phẩm
-        cập nhật trạng thái chi tiết hoá đơn là 2
-         */
+
         editMode(false);
-//        if (dataChiTietHoaDon.size() > 0) {
-        // thanh toán
+
+        for (chiTietHoaDon item : dataChiTietHoaDonCu) {
+            System.out.println("---------- data cũ");
+            System.out.println(item.getSoLuongNhapHang() + "  " + item.getTenSanPham());
+            System.out.println("----------");
+        }
+
         hoaDonNhapHang hoadon = new hoaDonNhapHang(
                 this.hoadon.getId(),
                 this.hoadon.getThoiGian(),
@@ -789,9 +807,7 @@ public class frmXemHoaDonNhapHang extends javax.swing.JDialog {
         } catch (AWTException ex) {
             Logger.getLogger(panelTaoHoaDonBanHang.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Chưa có sản phẩm nào !");
-//        }
+
 
     }//GEN-LAST:event_btnLuuActionPerformed
 

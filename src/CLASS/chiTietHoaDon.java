@@ -22,6 +22,8 @@ public class chiTietHoaDon {
         this.giaNhap = giaNhap;
     }
 
+    
+
     public chiTietHoaDon(
             String idSanPham,
             String tenSanPham,

@@ -35,17 +35,19 @@ public class MDNhapHang {
          */
         String sqlXoaChiTiet = "delete from chitiethoadon where idhoadon = ?";
         String sqlResetCongNoNhaCungCap = "update nhacungcap set congno = congno - ? where id = ?";
-        String sqlResetTonKho = "update sanpham set soluong = soluong - ? where id = ?";
+        String sqlResetTonKho = "update sanpham set soluong = soluong - ? where id = ? ";
         String sqlCapNhatCongNo = " update khachhang set congno = congno + ? where id = ? ";
         String sqlTaoChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban,trangthai) values(?,?,?,?,3)";
-        String sqlThemSoluongSanPham = "update sanpham set soluong=soluong + ? where id = ?";
+        String sqlThemSoluongSanPham = "update sanpham set soluong = soluong + ? where id = ?";
         String sqlCapNhatHoaDon = "update nhatkynhaphang set idnhacungcap = ?,tongtien=?,thanhtoan=?,ghichu=?,trangthai=?";
 
+        // xóa chi tiết hóa đơn cũ
+        HELPER.SQLhelper.executeUpdate(sqlXoaChiTiet, hoadon.getId());
+
         for (chiTietHoaDon item : dataCu) {
+            //reset tồn kho về ban đầu
             HELPER.SQLhelper.executeUpdate(sqlResetTonKho, item.getSoLuongNhapHang(), item.getIdSanPham());
         }
-
-        HELPER.SQLhelper.executeUpdate(sqlXoaChiTiet, hoadon.getId());
 
         HELPER.SQLhelper.executeUpdate(sqlResetCongNoNhaCungCap,
                 hoadoncu.getTongTien() - hoadoncu.getThanhToan(),
@@ -62,6 +64,7 @@ public class MDNhapHang {
                 hoadon.getTongTien() - hoadon.getThanhToan(),
                 hoadon.getIdNhaCungCap()
         );
+
         for (chiTietHoaDon item : dataMoi) {
             HELPER.SQLhelper.executeUpdate(sqlTaoChiTietHoaDon,
                     hoadon.getId(),
@@ -69,6 +72,7 @@ public class MDNhapHang {
                     item.getSoLuongNhapHang(),
                     item.getGiaNhap()
             );
+
             HELPER.SQLhelper.executeUpdate(sqlThemSoluongSanPham,
                     item.getSoLuongNhapHang(),
                     item.getIdSanPham()
