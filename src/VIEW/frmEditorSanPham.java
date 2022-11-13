@@ -35,7 +35,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class frmEditorSanPham extends javax.swing.JDialog {
-    
+
     public static String option;
     private DetailedComboBox comboBoxNhaCungCap;
     private DetailedComboBox comboBoxDonViTinh;
@@ -48,7 +48,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
     private String idDonViTinh;
     private String hinhAnh;
     private Component thisPanel = this;
-    
+
     public frmEditorSanPham(java.awt.Frame parent, boolean modal, String option) {
         super(parent, modal);
         this.option = option;
@@ -58,11 +58,11 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         lbHinhAnh.setIcon(imageIcon);
         if (this.option != "add") {
             loadThongTinSanPham(this.option);
-            
+
         }
         setUX(this.option);
     }
-    
+
     public void loadThongTinSanPham(String idSanPham) {
         sanPham item = MDSanPham.getSanPham(idSanPham);
         txtTenSanPham.setText(item.getName());
@@ -99,12 +99,12 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 break;
             }
         }
-        
+
     }
 
     // edit UX
     public void setUX(String option) {
-        
+
         if (option != "add") {
             btnChonAnh.setEnabled(false);
             btnLuu.setEnabled(false);
@@ -119,7 +119,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
             comboBoxNhaCungCap.setEnabled(false);
             comboBoxNhomHang.setEnabled(false);
             cbTrangThai.setEnabled(false);
-
+            txtGiaSi.setEditable(false);
             // set actionlistener btn Sữa
             btnSua.addActionListener(new ActionListener() {
                 @Override
@@ -175,7 +175,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                     thisPanel.setVisible(false);
                 }
             });
-            
+
         } else if (option == "add") {
             lbTrangThai.setVisible(false);
             cbTrangThai.setVisible(false);
@@ -192,7 +192,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                     int soLuong = Integer.parseInt(txtSoLuong.getValue() + "");
                     int soLuongToiThieu = Integer.parseInt(txtSoLuongToiThieu.getValue() + "");
                     String ghiChu = txtGhiChu.getText();
-                    
+
                     sanPham sp = new sanPham(
                             id,
                             name,
@@ -214,21 +214,21 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 }
             });
         }
-        
+
     }
-    
+
     public void loadComboBox() {
         // comboBox nhà cung cấp
         String[] columns1 = new String[]{"Mã", "Tên", "Điện thoại", "Công nợ"};
         int[] widths1 = new int[]{80, 300, 120, 130};
         this.comboBoxNhaCungCap = new DetailedComboBox(columns1, widths1, 1);
-        
+
         List<List<?>> tableDataNhaCungCap = new ArrayList<List<?>>();
         for (nhaCungCap ncc : dataNhaCungCap) {
             tableDataNhaCungCap.add(new ArrayList<>(
                     Arrays.asList(ncc.getIdNhaCungCap(), ncc.getName(), ncc.getSoDienThoai(), HELPER.helper.LongToString(ncc.getCongNo()))));
         }
-        
+
         comboBoxNhaCungCap.setTableData(tableDataNhaCungCap);
         comboBoxNhaCungCap.setFont(new Font("Arial", Font.ITALIC, 14));
         comboBoxNhaCungCap.setSelectedIndex(-1);
@@ -247,13 +247,13 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         String[] columns2 = new String[]{"Mã", "Loại"};
         int[] widths2 = new int[]{80, 200};
         this.comboBoxNhomHang = new DetailedComboBox(columns2, widths2, 1);
-        
+
         List<List<?>> tableDataLoaiSanPham = new ArrayList<List<?>>();
         for (loaiSanPham lsp : dataLoaiSanPham) {
             tableDataLoaiSanPham.add(new ArrayList<>(
                     Arrays.asList(lsp.getIdLoaiSanPham(), lsp.getName())));
         }
-        
+
         comboBoxNhomHang.setTableData(tableDataLoaiSanPham);
         comboBoxNhomHang.setFont(new Font("Arial", Font.ITALIC, 14));
         comboBoxNhomHang.setSelectedIndex(-1);
@@ -272,13 +272,13 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         String[] columns3 = new String[]{"Mã", "ĐVT"};
         int[] widths3 = new int[]{80, 200};
         this.comboBoxDonViTinh = new DetailedComboBox(columns3, widths3, 1);
-        
+
         List<List<?>> tableDataDonViTinh = new ArrayList<List<?>>();
         for (donViTinh dvt : dataDonViTinh) {
             tableDataDonViTinh.add(new ArrayList<>(
                     Arrays.asList(dvt.getIdDonViTinh(), dvt.getName())));
         }
-        
+
         comboBoxDonViTinh.setTableData(tableDataDonViTinh);
         comboBoxDonViTinh.setFont(new Font("Arial", Font.ITALIC, 14));
         comboBoxDonViTinh.setSelectedIndex(-1);
@@ -293,7 +293,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         comboBoxDonViTinh.setVisible(true);
         pnlDonViTinh.add(comboBoxDonViTinh);
     }
-    
+
     public void copyFile(File sourceFile, File destFile) {
         if (!destFile.exists()) {
             try {
@@ -302,10 +302,10 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 Logger.getLogger(frmEditorSanPham.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         FileChannel source = null;
         FileChannel destination = null;
-        
+
         try {
             source = new FileInputStream(sourceFile).getChannel();
             destination = new FileOutputStream(destFile).getChannel();
@@ -328,7 +328,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
             }
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -688,7 +688,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
     private void txtGiaSiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaSiKeyReleased
         HELPER.helper.setTextFieldMoney(txtGiaSi);
     }//GEN-LAST:event_txtGiaSiKeyReleased
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -1118,6 +1118,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         editMode(true);
+        txtBarcode.requestFocus();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtGiaTriGiamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaTriGiamKeyReleased

@@ -252,6 +252,11 @@ public class frmDangNhap extends javax.swing.JFrame {
 
         helper.setupTheme(config.getTheme());
         System.setProperty("flatlaf.uiScale", "150%");
+        System.setProperty("flatlaf.uiScale.enabled", "true");
+        System.setProperty("flatlaf.uiScale.allowScaleDown", "true");
+        System.setProperty("flatlaf.useWindowDecaries", "true");
+        System.setProperty("flatlaf.menuBarEmbedded", "true");
+        System.setProperty("flatlaf.useTextYCorrection", "true");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmDangNhap().setVisible(true);

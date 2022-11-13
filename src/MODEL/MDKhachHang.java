@@ -48,8 +48,8 @@ public class MDKhachHang {
                 data.add(new khachHang(
                         rs.getString("id"),
                         rs.getString("name"),
-                        rs.getString("sodienthoai"),
-                        rs.getString("diachi"),
+                        rs.getString("sodienthoai").equals("") ? "Chưa cập nhật" : rs.getString("sodienthoai"),
+                        rs.getString("diachi").equals("") ? "Chưa cập nhật" : rs.getString("diachi"),
                         rs.getString("ghichu"),
                         rs.getLong("CongNo"),
                         rs.getInt("trangthai") == 1 ? true : false
