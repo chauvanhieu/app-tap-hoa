@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmMAIN.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDNhapHang.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/CLASS/chiTietHoaDon.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/CLASS/hoaDonNhapHang.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDTrichKho.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/panelNhapHang.java</file>
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDChiTietHoaDon.java</file>
+            <file>file:/C:/Users/Admin/Desktop/DuAn1/app-tap-hoa/src/VIEW/frmXemHoaDon.java</file>
+            <file>file:/C:/Users/Admin/Desktop/DuAn1/app-tap-hoa/src/VIEW/frmEditorSanPham.java</file>
+            <file>file:/C:/Users/Admin/Desktop/DuAn1/app-tap-hoa/src/VIEW/frmMAIN.java</file>
+            <file>file:/C:/Users/Admin/Desktop/DuAn1/app-tap-hoa/src/VIEW/frmEditorThongTinCuaHang.java</file>
         </group>
     </open-files>
 </project-private>
