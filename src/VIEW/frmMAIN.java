@@ -8,6 +8,7 @@ import CLASS.nhanVien;
 import CLASS.sanPham;
 import HELPER.helper;
 import MODEL.MDAccount;
+import MODEL.MDBaoCao;
 import MODEL.MDCongNo;
 import MODEL.MDDonViTinh;
 import MODEL.MDHoaDon;
@@ -358,6 +359,14 @@ public class frmMAIN extends javax.swing.JFrame {
     }
     
     public void setTableTextCenter() {
+        helper.setTableTextCenterFullColumn(tableCongNoNCC);
+        helper.setTableTextCenterFullColumn(tableChiPhiNhapHang);
+        helper.setTableTextCenterFullColumn(tableCacKhoanChi);
+        helper.setTableTextCenterFullColumn(tableLuongNhanVien);
+        helper.setTableTextCenterFullColumn(tableTrichKhoSanPham);
+        helper.setTableTextCenterFullColumn(tableCongNoKhachHang);
+        helper.setTableTextCenterFullColumn(tableDoanhThuLoiNhuan);
+        helper.setTableTextCenterFullColumn(tableTraNoNhaCungCap);
         // set table text center      
         helper.setTableTextCenter(tableHoaDonNhapHang);
         helper.setTableTextCenter(tableHoaDonTraHang);
@@ -643,14 +652,14 @@ public class frmMAIN extends javax.swing.JFrame {
         panelBaoCaoTongHop = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
-        dateFromTraHang1 = new com.toedter.calendar.JDateChooser();
-        dateToTraHang1 = new com.toedter.calendar.JDateChooser();
+        dateFromBaoCao = new com.toedter.calendar.JDateChooser();
+        dateToBaoCao = new com.toedter.calendar.JDateChooser();
         jLabel35 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         tabBaoCao = new javax.swing.JTabbedPane();
         jPanel18 = new javax.swing.JPanel();
         jScrollPane19 = new javax.swing.JScrollPane();
-        tableTraNoNCC = new javax.swing.JTable();
+        tableCongNoNCC = new javax.swing.JTable();
         jPanel34 = new javax.swing.JPanel();
         txtSoTienDaTraNCC = new javax.swing.JTextField();
         txtSoTienNoNCCConLai = new javax.swing.JTextField();
@@ -677,13 +686,13 @@ public class frmMAIN extends javax.swing.JFrame {
         txtTongTienLuong = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         jScrollPane22 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableLuongNhanVien = new javax.swing.JTable();
         jPanel22 = new javax.swing.JPanel();
         jPanel30 = new javax.swing.JPanel();
         txtTongTienTrichKho = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
         jScrollPane23 = new javax.swing.JScrollPane();
-        tableTongTienTrichKho = new javax.swing.JTable();
+        tableTrichKhoSanPham = new javax.swing.JTable();
         jPanel23 = new javax.swing.JPanel();
         jPanel31 = new javax.swing.JPanel();
         txtTongTienNoDaThu = new javax.swing.JTextField();
@@ -691,7 +700,7 @@ public class frmMAIN extends javax.swing.JFrame {
         txtSoTienNoConLai = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
         jScrollPane24 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableCongNoKhachHang = new javax.swing.JTable();
         jPanel24 = new javax.swing.JPanel();
         jPanel32 = new javax.swing.JPanel();
         txtTongDoanhThu = new javax.swing.JTextField();
@@ -1628,6 +1637,7 @@ public class frmMAIN extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Sản phẩm", jPanel8);
 
+        tableDonViTinh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableDonViTinh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1706,6 +1716,7 @@ public class frmMAIN extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Đơn vị tính", jPanel9);
 
+        tableLoaiSanPham.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableLoaiSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -2777,23 +2788,23 @@ public class frmMAIN extends javax.swing.JFrame {
         jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel34.setText("TỪ NGÀY :");
 
-        dateFromTraHang1.setBackground(new java.awt.Color(102, 102, 102));
-        dateFromTraHang1.setForeground(new java.awt.Color(0, 153, 255));
-        dateFromTraHang1.setDate(new Date());
-        dateFromTraHang1.setDateFormatString("dd-MM-yyyy");
-        dateFromTraHang1.setFocusable(false);
-        dateFromTraHang1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        dateFromTraHang1.setRequestFocusEnabled(false);
-        dateFromTraHang1.setVerifyInputWhenFocusTarget(false);
+        dateFromBaoCao.setBackground(new java.awt.Color(102, 102, 102));
+        dateFromBaoCao.setForeground(new java.awt.Color(0, 153, 255));
+        dateFromBaoCao.setDate(new Date());
+        dateFromBaoCao.setDateFormatString("dd-MM-yyyy");
+        dateFromBaoCao.setFocusable(false);
+        dateFromBaoCao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dateFromBaoCao.setRequestFocusEnabled(false);
+        dateFromBaoCao.setVerifyInputWhenFocusTarget(false);
 
-        dateToTraHang1.setBackground(new java.awt.Color(102, 102, 102));
-        dateToTraHang1.setForeground(new java.awt.Color(0, 153, 255));
-        dateToTraHang1.setDate(new Date());
-        dateToTraHang1.setDateFormatString("dd-MM-yyyy");
-        dateToTraHang1.setFocusable(false);
-        dateToTraHang1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        dateToTraHang1.setRequestFocusEnabled(false);
-        dateToTraHang1.setVerifyInputWhenFocusTarget(false);
+        dateToBaoCao.setBackground(new java.awt.Color(102, 102, 102));
+        dateToBaoCao.setForeground(new java.awt.Color(0, 153, 255));
+        dateToBaoCao.setDate(new Date());
+        dateToBaoCao.setDateFormatString("dd-MM-yyyy");
+        dateToBaoCao.setFocusable(false);
+        dateToBaoCao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dateToBaoCao.setRequestFocusEnabled(false);
+        dateToBaoCao.setVerifyInputWhenFocusTarget(false);
 
         jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel35.setText("ĐẾN NGÀY :");
@@ -2801,6 +2812,11 @@ public class frmMAIN extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(51, 153, 255));
         jButton1.setText("Duyệt báo cáo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -2813,8 +2829,8 @@ public class frmMAIN extends javax.swing.JFrame {
                     .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dateFromTraHang1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                    .addComponent(dateToTraHang1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dateFromBaoCao, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                    .addComponent(dateToBaoCao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -2828,10 +2844,10 @@ public class frmMAIN extends javax.swing.JFrame {
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel34)
-                            .addComponent(dateFromTraHang1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateFromBaoCao, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dateToTraHang1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateToBaoCao, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel35))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -2844,7 +2860,7 @@ public class frmMAIN extends javax.swing.JFrame {
             }
         });
 
-        tableTraNoNCC.setModel(new javax.swing.table.DefaultTableModel(
+        tableCongNoNCC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -2863,7 +2879,7 @@ public class frmMAIN extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane19.setViewportView(tableTraNoNCC);
+        jScrollPane19.setViewportView(tableCongNoNCC);
 
         jPanel34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -3149,7 +3165,7 @@ public class frmMAIN extends javax.swing.JFrame {
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableLuongNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -3168,7 +3184,7 @@ public class frmMAIN extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane22.setViewportView(jTable1);
+        jScrollPane22.setViewportView(tableLuongNhanVien);
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -3224,7 +3240,7 @@ public class frmMAIN extends javax.swing.JFrame {
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
-        tableTongTienTrichKho.setModel(new javax.swing.table.DefaultTableModel(
+        tableTrichKhoSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -3243,7 +3259,7 @@ public class frmMAIN extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane23.setViewportView(tableTongTienTrichKho);
+        jScrollPane23.setViewportView(tableTrichKhoSanPham);
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -3315,18 +3331,26 @@ public class frmMAIN extends javax.swing.JFrame {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableCongNoKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Tên khách hàng", "Số điện thoại", "Địa chỉ", "Tiền còn nợ", "Tiền đã thu"
             }
-        ));
-        jScrollPane24.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane24.setViewportView(tableCongNoKhachHang);
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
@@ -4512,7 +4536,16 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemKhachHangActionPerformed
 
     private void btnBaoCaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaoCaoActionPerformed
-        openTab(panelBaoCaoTongHop, "Báo cáo tổng hợp :"); 
+        openTab(panelBaoCaoTongHop, "Báo cáo tổng hợp :");
+        
+        clearTable(tableCongNoNCC);
+        clearTable(tableChiPhiNhapHang);
+        clearTable(tableCacKhoanChi);
+        clearTable(tableLuongNhanVien);
+        clearTable(tableTrichKhoSanPham);
+        clearTable(tableCongNoKhachHang);
+        clearTable(tableDoanhThuLoiNhuan);
+        clearTable(tableTraNoNhaCungCap);
     }//GEN-LAST:event_btnBaoCaoActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
@@ -4688,8 +4721,23 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemSanPham1ActionPerformed
 
     private void tabBaoCaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabBaoCaoFocusGained
-       tabBaoCao.requestFocus();
+        tabBaoCao.requestFocus();
     }//GEN-LAST:event_tabBaoCaoFocusGained
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String dateFrom = helper.LayNgayString(dateFromBaoCao.getDate(), "yyyy-MM-dd");
+        String dateTo = helper.LayNgayString(dateToBaoCao.getDate(), "yyyy-MM-dd");
+        
+        MDBaoCao.loadTableCacKhoanChi(tableCacKhoanChi, dateFrom, dateTo, btnTongTienChiTieu);
+        MDBaoCao.loadTableChiPhiNhapHang(tableChiPhiNhapHang, dateFrom, dateTo, txtTongTienNhapHang, txtTongTienThanhToanNhapHang, txtTienNoLaiNCC);
+        MDBaoCao.loadTableCongNoNhaCungCap(tableCongNoNCC, dateFrom, dateTo, txtSoTienDaTraNCC, txtSoTienNoNCCConLai);
+        MDBaoCao.loadTableLuongNhanVien(tableLuongNhanVien, dateFrom, dateTo, txtTongTienLuong);
+        MDBaoCao.loadTableTienTrichKho(tableTrichKhoSanPham, dateFrom, dateTo, txtTongTienTrichKho);
+        MDBaoCao.loadCongNoKhachHang(tableCongNoKhachHang, dateFrom, dateTo, txtTongTienNoDaThu, txtSoTienNoConLai);
+        MDBaoCao.loadTableDoanhThuLoiNhuan(tableDoanhThuLoiNhuan, dateFrom, dateTo, txtTongDoanhThu, txtTongLoiNhuan);
+        MDBaoCao.loadTableTienTraLaiNCC(tableTienTraHangNCC, dateFrom, dateTo, txtTongTienNhanLai, txtTongTienTruCongNo);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
     public void loadTableHoaDonTrichKho() {
         MDTrichKho.loadTableHoaDonTrichKho(tableHoaDonTrichKho);
     }
@@ -4867,16 +4915,16 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbFilterThuNo;
     private javax.swing.JComboBox<String> cbFilterThuNo2;
     private javax.swing.JComboBox<String> comboBoxNhomHang;
+    private com.toedter.calendar.JDateChooser dateFromBaoCao;
     private com.toedter.calendar.JDateChooser dateFromHoaDon;
     private com.toedter.calendar.JDateChooser dateFromNhapHang;
     private com.toedter.calendar.JDateChooser dateFromTraHang;
-    private com.toedter.calendar.JDateChooser dateFromTraHang1;
     private com.toedter.calendar.JDateChooser dateFromTraNoNcc;
     private com.toedter.calendar.JDateChooser dateFromTrichKho;
+    private com.toedter.calendar.JDateChooser dateToBaoCao;
     private com.toedter.calendar.JDateChooser dateToHoaDon;
     private com.toedter.calendar.JDateChooser dateToNhapHang;
     private com.toedter.calendar.JDateChooser dateToTraHang;
-    private com.toedter.calendar.JDateChooser dateToTraHang1;
     private com.toedter.calendar.JDateChooser dateToTraNoNcc;
     private com.toedter.calendar.JDateChooser dateToTrichKho;
     private javax.swing.JButton jButton1;
@@ -5025,8 +5073,6 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JPopupMenu.Separator jSeparator9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem menuDanhSachHoaDonBanHang;
     private javax.swing.JMenuItem menuDanhSachPhieuChi;
@@ -5061,6 +5107,8 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JTable tableChiTietNhapHang;
     private javax.swing.JTable tableChiTietTraHang;
     private javax.swing.JTable tableChiTietTrichKho;
+    private javax.swing.JTable tableCongNoKhachHang;
+    private javax.swing.JTable tableCongNoNCC;
     private javax.swing.JTable tableDanhSachHoaDonBanHang;
     private javax.swing.JTable tableDanhSachPhieuChi;
     private javax.swing.JTable tableDoanhThuLoiNhuan;
@@ -5070,15 +5118,15 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JTable tableHoaDonTrichKho;
     private javax.swing.JTable tableKhachHang;
     private javax.swing.JTable tableLoaiSanPham;
+    private javax.swing.JTable tableLuongNhanVien;
     private javax.swing.JTable tableNhaCungCap;
     private javax.swing.JTable tableNhanVien;
     private javax.swing.JTable tableSanPhamPnlSanPham;
     private javax.swing.JTable tableTaiKhoan;
     private javax.swing.JTable tableThuNoKhachHang;
     private javax.swing.JTable tableTienTraHangNCC;
-    private javax.swing.JTable tableTongTienTrichKho;
-    private javax.swing.JTable tableTraNoNCC;
     private javax.swing.JTable tableTraNoNhaCungCap;
+    private javax.swing.JTable tableTrichKhoSanPham;
     private javax.swing.JMenuItem thongtin;
     private javax.swing.JTextField txtSoTienDaTraNCC;
     private javax.swing.JTextField txtSoTienNoConLai;
