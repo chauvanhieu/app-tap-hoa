@@ -3,6 +3,7 @@ package VIEW;
 import CLASS.config;
 import HELPER.helper;
 import MODEL.MDAccount;
+import java.awt.Image;
 import src.CLASS.Account;
 
 import java.awt.event.ActionEvent;
@@ -26,7 +27,8 @@ public class frmDangNhap extends javax.swing.JFrame {
         this.setTitle("FPOLY Market");
 
         // set logo Favicon
-        ImageIcon img = new ImageIcon("src/ICON/favicon.jpg");
+//                        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/ICON/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+        ImageIcon img = new ImageIcon(getClass().getResource("/ICON/favicon.jpg"));
         this.setIconImage(img.getImage());
 
         InputMap inputMap = btnDangNhap.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);

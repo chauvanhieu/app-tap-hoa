@@ -60,7 +60,7 @@ public class frmMAIN extends javax.swing.JFrame {
         // set Title cho phần mềm
         this.setTitle("FPOLY Market");
         // set logo Favicon
-        ImageIcon img = new ImageIcon("src/ICON/favicon.jpg");
+        ImageIcon img = new ImageIcon(getClass().getResource("/ICON/favicon.jpg"));
         this.setIconImage(img.getImage());
 
         // hiện nút close tabbed
@@ -293,9 +293,8 @@ public class frmMAIN extends javax.swing.JFrame {
         listSanPham = data;
         DefaultTableModel model = (DefaultTableModel) tableSanPhamPnlSanPham.getModel();
         model.setRowCount(0);
-        String path = "src/IMAGE/";
         for (sanPham item : data) {
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
             model.addRow(new Object[]{
                 imageIcon,
                 item.getIdSanPham(),
@@ -4432,7 +4431,7 @@ public class frmMAIN extends javax.swing.JFrame {
                     || helper.removeAccent(item.getIdSanPham().toLowerCase()).contains(keyword.toLowerCase())
                     || helper.removeAccent(item.getName().toLowerCase()).contains(keyword.toLowerCase())) {
 
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -4498,7 +4497,7 @@ public class frmMAIN extends javax.swing.JFrame {
         for (sanPham item : dataSanPhamTable) {
 
             if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -4770,7 +4769,7 @@ public class frmMAIN extends javax.swing.JFrame {
         for (sanPham item : dataSanPhamTable) {
             String rs = item.getBarcode() + " " + item.getIdSanPham() + " " + item.getName();
             if ((loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) && (helper.removeAccent(rs.toLowerCase()).contains(helper.removeAccent(keyword.toLowerCase())))) {
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -4799,7 +4798,7 @@ public class frmMAIN extends javax.swing.JFrame {
         for (sanPham item : dataSanPhamTable) {
 
             if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),

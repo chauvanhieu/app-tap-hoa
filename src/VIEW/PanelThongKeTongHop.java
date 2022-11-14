@@ -586,7 +586,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
             while (rs.next()) {
 
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh")))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh")))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 
                 model.addRow(new Object[]{
                     imageIcon,

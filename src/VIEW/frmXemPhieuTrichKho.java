@@ -31,7 +31,6 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
 
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon;
     private ArrayList<String> listLoaiSanPham = MDLoaiSanPham.getNames();
-    private String path = "src/IMAGE/";
     public static String idHoaDon;
     private hoaDonTrichKho hoadon;
     private ArrayList<chiTietHoaDon> dataChiTietHoaDonCu;
@@ -197,7 +196,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
                     || helper.removeAccent(item.getIdSanPham().toLowerCase()).contains(keyword.toLowerCase())
                     || helper.removeAccent(item.getName().toLowerCase()).contains(keyword.toLowerCase())) {
 
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -217,7 +216,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : dataSanPhamTable) {
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             model.addRow(new Object[]{
                 imageIcon,
                 item.getIdSanPham(),
@@ -238,7 +237,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         for (sanPham item : dataSanPhamTable) {
 
             if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
