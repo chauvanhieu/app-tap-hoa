@@ -71,7 +71,7 @@ public class MDSanPham {
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh"),
+                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),

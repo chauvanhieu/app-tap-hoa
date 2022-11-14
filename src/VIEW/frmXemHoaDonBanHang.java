@@ -998,6 +998,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
                 tienNoCu,
                 idKhachHangCu);
         JOptionPane.showMessageDialog(this, "CẬP NHẬT THÀNH CÔNG !");
+        this.dispose();
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnLuuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLuuKeyPressed
@@ -1117,6 +1118,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         editMode(true);
+        txtBarcode.requestFocus();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtGiaTriGiamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGiaTriGiamKeyReleased

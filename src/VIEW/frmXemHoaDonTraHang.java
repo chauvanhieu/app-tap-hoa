@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package VIEW;
 
 import CLASS.chiTietHoaDon;
@@ -703,6 +699,7 @@ public class frmXemHoaDonTraHang extends javax.swing.JDialog {
 
     private void tableGioHangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableGioHangKeyReleased
         int rowCount = tableGioHang.getRowCount();
+
         for (int i = 0; i < rowCount; i++) {
 
             dataChiTietHoaDon.get(i).setSoLuongTraHang(Integer.parseInt(tableGioHang.getValueAt(i, 2) + ""));
@@ -748,6 +745,7 @@ public class frmXemHoaDonTraHang extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         editMode(true);
+        dataChiTietHoaDonCu = MDChiTietHoaDon.getChiTietHoaDonTraHang(hoadon.getId());
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
