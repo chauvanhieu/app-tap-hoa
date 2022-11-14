@@ -36,7 +36,7 @@ public class MDNhapHang {
         String sqlXoaChiTiet = "delete from chitiethoadon where idhoadon = ?";
         String sqlResetCongNoNhaCungCap = "update nhacungcap set congno = congno - ? where id = ?";
         String sqlResetTonKho = "update sanpham set soluong = soluong - ? where id = ? ";
-        String sqlCapNhatCongNo = " update khachhang set congno = congno + ? where id = ? ";
+        String sqlCapNhatCongNo = " update nhacungcap set congno = congno + ? where id = ? ";
         String sqlTaoChiTietHoaDon = "insert into chitiethoadon(idhoadon,idsanpham,soluong,chitiethoadon.giaban,trangthai) values(?,?,?,?,3)";
         String sqlThemSoluongSanPham = "update sanpham set soluong = soluong + ? where id = ?";
         String sqlCapNhatHoaDon = "update nhatkynhaphang set idnhacungcap = ?,tongtien=?,thanhtoan=?,ghichu=?,trangthai=? where id = ?";

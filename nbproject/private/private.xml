@@ -5,9 +5,13 @@
         <group>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmMAIN.java</file>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmXemHoaDonBanHang.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDNhapHang.java</file>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmEditorSanPham.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmEditorGiaoDien.java</file>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmDangNhap.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/HELPER/helper.java</file>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDBaoCao.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmPhieuChi.java</file>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDTrichKho.java</file>
             <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/panelNhapHang.java</file>
         </group>
