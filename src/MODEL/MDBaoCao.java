@@ -12,11 +12,11 @@ public class MDBaoCao {
             String dateTo,
             JTextField txtSoTienChiTra,
             JTextField txtTongNoConLai) {
-        String sql = "SELECT nhacungcap.name as 'name',nhacungcap.SoDienThoai as 'sodienthoai' ,"
-                + "nhacungcap.DiaChi as 'diachi',nhacungcap.congno as 'tienconno',\n"
+        String sql = "SELECT nhacungcap.name as 'name',nhacungcap.SoDienThoai as 'sodienthoai' ,\n"
+                + " nhacungcap.DiaChi as 'diachi',nhacungcap.congno as 'tienconno',\n"
                 + " (select sum(phieutranoncc.SoTienTra) from phieutranoncc\n"
-                + " where date(phieutranoncc.ThoiGian) BETWEEN ? and ? ) as 'tiendatra'\n"
-                + " from nhacungcap where nhacungcap.trangthai = 1"
+                + " where phieutranoncc.IDNcc = nhacungcap.id and date(phieutranoncc.ThoiGian) BETWEEN ?  and ? ) as 'tiendatra'\n"
+                + " from nhacungcap where nhacungcap.trangthai = 1\n"
                 + " order by nhacungcap.congno desc";
 
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -50,7 +50,7 @@ public class MDBaoCao {
             JTextField txtTongTienDaThanhToan,
             JTextField txtSoTienNoLaiNCC
     ) {
-        String sql = "SELECT nhatkynhaphang.ThoiGian as 'thoigian', nhanvien.Name as 'nhanvien', nhacungcap.name as 'nhacungcap',\n"
+        String sql = "SELECT nhatkynhaphang.ThoiGian as 'thoigian',nhatkynhaphang.ID as 'maphieu', nhanvien.Name as 'nhanvien', nhacungcap.name as 'nhacungcap',\n"
                 + " nhatkynhaphang.TongTien as 'tongtien' , nhatkynhaphang.ThanhToan as 'thanhtoan'\n"
                 + " from nhatkynhaphang\n"
                 + " join nhanvien on nhanvien.id = nhatkynhaphang.IDnhanvien\n"
@@ -70,6 +70,7 @@ public class MDBaoCao {
                 soTienNoLaiNCC += rs.getLong("tongtien") - rs.getLong("thanhtoan");
                 model.addRow(new Object[]{
                     rs.getString("thoigian"),
+                    rs.getString("maphieu"),
                     rs.getString("nhanvien"),
                     rs.getString("nhacungcap"),
                     HELPER.helper.SoString(rs.getLong("tongtien")),
@@ -118,8 +119,8 @@ public class MDBaoCao {
             String dateTo,
             JTextField txtTongTienLuong) {
         String sql = "SELECT nhanvien.*,\n"
-                + " (SELECT sum(hoadon.TongTienThanhToan) from hoadon"
-                + " where date(hoadon.ThoiGian) BETWEEN ? and ?) as 'doanhthu'\n"
+                + " (SELECT sum(hoadon.TongTienThanhToan) from hoadon\n"
+                + " where hoadon.IDnhanvien=nhanvien.id and date(hoadon.ThoiGian) BETWEEN ? and ?) as 'doanhthu'\n"
                 + " from nhanvien where nhanvien.trangthai = 1";
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
@@ -149,7 +150,7 @@ public class MDBaoCao {
             String dateFrom,
             String dateTo,
             JTextField txtTongTienTrichKho) {
-        String sql = "select trichkho.ThoiGian as 'thoigian',nhanvien.name as 'nhanvien',"
+        String sql = "select trichkho.id as 'maphieu', trichkho.ThoiGian as 'thoigian',nhanvien.name as 'nhanvien',"
                 + " sanpham.name as 'sanpham',sanpham.GiaNhap as 'gianhap',"
                 + " chitiethoadon.soluong as 'soluong',(chitiethoadon.soluong*sanpham.GiaNhap) as 'thanhtien'"
                 + " from chitiethoadon\n"
@@ -169,6 +170,7 @@ public class MDBaoCao {
                 tongTienTrichKho += rs.getLong("thanhtien");
                 model.addRow(new Object[]{
                     rs.getString("thoigian"),
+                    rs.getString("maphieu"),
                     rs.getString("nhanvien"),
                     rs.getString("sanpham"),
                     HELPER.helper.SoString(rs.getLong("gianhap")),
@@ -192,7 +194,7 @@ public class MDBaoCao {
                 + " khachhang.congno 'congno',\n"
                 + " (SELECT sum(thutienkhachhang.SoTien) from thutienkhachhang\n"
                 + " where date(thutienkhachhang.ThoiGian) BETWEEN ? and ?  and thutienkhachhang.IDKhachHang=khachhang.id) as 'tiendathu'\n"
-                + " from khachhang where khachhang.TrangThai = 1\n"
+                + " from khachhang where khachhang.TrangThai = 1 and khachhang.id != 'KH01'\n"
                 + " order by khachhang.congno desc ";
 
         DefaultTableModel model = (DefaultTableModel) table.getModel();
