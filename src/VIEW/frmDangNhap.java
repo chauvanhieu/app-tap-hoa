@@ -250,7 +250,7 @@ public class frmDangNhap extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 
-        helper.setupTheme(config.getTheme());
+//        helper.setupTheme(config.getTheme());
         System.setProperty("flatlaf.uiScale", "150%");
         System.setProperty("flatlaf.uiScale.enabled", "true");
         System.setProperty("flatlaf.uiScale.allowScaleDown", "true");
