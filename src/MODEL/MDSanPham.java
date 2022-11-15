@@ -39,7 +39,7 @@ public class MDSanPham {
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh"),
+                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),
@@ -99,7 +99,7 @@ public class MDSanPham {
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh"),
+                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),
@@ -127,7 +127,7 @@ public class MDSanPham {
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh"),
+                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),
@@ -222,7 +222,7 @@ public class MDSanPham {
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh"),
+                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),
@@ -239,8 +239,5 @@ public class MDSanPham {
         }
         return data;
     }
-//    public static void quickAdd(String id, String name, String sdt, String diachi) {
-//        String sql = "insert into SanPham(id,name,SoDienThoai,DiaChi) values(?,?,?,?);";
-//        HELPER.SQLhelper.executeUpdate(sql, id, name, sdt, diachi);
-//    }
+
 }

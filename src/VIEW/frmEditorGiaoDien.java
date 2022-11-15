@@ -50,7 +50,7 @@ public class frmEditorGiaoDien extends javax.swing.JDialog {
         jLabel2.setText("Chọn :");
 
         cbGiaoDien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cbGiaoDien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Flat Light", "Flat High Contrast", "Flat Carbon", "Flat monokai Pro Contrast", "Flat Arc Dark Contrast", "Flat Solarized Light Contrast", "Flat Arc Orange", "Flat Material Ocreanic", "Flat Material Palenight", "Flat Github", "Flat AtomOne" }));
+        cbGiaoDien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mặc định", "Flat High Contrast", "Flat Carbon", "Flat monokai Pro Contrast", "Flat Arc Dark Contrast", "Flat Solarized Light Contrast", "Flat Arc Orange", "Flat Material Ocreanic", "Flat Material Palenight", "Flat Github", "Flat AtomOne" }));
         cbGiaoDien.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbGiaoDienItemStateChanged(evt);
