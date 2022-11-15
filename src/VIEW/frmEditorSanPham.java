@@ -677,23 +677,20 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         if (rVal == JFileChooser.APPROVE_OPTION) {
 
             File file = new File(chooser.getSelectedFile().getAbsolutePath());
-            System.out.println(file.getName());
-            System.out.println(file.getName().replaceAll(" ", ""));
             URL url = getClass().getResource("/IMAGE/");
+            String path = url.toString().substring(6, url.toString().length());
+            String fileName = HELPER.helper.removeAccent(file.getName().replaceAll(" ", ""));
+            String pathSrc = "src/IMAGE/";
 
-            file.renameTo(new File(url.toString().substring(6, url.toString().length()) + file.getName()));
+            //copy 1 ảnh qua thư mục build : path
+            copyFile(file, new File(path + fileName));
+            //copy 1 ảnh qua thư mục src : pathsrc
+            copyFile(file, new File(pathSrc + fileName));
 
-            File targetFile = new File(url.toString().substring(6, url.toString().length()), file.getName());
-            copyFile(file, targetFile);
+            hinhAnh = fileName;
 
-            copyFile(file, new File("src/IMAGE/" + file.getName()));
-
-            hinhAnh = file.getName();
-            System.out.println(url.toString().substring(6, url.toString().length()));
-            System.out.println(file.getAbsolutePath());
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + file.getName())).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + fileName)).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
             lbHinhAnh.setIcon(imageIcon);
-
         }
     }//GEN-LAST:event_btnChonAnhActionPerformed
 
