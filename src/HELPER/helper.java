@@ -16,6 +16,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialOceani
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialPalenightContrastIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMonokaiProContrastIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLightContrastIJTheme;
+import java.awt.Image;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -273,8 +274,10 @@ public class helper {
     }
 
     public static void addIconSearch(JTextField txt) {
-        Icon icon = new ImageIcon("src/ICON/search.png");
-        txt.putClientProperty("JTextField.leadingIcon", icon);
+////        getClass().getResource("/ICON/search.png")
+//        Icon icon = new ImageIcon(new ImageIcon(getClass().getResource("/ICON/search.png"))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+////        Icon icon = new ImageIcon("src/ICON/search.png");
+//        txt.putClientProperty("JTextField.leadingIcon", icon);
         txt.putClientProperty("JTextField.showClearButton", true);
         txt.putClientProperty("JTextField.clearCallback",
                 (Runnable) () -> {

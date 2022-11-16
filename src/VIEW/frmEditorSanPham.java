@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,10 +52,15 @@ public class frmEditorSanPham extends javax.swing.JDialog {
 
     public frmEditorSanPham(java.awt.Frame parent, boolean modal, String option) {
         super(parent, modal);
+
         this.option = option;
         initComponents();
         loadComboBox();
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/empty.png").getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+//                ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/empty.png").getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+//new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? 
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/empty.png")).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+//      ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/empty.png").getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+
         lbHinhAnh.setIcon(imageIcon);
         if (this.option != "add") {
             loadThongTinSanPham(this.option);
@@ -73,7 +79,11 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         txtGiaNhap.setText(HELPER.helper.LongToString(item.getGiaNhap()));
         txtSoLuong.setValue(Integer.parseInt(item.getSoLuong() + ""));
         txtSoLuongToiThieu.setValue(Integer.parseInt(item.getSoLuongToiThieu() + ""));
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + item.getHinhAnh()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+
+//      ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + item.getHinhAnh())).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+//      ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + item.getHinhAnh()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+
         lbHinhAnh.setIcon(imageIcon);
         this.hinhAnh = item.getHinhAnh();
         if (item.isTrangThai() == true) {
@@ -665,10 +675,21 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         // nếu đã chọn thì tạo 1 file mới với path đã chọn bởi chooser.
         // sau đó copy file đó đến folder IMAGE 
         if (rVal == JFileChooser.APPROVE_OPTION) {
+
             File file = new File(chooser.getSelectedFile().getAbsolutePath());
-            copyFile(file, new File("src/IMAGE/" + file.getName()));
-            hinhAnh = file.getName();
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + file.getName()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
+            URL url = getClass().getResource("/IMAGE/");
+            String path = url.toString().substring(6, url.toString().length());
+            String fileName = HELPER.helper.removeAccent(file.getName().replaceAll(" ", ""));
+            String pathSrc = "src/IMAGE/";
+
+            //copy 1 ảnh qua thư mục build : path
+            copyFile(file, new File(path + fileName));
+            //copy 1 ảnh qua thư mục src : pathsrc
+            copyFile(file, new File(pathSrc + fileName));
+
+            hinhAnh = fileName;
+
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + fileName)).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
             lbHinhAnh.setIcon(imageIcon);
         }
     }//GEN-LAST:event_btnChonAnhActionPerformed

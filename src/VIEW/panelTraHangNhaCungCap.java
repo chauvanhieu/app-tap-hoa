@@ -35,16 +35,15 @@ import javax.swing.table.DefaultTableModel;
 import src.CLASS.Account;
 
 public class panelTraHangNhaCungCap extends javax.swing.JPanel {
-    
+
     private ArrayList<chiTietHoaDon> dataChiTietHoaDon = new ArrayList<>();
     private ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
     private ArrayList<sanPham> dataSanPhamTimKiem = new ArrayList<sanPham>();
-    private String path = "src/IMAGE/";
     private String idNhaCungCap = "";
     private DetailedComboBox comboBoxNhaCungCap;
     private ArrayList<nhaCungCap> dataNhaCungCap = MDNhaCungCap.getAll();
     private Account acc;
-    
+
     public panelTraHangNhaCungCap(Account acc) {
         this.acc = acc;
         initComponents();
@@ -53,7 +52,7 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         setKeyPress();
         helper.addIconSearch(txtTimKiem);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -415,18 +414,18 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         }
         loadGioHang();
     }
-    
+
     public void loadComboBoxNhaCungCap() {
         String[] columns1 = new String[]{"Mã", "Tên", "Điện thoại", "Công nợ"};
         int[] widths1 = new int[]{80, 380, 120, 130};
         this.comboBoxNhaCungCap = new DetailedComboBox(columns1, widths1, 1);
-        
+
         List<List<?>> tableDataNhaCungCap = new ArrayList<List<?>>();
         for (nhaCungCap ncc : dataNhaCungCap) {
             tableDataNhaCungCap.add(new ArrayList<>(
                     Arrays.asList(ncc.getIdNhaCungCap(), ncc.getName(), ncc.getSoDienThoai(), HELPER.helper.LongToString(ncc.getCongNo()))));
         }
-        
+
         comboBoxNhaCungCap.setTableData(tableDataNhaCungCap);
         comboBoxNhaCungCap.setFont(new Font("Arial", Font.ITALIC, 14));
         comboBoxNhaCungCap.setSelectedIndex(-1);
@@ -444,15 +443,15 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         comboBoxNhaCungCap.setVisible(true);
         panelComboBoxNhaCungCap.add(comboBoxNhaCungCap);
     }
-    
+
     public void loadTableSanPham(String idNhaCungCap) {
-        
+
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         dataSanPhamTimKiem = new ArrayList<sanPham>();
         for (sanPham item : dataSanPhamTable) {
             if (item.getIdNhaCungCap().equals(idNhaCungCap)) {
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -467,7 +466,7 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         }
         tableSanPham.setModel(model);
     }
-    
+
     public void setModelTableSanPham() {
         DefaultTableCellRenderer centerRendere = new DefaultTableCellRenderer();
         centerRendere.setHorizontalAlignment(JLabel.CENTER);
@@ -476,7 +475,7 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         }
         tableGioHang.setFont(new Font("Arial", Font.CENTER_BASELINE, 13));
         tableGioHang.setRowHeight(40);
-        
+
         String[] column = {"Hình ảnh", "Mã", "Sản phẩm", "Mã vạch", "ĐVT", "Tồn kho", "Giá"};
         Object[][] rows = {};
         DefaultTableModel model = new DefaultTableModel(rows, column) {
@@ -485,12 +484,12 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
                 switch (column) {
                     case 0:
                         return ImageIcon.class;
-                    
+
                     default:
                         return Object.class;
                 }
             }
-            
+
             public boolean isCellEditable(int rowIndex,
                     int columnIndex) {
                 return false;
@@ -515,7 +514,7 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         tableSanPham.getColumnModel().getColumn(4).setPreferredWidth(30);
         tableSanPham.getColumnModel().getColumn(5).setPreferredWidth(30);
         tableSanPham.getColumnModel().getColumn(6).setPreferredWidth(60);
-        
+
     }
 
     private void tableGioHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableGioHangFocusLost
@@ -537,19 +536,19 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
     private void tableGioHangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableGioHangKeyReleased
         int rowCount = tableGioHang.getRowCount();
         for (int i = 0; i < rowCount; i++) {
-            
+
             dataChiTietHoaDon.get(i).setSoLuongTraHang(Integer.parseInt(tableGioHang.getValueAt(i, 2) + ""));
             if (dataChiTietHoaDon.get(i).getSoLuongTraHang() < 1 || dataChiTietHoaDon.get(i).getDonGia() < 0) {
                 dataChiTietHoaDon.remove(i);
             }
-            
+
         }
-        
+
         loadGioHang();
     }//GEN-LAST:event_tableGioHangKeyReleased
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        
+
         if (dataChiTietHoaDon.size() > 0) {
             hoaDonTraHang hoadon = new hoaDonTraHang(
                     MDTraHang.createID(),
@@ -572,18 +571,17 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
     private void btnThanhToanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnThanhToanKeyPressed
 
     }//GEN-LAST:event_btnThanhToanKeyPressed
-    
+
     public void loadResultSanPham(String keyword) {
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : dataSanPhamTimKiem) {
             String rs = item.getBarcode() + " " + item.getIdSanPham() + " " + item.getName();
-           
-            
+
             if (rs.contains(keyword)
                     || rs.toLowerCase().contains(keyword.toLowerCase())
                     || helper.removeAccent(rs.toLowerCase()).contains(helper.removeAccent(keyword.toLowerCase()))) {
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -597,7 +595,7 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         }
         tableSanPham.setModel(model);
     }
-    
+
     public void exit() {
         Robot robot;
         try {
@@ -641,29 +639,29 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
     private void tableSanPhamMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMouseExited
 
     }//GEN-LAST:event_tableSanPhamMouseExited
-    
+
     public void setKeyPress() {
         // nút enter
         InputMap inputMap = btnEnter.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(KeyStroke.getKeyStroke("ENTER"), "KEY_ENTER");
         btnEnter.getActionMap().put("KEY_ENTER", new AbstractAction() {
             public void actionPerformed(ActionEvent evt) {
-                
+
                 if (txtBarcode.isFocusable()) {
                     btnEnter.doClick();
                 }
             }
         });
-        
+
     }
-    
+
     public void loadGioHang() {
         DefaultTableModel model = (DefaultTableModel) tableGioHang.getModel();
         model.setRowCount(0);
         long thanhTienBanDau = 0;
         for (chiTietHoaDon item : dataChiTietHoaDon) {
             thanhTienBanDau += item.getGiaNhap() * item.getSoLuongTraHang();
-            
+
             model.addRow(new Object[]{
                 item.getTenSanPham(),
                 item.getDonViTinh(),
@@ -673,23 +671,23 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
                 item.isTrangThai()
             });
         }
-        
+
         tableGioHang.setModel(model);
-        
+
         txtTongTien.setText(helper.LongToString(thanhTienBanDau));
-        
+
     }
-    
+
     public void addGioHang(chiTietHoaDon sp) {
         boolean isTonTai = true;
-        
+
         if (sp == null) {
             JOptionPane.showMessageDialog(this, "CHƯA CÓ SẢN PHẨM NÀY");
             txtBarcode.setText("");
             txtBarcode.requestFocus();
             return;
         }
-        
+
         if (dataChiTietHoaDon.size() == 0) {
             dataChiTietHoaDon.add(sp);
             loadGioHang();
@@ -703,11 +701,11 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
                 } else {
                     //chưa tồn tại
                     isTonTai = false;
-                    
+
                 }
             }
         }
-        
+
         if (isTonTai == true) {
             for (chiTietHoaDon item : dataChiTietHoaDon) {
                 if (item.getIdSanPham().equals(sp.getIdSanPham())) {
@@ -720,7 +718,7 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         }
         loadGioHang();
     }
-    
+
     public void enterBarcode() {
         if (txtBarcode.isFocusable() == false) {
             return;
@@ -732,30 +730,30 @@ public class panelTraHangNhaCungCap extends javax.swing.JPanel {
         if (barcode.length() < 7) {
             return;
         }
-        
+
         chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDon(barcode, idNhaCungCap);
-        
+
         if (sp == null) {
             JOptionPane.showMessageDialog(this, "CHƯA CÓ SẢN PHẨM NÀY");
-            
+
             txtBarcode.setText("");
             txtBarcode.requestFocus();
             return;
         }
-        
+
         addGioHang(sp);
         txtBarcode.requestFocus();
     }
-    
+
 
     private void tableSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMousePressed
         if (tableSanPham.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             int indexRow = tableSanPham.getSelectedRow();
             String id = tableSanPham.getValueAt(indexRow, 1) + "";
             chiTietHoaDon sp = MDChiTietHoaDon.getSanPhamChiTietHoaDonbyID(id);
-            
+
             addGioHang(sp);
-            
+
         }
     }//GEN-LAST:event_tableSanPhamMousePressed
 

@@ -50,7 +50,6 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
     private ArrayList<chiTietHoaDon> dataChiTietHoaDonMoi;
     private ArrayList<chiTietHoaDon> dataChiTietHoaDonCu;
     private ArrayList<String> listLoaiSanPham = MDLoaiSanPham.getNames();
-    private String path = "src/IMAGE/";
     private ArrayList<khachHang> dataKhachHang = MDKhachHang.getDataToComboBox();
     private static hoaDon hoadon;
     private DetailedComboBox comboboxKhachHang;
@@ -84,7 +83,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
         }
         txtGiaTriGiam.setText(helper.LongToString(hoadon.getGiamGia()));
         this.setTitle("Phiếu bán hàng : " + hoadon.getId());
-        ImageIcon img = new ImageIcon("src/ICON/favicon.jpg");
+        ImageIcon img = new ImageIcon(getClass().getResource("/ICON/favicon.jpg"));
         this.setIconImage(img.getImage());
 
         // load combobox thông tin khách hàng
@@ -340,7 +339,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
         DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : data) {
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
             model.addRow(new Object[]{
                 imageIcon,
                 item.getIdSanPham(),
@@ -1071,7 +1070,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
                     || helper.removeAccent(item.getIdSanPham().toLowerCase()).contains(keyword.toLowerCase())
                     || helper.removeAccent(item.getName().toLowerCase()).contains(keyword.toLowerCase())) {
 
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + item.getHinhAnh()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),
@@ -1092,7 +1091,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
         ArrayList<sanPham> dataSanPhamTable = MDSanPham.getDataToTableBanHang();
         for (sanPham item : dataSanPhamTable) {
             if (loaiSanPham.equals("Tất cả") || item.getIdLoaiSanPham().equals(loaiSanPham)) {
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(path + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh())).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
                 model.addRow(new Object[]{
                     imageIcon,
                     item.getIdSanPham(),

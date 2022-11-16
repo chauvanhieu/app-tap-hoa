@@ -11,12 +11,12 @@ public class frmEditorGiaoDien extends javax.swing.JDialog {
     public frmEditorGiaoDien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        String path_img1 = "src/IMAGE/theme/theme" + 0 + "-1.png";
-        String path_img2 = "src/IMAGE/theme/theme" + 0 + "-2.png";
-        String path_img3 = "src/IMAGE/theme/theme" + 0 + "-3.png";
-        ImageIcon imageIcon1 = new ImageIcon(new ImageIcon(path_img1).getImage().getScaledInstance(img1.getWidth(), img1.getHeight(), Image.SCALE_DEFAULT));
-        ImageIcon imageIcon2 = new ImageIcon(new ImageIcon(path_img2).getImage().getScaledInstance(img2.getWidth(), img2.getHeight(), Image.SCALE_DEFAULT));
-        ImageIcon imageIcon3 = new ImageIcon(new ImageIcon(path_img3).getImage().getScaledInstance(img3.getWidth(), img3.getHeight(), Image.SCALE_DEFAULT));
+        String path_img1 = "/IMAGE/theme/theme" + 0 + "-1.png";
+        String path_img2 = "/IMAGE/theme/theme" + 0 + "-2.png";
+        String path_img3 = "/IMAGE/theme/theme" + 0 + "-3.png";
+        ImageIcon imageIcon1 = new ImageIcon(new ImageIcon(getClass().getResource(path_img1)).getImage().getScaledInstance(img1.getWidth(), img1.getHeight(), Image.SCALE_DEFAULT));
+        ImageIcon imageIcon2 = new ImageIcon(new ImageIcon(getClass().getResource(path_img2)).getImage().getScaledInstance(img2.getWidth(), img2.getHeight(), Image.SCALE_DEFAULT));
+        ImageIcon imageIcon3 = new ImageIcon(new ImageIcon(getClass().getResource(path_img3)).getImage().getScaledInstance(img3.getWidth(), img3.getHeight(), Image.SCALE_DEFAULT));
         img1.setIcon(imageIcon1);
         img2.setIcon(imageIcon2);
         img3.setIcon(imageIcon3);
@@ -163,13 +163,13 @@ public class frmEditorGiaoDien extends javax.swing.JDialog {
         int index = cbGiaoDien.getSelectedIndex();
         // lấy ra theme + index+ -1/2/3.png
 
-        String path_img1 = "src/IMAGE/theme/theme" + index + "-1.png";
-        String path_img2 = "src/IMAGE/theme/theme" + index + "-2.png";
-        String path_img3 = "src/IMAGE/theme/theme" + index + "-3.png";
+        String path_img1 = "/IMAGE/theme/theme" + index + "-1.png";
+        String path_img2 = "/IMAGE/theme/theme" + index + "-2.png";
+        String path_img3 = "/IMAGE/theme/theme" + index + "-3.png";
 
-        ImageIcon imageIcon1 = new ImageIcon(new ImageIcon(path_img1).getImage().getScaledInstance(img1.getWidth(), img1.getHeight(), Image.SCALE_DEFAULT));
-        ImageIcon imageIcon2 = new ImageIcon(new ImageIcon(path_img2).getImage().getScaledInstance(img2.getWidth(), img2.getHeight(), Image.SCALE_DEFAULT));
-        ImageIcon imageIcon3 = new ImageIcon(new ImageIcon(path_img3).getImage().getScaledInstance(img3.getWidth(), img3.getHeight(), Image.SCALE_DEFAULT));
+        ImageIcon imageIcon1 = new ImageIcon(new ImageIcon(getClass().getResource(path_img1)).getImage().getScaledInstance(img1.getWidth(), img1.getHeight(), Image.SCALE_DEFAULT));
+        ImageIcon imageIcon2 = new ImageIcon(new ImageIcon(getClass().getResource(path_img2)).getImage().getScaledInstance(img2.getWidth(), img2.getHeight(), Image.SCALE_DEFAULT));
+        ImageIcon imageIcon3 = new ImageIcon(new ImageIcon(getClass().getResource(path_img3)).getImage().getScaledInstance(img3.getWidth(), img3.getHeight(), Image.SCALE_DEFAULT));
 
         img1.setIcon(imageIcon1);
         img2.setIcon(imageIcon2);
@@ -187,7 +187,6 @@ public class frmEditorGiaoDien extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    
 
     public static void main(String args[]) {
         FlatLightLaf.setup();
