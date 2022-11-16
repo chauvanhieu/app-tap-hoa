@@ -294,6 +294,8 @@ public class frmMAIN extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tableSanPhamPnlSanPham.getModel();
         model.setRowCount(0);
         for (sanPham item : data) {
+
+            System.out.println("load table: " + item.getHinhAnh());
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(120, 120, Image.SCALE_DEFAULT));
             model.addRow(new Object[]{
                 imageIcon,

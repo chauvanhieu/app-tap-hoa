@@ -34,6 +34,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.codehaus.groovy.ast.stmt.TryCatchStatement;
 
 public class frmEditorSanPham extends javax.swing.JDialog {
 
@@ -677,18 +678,20 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         if (rVal == JFileChooser.APPROVE_OPTION) {
 
             File file = new File(chooser.getSelectedFile().getAbsolutePath());
-            URL url = getClass().getResource("/IMAGE/");
-            String path = url.toString().substring(6, url.toString().length());
-            String fileName = HELPER.helper.removeAccent(file.getName().replaceAll(" ", ""));
-            String pathSrc = "src/IMAGE/";
 
-            //copy 1 ảnh qua thư mục build : path
-            copyFile(file, new File(path + fileName));
-            //copy 1 ảnh qua thư mục src : pathsrc
-            copyFile(file, new File(pathSrc + fileName));
+            // lấy url cần copy tới
+            URL url = getClass().getResource("/IMAGE/");
+            System.out.println(url.toString());
+
+            String fileName = HELPER.helper.removeAccent(file.getName().replaceAll(" ", ""));
+
+            //copy 1 ảnh qua thư mục build 
+//            File targetFile = new File(url.toString(), fileName);
+            String path = url.toString() + fileName;
+
+            copyFile(file, new File(path));
 
             hinhAnh = fileName;
-
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + fileName)).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
             lbHinhAnh.setIcon(imageIcon);
         }
