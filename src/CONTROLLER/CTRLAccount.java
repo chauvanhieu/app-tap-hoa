@@ -14,7 +14,7 @@ public class CTRLAccount {
             //username đúng
             checkuser = true;
         }
-        if (HELPER.helper.isUsername(acc.getPassword()) == true) {
+        if (HELPER.helper.isPassword(acc.getPassword()) == true) {
             // đúng 
             checkpass = true;
         }
@@ -32,7 +32,6 @@ public class CTRLAccount {
             if (checkpass == false) {
                 // thông báo cú pháp pass  sai
                 JOptionPane.showMessageDialog(null, "Mật khẩu sai cú pháp, cần 1 ký tự đặc biệt và 1 chữ cái viết hoa.");
-
                 return;
             }
         }
@@ -45,7 +44,7 @@ public class CTRLAccount {
             //username đúng
             checkuser = true;
         }
-        if (HELPER.helper.isUsername(acc.getPassword()) == true) {
+        if (HELPER.helper.isPassword(acc.getPassword()) == true) {
             // đúng 
             checkpass = true;
         }

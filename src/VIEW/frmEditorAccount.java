@@ -2,6 +2,7 @@ package VIEW;
 
 import CLASS.nhanVien;
 import COMPONENT.DetailedComboBox;
+import CONTROLLER.CTRLAccount;
 import HELPER.helper;
 import MODEL.MDAccount;
 import MODEL.MDNhanVien;
@@ -18,14 +19,14 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 public class frmEditorAccount extends javax.swing.JDialog {
-
+    
     private DetailedComboBox comboBoxNhanvien;
     private static String option;
     private String idNhanVien;
     private boolean checkUser = false;
     private boolean checkPass = false;
     private boolean checkConfirmPass = false;
-
+    
     public frmEditorAccount(java.awt.Frame parent, boolean modal, String option) {
         super(parent, modal);
         frmEditorAccount.option = option;
@@ -38,7 +39,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
             cbTrangThai.setVisible(false);
         }
     }
-
+    
     public void loadThongTin() {
         Account acc = MDAccount.getAccount(option);
         txtUsername.setText(acc.getUsername());
@@ -59,7 +60,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
         checkboxBaoCao.setSelected(acc.isBaoCao());
         checkboxThuChi.setSelected(acc.isPhieuChi());
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -309,9 +310,9 @@ public class frmEditorAccount extends javax.swing.JDialog {
         String[] columns = new String[]{"Mã nhân viên", "Tên", "Điện thoại", "Địa chỉ"};
         int[] widths = new int[]{80, 300, 120, 360};
         this.comboBoxNhanvien = new DetailedComboBox(columns, widths, 1);
-
+        
         List<List<?>> tableData = new ArrayList<List<?>>();
-
+        
         for (nhanVien nv : data) {
             tableData.add(new ArrayList<>(
                     Arrays.asList(nv.getIdNhanVien(), nv.getName(), nv.getSoDienthoai(), nv.getDiaChi())));
@@ -350,8 +351,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
                     checkboxNhaCungCap.isSelected(),
                     checkboxBaoCao.isSelected(),
                     checkboxThuChi.isSelected());
-            MDAccount.add(acc);
-            JOptionPane.showMessageDialog(this, "Đã thêm thành công !!");
+            CTRLAccount.checkAddAccount(acc);
         } else {
             if (comboBoxNhanvien.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "Chưa chọn nhân viên !!");
@@ -360,7 +360,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
             Account acc = new Account(
                     idNhanVien,
                     txtUsername.getText(),
-                    new String (txtPassword.getPassword()),
+                    new String(txtPassword.getPassword()),
                     cbTrangThai.getSelectedIndex() == 0 ? true : false,
                     checkboxBanHang.isSelected(),
                     checkboxNhapHang.isSelected(),

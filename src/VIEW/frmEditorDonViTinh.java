@@ -1,6 +1,7 @@
 package VIEW;
 
 import CLASS.donViTinh;
+import CONTROLLER.CTRLDonViTinh;
 import MODEL.MDDonViTinh;
 import javax.swing.JOptionPane;
 
@@ -129,24 +130,12 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
         String name = txtName.getText();
         String moTa = txtMoTa.getText();
         if (option == "add") {
-            if (!name.equals("")) {
-                donViTinh item = new donViTinh(MDDonViTinh.createId(), name, moTa, true);
-                MDDonViTinh.add(item);
-                JOptionPane.showMessageDialog(this, "Thêm thành công !!!");
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Chưa nhập tên đơn vị tính !!!");
-            }
-        } else {
 
-            if (!name.equals("")) {
-                donViTinh item = new donViTinh(option, name, moTa, cbboc.getSelectedIndex() == 1 ? true : false);
-                MDDonViTinh.update(item);
-                JOptionPane.showMessageDialog(this, "Sữa thành công !!!");
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Chưa nhập tên đơn vị tính !!!");
-            }
+            donViTinh item = new donViTinh(MDDonViTinh.createId(), name, moTa, true);
+            CTRLDonViTinh.checkAdd(item);
+        } else {
+            donViTinh item = new donViTinh(MDDonViTinh.createId(), name, moTa, true);
+            CTRLDonViTinh.checkUpdate(item);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 

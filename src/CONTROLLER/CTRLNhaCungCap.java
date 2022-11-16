@@ -13,20 +13,21 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class CTRLNhaCungCap {
-   public static void checkAdd(nhaCungCap ncc) {
+
+    public static void checkAdd(nhaCungCap ncc) {
         boolean checkIdNhaCungCap = false;
         boolean checkName = false;
         boolean checkSoDienThoai = false;
         boolean checkDiaChi = false;
 
-        if (ncc.getIdNhaCungCap()== " ") {
+        if (ncc.getIdNhaCungCap().equals("")) {
             JOptionPane.showMessageDialog(null, " Mã nhà cung cấp không để trống", " lỗi", 1);
             return;
         } else {
             checkIdNhaCungCap = true;
         }
 
-        if ( ncc.getName() == " ") {
+        if (ncc.getName().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập tên nhà cung cấp !", " lỗi", 1);
             return;
         } else {
@@ -38,7 +39,7 @@ public class CTRLNhaCungCap {
         } else {
             checkSoDienThoai = true;
         }
-        if (ncc.getDiaChi() == " ") {
+        if (ncc.getDiaChi().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
             return;
         } else {
@@ -55,20 +56,20 @@ public class CTRLNhaCungCap {
         }
     }
 
-   public static void checkUpdate(nhaCungCap ncc) {
+    public static void checkUpdate(nhaCungCap ncc) {
         boolean checkIdNhaCungCap = false;
         boolean checkName = false;
         boolean checkSoDienThoai = false;
         boolean checkDiaChi = false;
 
-        if (ncc.getIdNhaCungCap()== " ") {
+        if (ncc.getIdNhaCungCap().equals("")) {
             JOptionPane.showMessageDialog(null, " Mã nhà cung cấp không để trống", " lỗi", 1);
             return;
         } else {
             checkIdNhaCungCap = true;
         }
 
-        if ( ncc.getName() == " ") {
+        if (ncc.getName().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập tên nhà cung cấp !", " lỗi", 1);
             return;
         } else {
@@ -80,7 +81,7 @@ public class CTRLNhaCungCap {
         } else {
             checkSoDienThoai = true;
         }
-        if (ncc.getDiaChi() == " ") {
+        if (ncc.getDiaChi().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
             return;
         } else {

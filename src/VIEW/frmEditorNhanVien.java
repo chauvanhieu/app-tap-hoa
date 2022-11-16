@@ -1,6 +1,7 @@
 package VIEW;
 
 import CLASS.nhanVien;
+import CONTROLLER.CTRLNhanVien;
 import MODEL.MDHoaDon;
 import MODEL.MDNhanVien;
 import static VIEW.PanelThongKeTongHop.acc;
@@ -15,10 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class frmEditorNhanVien extends javax.swing.JDialog {
-
+    
     private nhanVien nv;
     public static String idNhanVien;
-
+    
     public frmEditorNhanVien(java.awt.Frame parent, boolean modal, String idNhanVien) {
         // Sữa nhân viên
 
@@ -33,7 +34,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         MDHoaDon.showHoaDonCuaNhanVien(idNhanVien, tableDanhSachHoaDonBanHang);
         HELPER.helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
     }
-
+    
     public frmEditorNhanVien(java.awt.Frame parent, boolean modal) {
         // Thêm nhân viên
 
@@ -49,7 +50,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         dateNgayVaoLam.setDate(new Date());
         setBtnLuu(option);
     }
-
+    
     public void setBtnLuu(String option) {
         if (option == "edit") {
             btnLuu.addActionListener(new ActionListener() {
@@ -69,7 +70,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
             });
         }
     }
-
+    
     public void themNhanVien() {
         String id = txtIDNhanVien.getText();
         String name = txtTenNhanVien.getText();
@@ -91,11 +92,11 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         } else {
             trangThai = false;
         }
-
-        // chưa validate
-        MDNhanVien.add(new nhanVien(id, name, soDienThoai, diaChi, ngaySinh, Luong, gioiTinh, ngayVaoLam, ghiChu, trangThai));
+        
+        CTRLNhanVien.checkAdd(new nhanVien(id, name, soDienThoai, diaChi, ngaySinh, Luong, gioiTinh, ngayVaoLam, ghiChu, trangThai));
+//        MDNhanVien.add(new nhanVien(id, name, soDienThoai, diaChi, ngaySinh, Luong, gioiTinh, ngayVaoLam, ghiChu, trangThai));
     }
-
+    
     public void suaNhanVien() {
         String id = txtIDNhanVien.getText();
         String name = txtTenNhanVien.getText();
@@ -117,11 +118,11 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         } else {
             trangThai = false;
         }
-
-        // chưa validate
-        MDNhanVien.update(new nhanVien(id, name, soDienThoai, diaChi, ngaySinh, Luong, gioiTinh, ngayVaoLam, ghiChu, trangThai));
+        
+        CTRLNhanVien.checkUpdate(new nhanVien(id, name, soDienThoai, diaChi, ngaySinh, Luong, gioiTinh, ngayVaoLam, ghiChu, trangThai));
+//        MDNhanVien.update(new nhanVien(id, name, soDienThoai, diaChi, ngaySinh, Luong, gioiTinh, ngayVaoLam, ghiChu, trangThai));
     }
-
+    
     public void setThongTinNhanVien() {
         txtIDNhanVien.setText(nv.getIdNhanVien());
         txtDiaChi.setText(nv.getDiaChi());
@@ -129,14 +130,14 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         txtTenNhanVien.setText(nv.getName());
         txtSoDienThoai.setText(nv.getSoDienthoai());
         txtLuong.setText(HELPER.helper.LongToString(nv.getLuong()));
-
+        
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             dateNgaySinh.setDate(dateFormat.parse(nv.getNgaySinh()));
             dateNgayVaoLam.setDate(dateFormat.parse(nv.getNgaySinh()));
         } catch (Exception e) {
         }
-
+        
         if (nv.isGioiTinh() == true) {
             cbGioiTinh.setSelectedIndex(0);
         } else {
@@ -148,7 +149,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
             cbTrangThai.setSelectedIndex(1);
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -183,7 +184,6 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(null);
         setMinimumSize(null);
         setModal(true);
         setResizable(false);
@@ -239,6 +239,11 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
 
         txtLuong.setEditable(false);
         txtLuong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtLuong.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLuongKeyReleased(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Trạng thái :");
@@ -461,7 +466,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMouseClicked
 
     private void tableDanhSachHoaDonBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangMousePressed
-
+        
         if (tableDanhSachHoaDonBanHang.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             String idhoadon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
             this.setVisible(false);
@@ -471,7 +476,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMousePressed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-
+        
         showHide(true);
     }//GEN-LAST:event_btnSuaActionPerformed
     public void showHide(boolean bool) {
@@ -497,12 +502,16 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "KHÔNG ĐƯỢC XÓA TÀI KHOẢN ĐIỀU HÀNH !!");
             return;
         }
-
+        
         if (JOptionPane.showConfirmDialog(null, "Xóa nhân viên ?") == 0) {
             MDNhanVien.remove(txtIDNhanVien.getText());
         }
         this.dispose();
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void txtLuongKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLuongKeyReleased
+        HELPER.helper.setTextFieldMoney(txtLuong);
+    }//GEN-LAST:event_txtLuongKeyReleased
 
     /**
      * @param args the command line arguments

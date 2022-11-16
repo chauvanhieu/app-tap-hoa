@@ -1,6 +1,7 @@
 package VIEW;
 
 import CLASS.nhanVien;
+import CONTROLLER.CTRLAccount;
 import MODEL.MDAccount;
 import MODEL.MDNhanVien;
 import javax.swing.JOptionPane;
@@ -199,13 +200,14 @@ public class frmDoiMatKhau extends javax.swing.JDialog {
         String username = txtUsername.getText();
         String pass = new String(txtPassword.getPassword());
         String confirmPass = new String(txtComfirmPassword.getPassword());
-        if (username.equals(acc.getUsername()) && pass.equals(confirmPass)) {
-            acc.setPassword(pass);
-            MDAccount.updateAccount(acc);
-            JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công !");
-        } else {
-            JOptionPane.showMessageDialog(this, "Sai dữ liệu !");
-        }
+//        if (username.equals(acc.getUsername()) && pass.equals(confirmPass)) {
+//           
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Sai dữ liệu !");
+//        }
+
+        acc.setPassword(pass);
+        CTRLAccount.checkUpdate(acc);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {

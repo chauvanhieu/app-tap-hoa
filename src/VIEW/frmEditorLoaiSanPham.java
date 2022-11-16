@@ -6,6 +6,7 @@ package VIEW;
 
 import CLASS.donViTinh;
 import CLASS.loaiSanPham;
+import CONTROLLER.CTRLLoaiSanPham;
 import MODEL.MDDonViTinh;
 import MODEL.MDLoaiSanPham;
 import javax.swing.JOptionPane;
@@ -145,23 +146,11 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
         String name = txtName.getText();
         String moTa = txtMoTa.getText();
         if (option == "add") {
-            if (!name.equals("")) {
-                loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createId(), name, moTa, true);
-                MDLoaiSanPham.add(item);
-                JOptionPane.showMessageDialog(this, "Thêm thành công !!!");
-                this.setVisible(false);
-            } else if (name.equals("")) {
-                JOptionPane.showMessageDialog(this, "Chưa nhập tên loại sản phẩm !!!");
-            }
+            loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createId(), name, moTa, true);
+            CTRLLoaiSanPham.checkAdd(item);
         } else {
-            if (!name.equals("")) {
-                loaiSanPham item = new loaiSanPham(option, name, moTa, cbboc.getSelectedIndex() == 1 ? true : false);
-                MDLoaiSanPham.update(item);
-                JOptionPane.showMessageDialog(this, "Sữa thành công !!!");
-                this.setVisible(false);
-            } else if (name.equals("")) {
-                JOptionPane.showMessageDialog(this, "Chưa nhập tên loại sản phẩm !!!");
-            }
+            loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createId(), name, moTa, true);
+            CTRLLoaiSanPham.checkUpdate(item);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
 

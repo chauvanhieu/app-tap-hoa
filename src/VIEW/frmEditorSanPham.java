@@ -5,6 +5,7 @@ import CLASS.loaiSanPham;
 import CLASS.nhaCungCap;
 import CLASS.sanPham;
 import COMPONENT.DetailedComboBox;
+import CONTROLLER.CTRLSanPham;
 import MODEL.MDDonViTinh;
 import MODEL.MDLoaiSanPham;
 import MODEL.MDNhaCungCap;
@@ -181,9 +182,10 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                             idLoaiSanPham,
                             ghiChu,
                             cbTrangThai.getSelectedIndex() == 0 ? true : false);
-                    MDSanPham.update(spUpdate);
-                    JOptionPane.showMessageDialog(thisPanel, "Đã cập nhật sản phẩm");
-                    thisPanel.setVisible(false);
+//                    MDSanPham.update(spUpdate);
+                    CTRLSanPham.checkUpdate(spUpdate);
+//                    JOptionPane.showMessageDialog(thisPanel, "Đã cập nhật sản phẩm");
+//                    thisPanel.setVisible(false);
                 }
             });
 
@@ -219,9 +221,10 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                             idLoaiSanPham,
                             ghiChu,
                             true);
-                    MDSanPham.add(sp);
-                    JOptionPane.showMessageDialog(thisPanel, "Đã Thêm sản phẩm");
-                    thisPanel.setVisible(false);
+//                    MDSanPham.add(sp);
+                    CTRLSanPham.checkAddSP(sp);
+//                    JOptionPane.showMessageDialog(thisPanel, "Đã Thêm sản phẩm");
+//                    thisPanel.setVisible(false);
                 }
             });
         }

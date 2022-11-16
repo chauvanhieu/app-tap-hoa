@@ -122,7 +122,7 @@ public class frmEditorGiaoDien extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(301, 301, 301)
                         .addComponent(img3, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -13,30 +13,30 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class CTRLLoaiSanPham {
-
+    
     public static void checkAdd(loaiSanPham item) {
         boolean checkName = false;
-        if (item.getName() == " ") {
+        if (item.getName().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập loại sản phẩm  ", " lỗi", 1);
             return;
         } else {
             checkName = true;
             MDLoaiSanPham.add(item);
             JOptionPane.showMessageDialog(null, "Thêm thành công .");
-
+            
         }
     }
     
     public static void checkUpdate(loaiSanPham item) {
         boolean checkName = false;
-        if (item.getName() == " ") {
+        if (item.getName().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập loại sản phẩm  ", " lỗi", 1);
             return;
         } else {
             checkName = true;
             MDLoaiSanPham.update(item);
-            JOptionPane.showMessageDialog(null, "Cập nhật  thành công .");
-
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công .");
+            
         }
     }
 }

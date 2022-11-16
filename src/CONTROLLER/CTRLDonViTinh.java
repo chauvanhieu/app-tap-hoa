@@ -16,15 +16,26 @@ public class CTRLDonViTinh {
 
     public static void checkAdd(donViTinh item) {
         boolean checkName = false;
-        if (item.getName() == " ") {
+        if (item.getName() == "") {
             JOptionPane.showMessageDialog(null, " Tên đơn vị tính không được bỏ trống  ", " lỗi", 1);
             return;
-        }else{
+        } else {
             checkName = true;
             MDDonViTinh.add(item);
             JOptionPane.showMessageDialog(null, "Thêm thành công .");
-            
         }
     }
 
+    public static void checkUpdate(donViTinh item) {
+        boolean checkName = false;
+        if (!item.getName().equals("")) {
+            checkName = true;
+        }
+        if (checkName == true) {
+            MDDonViTinh.update(item);
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công .");
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa nhập tên đơn vị tính !");
+        }
+    }
 }

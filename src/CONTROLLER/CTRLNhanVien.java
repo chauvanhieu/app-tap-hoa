@@ -21,14 +21,14 @@ public class CTRLNhanVien {
         boolean checkDiaChi = false;
         boolean checkLuong = false;
 
-        if (nhanvien.getIdNhanVien() == " ") {
+        if (nhanvien.getIdNhanVien().equals("")) {
             JOptionPane.showMessageDialog(null, " Mã nhân viên không để trống", " lỗi", 1);
             return;
         } else {
             checkIdNhanVien = true;
         }
 
-        if (nhanvien.getName() == " ") {
+        if (nhanvien.getName().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập tên nhà cung cấp !", " lỗi", 1);
             return;
         } else {
@@ -40,7 +40,7 @@ public class CTRLNhanVien {
         } else {
             checkSoDienThoai = true;
         }
-        if (nhanvien.getDiaChi() == " ") {
+        if (nhanvien.getDiaChi().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
             return;
         } else {
@@ -69,14 +69,14 @@ public class CTRLNhanVien {
         boolean checkDiaChi = false;
         boolean checkLuong = false;
 
-        if (nhanvien.getIdNhanVien() == " ") {
+        if (nhanvien.getIdNhanVien().equals("")) {
             JOptionPane.showMessageDialog(null, " Mã nhân viên không để trống", " lỗi", 1);
             return;
         } else {
             checkIdNhanVien = true;
         }
 
-        if (nhanvien.getName() == " ") {
+        if (nhanvien.getName().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập tên nhà cung cấp !", " lỗi", 1);
             return;
         } else {
@@ -88,7 +88,7 @@ public class CTRLNhanVien {
         } else {
             checkSoDienThoai = true;
         }
-        if (nhanvien.getDiaChi() == " ") {
+        if (nhanvien.getDiaChi().equals("")) {
             JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
             return;
         } else {

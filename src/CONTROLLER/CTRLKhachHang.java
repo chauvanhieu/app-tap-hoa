@@ -93,7 +93,7 @@ public class CTRLKhachHang {
             return;
         } else {
             MDKhachHang.update(kh);
-            JOptionPane.showMessageDialog(null, "Cập nhật  thành công");
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công");
 
         }
     }
