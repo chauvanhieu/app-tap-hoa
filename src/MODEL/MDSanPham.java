@@ -1,6 +1,7 @@
 package MODEL;
 
 import CLASS.sanPham;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -29,17 +30,19 @@ public class MDSanPham {
     public static ArrayList<sanPham> getDataToTable() {
         ArrayList<sanPham> data = new ArrayList<>();
         String sql = "SELECT sanpham.* ,donvitinh.name as 'dvt', loaisanpham.name as 'lsp' from sanpham "
-                + "join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
-                + "join loaisanpham on loaisanpham.id=sanpham.idLoaiSanPham"
+                + " join donvitinh on donvitinh.id = sanpham.IDDonViTinh "
+                + " join loaisanpham on loaisanpham.id=sanpham.idLoaiSanPham"
                 + " order by trangthai desc";
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {
+
             while (rs.next()) {
+
                 data.add(new sanPham(
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
+                        rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),
@@ -67,11 +70,12 @@ public class MDSanPham {
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {
             while (rs.next()) {
+
                 data.add(new sanPham(
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
+                        rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),
@@ -95,11 +99,12 @@ public class MDSanPham {
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {
             while (rs.next()) {
+
                 data.add(new sanPham(
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
+                        rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),
@@ -123,11 +128,12 @@ public class MDSanPham {
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql, id);
         try {
             while (rs.next()) {
+
                 item = new sanPham(
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
+                        rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),
@@ -145,13 +151,13 @@ public class MDSanPham {
         return item;
     }
 
-    public static void add(sanPham item) {
+    public static void add(sanPham item) throws IOException {
         String sql = "insert into SanPham values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql,
                 item.getIdSanPham(),
                 item.getName(),
                 item.getBarcode(),
-                item.getHinhAnh() == null ? "empty.png" : item.getHinhAnh(),
+                item.getHinhAnh(),
                 item.getGiaNhap(),
                 item.getGiaBan(),
                 item.getGiaSi(),
@@ -178,7 +184,7 @@ public class MDSanPham {
                 sp.getName(),
                 sp.getGiaSi(),
                 sp.getBarcode(),
-                sp.getHinhAnh() == null ? "empty.png" : sp.getHinhAnh(),
+                sp.getHinhAnh(),
                 sp.getGiaNhap(),
                 sp.getGiaBan(),
                 sp.getSoLuong(),
@@ -218,11 +224,12 @@ public class MDSanPham {
         ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
         try {
             while (rs.next()) {
+
                 data.add(new sanPham(
                         rs.getString("id"),
                         rs.getString("name"),
                         rs.getString("barcode"),
-                        rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh"),
+                        rs.getString("hinhanh"),
                         rs.getLong("GiaNhap"),
                         rs.getLong("GiaBan"),
                         rs.getLong("giaSi"),

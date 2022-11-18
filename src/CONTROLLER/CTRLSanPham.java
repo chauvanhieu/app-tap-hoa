@@ -2,8 +2,8 @@ package CONTROLLER;
 
 import CLASS.sanPham;
 import MODEL.MDSanPham;
+import java.io.IOException;
 import javax.swing.JOptionPane;
-import java.awt.Color;
 
 public class CTRLSanPham {
 
@@ -20,7 +20,7 @@ public class CTRLSanPham {
         return check;
     }
 
-    public static void checkAddSP(sanPham sp) {
+    public static void checkAddSP(sanPham sp) throws IOException {
         boolean checkName = false;
         boolean checkGiaNhap = false;
         boolean checkGiaBan = false;
@@ -39,24 +39,19 @@ public class CTRLSanPham {
         }
         if (sp.getGiaBan() < 0 && sp.getGiaBan() < sp.getGiaNhap()) {
             JOptionPane.showMessageDialog(null, "Giá nhập không được hơn giá bán và phải lớn hơn 0", " lỗi", 1);
-
             return;
         } else {
             checkGiaBan = true;
-
         }
         if (sp.getGiaNhap() < 0 && sp.getGiaBan() < sp.getGiaNhap()) {
             JOptionPane.showMessageDialog(null, "Giá nhập không được hơn giá bán và phải lớn hơn 0", " lỗi", 1);
-
             return;
         } else {
             checkGiaBan = true;
-
         }
 
         if (sp.getIdDonViTinh().equals("")) {
             JOptionPane.showMessageDialog(null, " Đơn vị tính không để trống", " lỗi", 1);
-
             return;
         } else {
             checkIDDVT = true;
@@ -72,7 +67,6 @@ public class CTRLSanPham {
 
         if (sp.getIdNhaCungCap().equals("")) {
             JOptionPane.showMessageDialog(null, " Nhà cung cấp ko để trống", " lỗi", 1);
-
             return;
         } else {
             checkIDNCC = true;
@@ -86,7 +80,6 @@ public class CTRLSanPham {
         }
         if (sp.getSoLuongToiThieu() <= 0 && sp.getSoLuongToiThieu() < sp.getSoLuong()) {
             JOptionPane.showMessageDialog(null, " Số lượng tối thiểu ko nhỏ hơn số lượng", " lỗi", 1);
-
             return;
         } else {
             checkSoLuongToiThieu = true;
@@ -97,12 +90,10 @@ public class CTRLSanPham {
                 && checkIDNCC == true) {
             MDSanPham.add(sp);
             JOptionPane.showMessageDialog(null, "Thêm thành công");
-        } else {
-            return;
         }
     }
 
-    public static void checkUpdate(sanPham sp) {
+    public static void checkUpdate(sanPham sp)  {
         boolean checkName = false;
         boolean checkGiaNhap = false;
         boolean checkGiaBan = false;

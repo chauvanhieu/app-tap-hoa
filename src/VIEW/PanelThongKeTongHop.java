@@ -1,5 +1,6 @@
 package VIEW;
 
+import HELPER.helper;
 import MODEL.MDHoaDon;
 import src.CLASS.Account;
 
@@ -7,9 +8,12 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
+import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -569,6 +573,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setModelTableSanPham();
         hienThiSanPhamSapHetHang();
+
         loadDuLieu();
         MDHoaDon.showHoaDonTrongNgay(tableHoaDonTrongNgay);
         MDHoaDon.showDoanhThuTrongNgay(tableDoanhThuLoiNhuan);
@@ -586,7 +591,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
             ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
             while (rs.next()) {
 
-                ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (rs.getString("hinhanh").equals("") ? "empty.png" : rs.getString("hinhanh")))).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(rs.getString("hinhanh")).getImage().getScaledInstance(90, 90, Image.SCALE_DEFAULT));
 
                 model.addRow(new Object[]{
                     imageIcon,

@@ -1724,7 +1724,7 @@
               <Component id="jPanel11" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane10" max="32767" attributes="0"/>
+                  <Component id="jScrollPane10" pref="833" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -1821,10 +1821,8 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbFilterThuNo" min="-2" pref="158" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="txtTimKiemThuNoKhachHang" min="-2" pref="219" max="-2" attributes="0"/>
-                      <EmptySpace pref="253" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnTimKiemNhanVien1" min="-2" pref="88" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1838,7 +1836,6 @@
                           <Component id="jLabel13" alignment="2" min="-2" max="-2" attributes="0"/>
                           <Component id="btnTimKiemNhanVien1" alignment="2" min="-2" max="-2" attributes="0"/>
                           <Component id="txtTimKiemThuNoKhachHang" alignment="2" min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="cbFilterThuNo" alignment="2" min="-2" pref="42" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
@@ -1866,22 +1863,8 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="16" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ti&#x300;m theo :"/>
+                <Property name="text" type="java.lang.String" value="Ti&#x300;m Ki&#xea;&#x301;m :"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cbFilterThuNo">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="T&#xe2;&#x301;t ca&#x309;"/>
-                    <StringItem index="1" value="Nh&#xe2;n vi&#xea;n"/>
-                    <StringItem index="2" value="Kha&#x301;ch ha&#x300;ng"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

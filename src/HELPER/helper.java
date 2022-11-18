@@ -16,9 +16,14 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialOceani
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialPalenightContrastIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMonokaiProContrastIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLightContrastIJTheme;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.DateFormat;
@@ -37,8 +42,47 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class helper {
+
+    public static Image resize(Image img, int width, int height) {
+        return img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    }
+
+    public static byte[] toByteArray(Image img, String type) throws IOException {
+        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = bimage.createGraphics();
+        g.drawImage(img, 0, 0, null);
+        g.dispose();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bimage, type, baos);
+        return baos.toByteArray();
+    }
+
+    public static byte[] toByteArray(ImageIcon icon) throws IOException {
+        Image img = icon.getImage();
+        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = bimage.createGraphics();
+        g.drawImage(img, 0, 0, null);
+        g.dispose();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bimage, "jpg", baos);
+        return baos.toByteArray();
+    }
+
+    public static Image getImage(byte[] b) {
+        return new ImageIcon(b).getImage();
+    }
+
+    public static Image craeteImage(byte[] data, String type) throws IOException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(data);
+        BufferedImage bImage2 = ImageIO.read(bis);
+        return bImage2.getScaledInstance(bImage2.getWidth(), bImage2.getHeight(), Image.SCALE_SMOOTH);
+    }
 
     public static void setConfig(config item) {
         try {

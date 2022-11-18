@@ -35,7 +35,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.codehaus.groovy.ast.stmt.TryCatchStatement;
 
 public class frmEditorSanPham extends javax.swing.JDialog {
 
@@ -52,26 +51,22 @@ public class frmEditorSanPham extends javax.swing.JDialog {
     private String hinhAnh;
     private Component thisPanel = this;
 
-    public frmEditorSanPham(java.awt.Frame parent, boolean modal, String option) {
+    public frmEditorSanPham(java.awt.Frame parent, boolean modal, String option) throws IOException {
         super(parent, modal);
 
         this.option = option;
         initComponents();
         loadComboBox();
-//                ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/empty.png").getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
-//new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? 
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/empty.png")).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
-//      ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/empty.png").getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
-
+        hinhAnh = getClass().getResource("/IMAGE/empty.png").toString();
         lbHinhAnh.setIcon(imageIcon);
         if (this.option != "add") {
             loadThongTinSanPham(this.option);
-
         }
         setUX(this.option);
     }
 
-    public void loadThongTinSanPham(String idSanPham) {
+    public void loadThongTinSanPham(String idSanPham) throws IOException {
         sanPham item = MDSanPham.getSanPham(idSanPham);
         txtTenSanPham.setText(item.getName());
         txtBarcode.setText(item.getBarcode());
@@ -82,9 +77,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         txtSoLuong.setValue(Integer.parseInt(item.getSoLuong() + ""));
         txtSoLuongToiThieu.setValue(Integer.parseInt(item.getSoLuongToiThieu() + ""));
 
-//      ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + (item.getHinhAnh().equals("") ? "empty.png" : item.getHinhAnh()))).getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + item.getHinhAnh())).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
-//      ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/IMAGE/" + item.getHinhAnh()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(item.getHinhAnh()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
 
         lbHinhAnh.setIcon(imageIcon);
         this.hinhAnh = item.getHinhAnh();
@@ -166,12 +159,12 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                     int soLuong = Integer.parseInt(txtSoLuong.getValue() + "");
                     int soLuongToiThieu = Integer.parseInt(txtSoLuongToiThieu.getValue() + "");
                     String ghiChu = txtGhiChu.getText();
-                    String img = hinhAnh;
+
                     sanPham spUpdate = new sanPham(
                             id,
                             name,
                             barcode,
-                            img,
+                            hinhAnh,
                             giaNhap,
                             giaBan,
                             giaSi,
@@ -221,10 +214,14 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                             idLoaiSanPham,
                             ghiChu,
                             true);
-//                    MDSanPham.add(sp);
-                    CTRLSanPham.checkAddSP(sp);
-//                    JOptionPane.showMessageDialog(thisPanel, "Đã Thêm sản phẩm");
-//                    thisPanel.setVisible(false);
+                    try {
+                        MDSanPham.add(sp);
+                    } catch (IOException ex) {
+                        Logger.getLogger(frmEditorSanPham.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+//                    CTRLSanPham.checkAddSP(sp);
+                    JOptionPane.showMessageDialog(thisPanel, "Đã Thêm sản phẩm");
+                    thisPanel.setVisible(false);
                 }
             });
         }
@@ -682,20 +679,10 @@ public class frmEditorSanPham extends javax.swing.JDialog {
 
             File file = new File(chooser.getSelectedFile().getAbsolutePath());
 
-            // lấy url cần copy tới
-            URL url = getClass().getResource("/IMAGE/");
-            System.out.println(url.toString());
+            System.out.println(file.getPath());
 
-            String fileName = HELPER.helper.removeAccent(file.getName().replaceAll(" ", ""));
-
-            //copy 1 ảnh qua thư mục build 
-//            File targetFile = new File(url.toString(), fileName);
-            String path = url.toString() + fileName;
-
-            copyFile(file, new File(path));
-
-            hinhAnh = fileName;
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/" + fileName)).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
+            hinhAnh = file.getPath();
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(file.getPath()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
             lbHinhAnh.setIcon(imageIcon);
         }
     }//GEN-LAST:event_btnChonAnhActionPerformed
@@ -743,7 +730,12 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmEditorSanPham dialog = new frmEditorSanPham(new javax.swing.JFrame(), true, option);
+                frmEditorSanPham dialog = null;
+                try {
+                    dialog = new frmEditorSanPham(new javax.swing.JFrame(), true, option);
+                } catch (IOException ex) {
+                    Logger.getLogger(frmEditorSanPham.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

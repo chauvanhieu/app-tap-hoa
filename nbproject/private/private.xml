@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmEditorSanPham.java</file>
-=======
-            <file>file:/C:/Users/Admin/Desktop/DuAn1/app-tap-hoa/src/VIEW/frmXemHoaDonNhapHang.java</file>
-            <file>file:/C:/Users/Admin/Desktop/DuAn1/app-tap-hoa/src/VIEW/frmMAIN.java</file>
-            <file>file:/C:/Users/Admin/Desktop/DuAn1/app-tap-hoa/src/VIEW/panelTaoHoaDonBanHang.java</file>
->>>>>>> deb348bb4d2c3f4a439286085a877ca76814660d
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/VIEW/frmMAIN.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/MODEL/MDSanPham.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/NewMain.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/HELPER/helper.java</file>
+            <file>file:/D:/gocHocTap/app/DU_AN_1/src/NewJFrame.java</file>
         </group>
     </open-files>
 </project-private>

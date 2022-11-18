@@ -1,5 +1,7 @@
 package CLASS;
 
+import javax.swing.ImageIcon;
+
 public class sanPham {
 
     String idSanPham;
