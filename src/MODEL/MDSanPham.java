@@ -206,12 +206,12 @@ public class MDSanPham {
 
     //hàm auto create ID cho Sanr Phaamr
     public static String createID() {
-        String id = "PRD";
-        String date = HELPER.helper.LayNgayString(new Date(), "ddMM");
+        String id = "SP";
+        String date = HELPER.helper.LayNgayString(new Date(), "yyyy");
         Random r = new Random();
         String alphabet = "1234567890";
         String random = "";
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             random += r.nextInt(alphabet.length());
         }
         return id + date + random;

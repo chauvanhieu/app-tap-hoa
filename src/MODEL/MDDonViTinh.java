@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package MODEL;
 
 import CLASS.donViTinh;
@@ -12,10 +8,6 @@ import java.util.Random;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author DELL
- */
 public class MDDonViTinh {
 
     public static String createID() {
@@ -24,7 +16,7 @@ public class MDDonViTinh {
         Random r = new Random();
         String alphabet = "1234567890";
         String random = "";
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             random += r.nextInt(alphabet.length());
         }
         return id + date + random;

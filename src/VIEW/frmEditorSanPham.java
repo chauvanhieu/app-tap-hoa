@@ -57,7 +57,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         initComponents();
         loadComboBox();
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/empty.png")).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
-        hinhAnh = getClass().getResource("/IMAGE/empty.png").toString();
+        hinhAnh = getClass().getResource("/IMAGE/empty.png").toString().substring(6);
         lbHinhAnh.setIcon(imageIcon);
         if (this.option != "add") {
             loadThongTinSanPham(this.option);
@@ -210,7 +210,6 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                             ghiChu,
                             true);
                     CTRLSanPham.checkAddSP(sp);
-                    JOptionPane.showMessageDialog(thisPanel, "Đã Thêm sản phẩm");
                     thisPanel.setVisible(false);
                 }
             });
@@ -669,7 +668,6 @@ public class frmEditorSanPham extends javax.swing.JDialog {
 
             File file = new File(chooser.getSelectedFile().getAbsolutePath());
 
-            System.out.println(file.getPath());
 
             this.hinhAnh = file.getPath();
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(file.getPath()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));

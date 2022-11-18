@@ -1210,7 +1210,9 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
         }
         try {
             Hashtable map = new Hashtable();
-            JasperReport jasper = JasperCompileManager.compileReport("src/REPORT/hoaDonBanHang.jrxml");
+//            JasperReport jasper = JasperCompileManager.compileReport("src/REPORT/hoaDonBanHang.jrxml");
+            String path = getClass().getResource("/REPORT/hoaDonBanHang.jrxml").toString();
+            JasperReport jasper = JasperCompileManager.compileReport(path.substring(6, path.length()));
             map.put("tenCuaHang", admin.getTenCuaHang());
             map.put("diaChiCuaHang", admin.getDiaChi());
             map.put("idHoaDon", hoadon.getId());

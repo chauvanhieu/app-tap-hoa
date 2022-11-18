@@ -149,7 +149,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
             loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createID(), name, moTa, true);
             CTRLLoaiSanPham.checkAdd(item);
         } else {
-            loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createID(), name, moTa, true);
+            loaiSanPham item = new loaiSanPham(option, name, moTa, true);
             CTRLLoaiSanPham.checkUpdate(item);
         }
     }//GEN-LAST:event_btnLuuActionPerformed

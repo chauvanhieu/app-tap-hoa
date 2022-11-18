@@ -19,14 +19,14 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 public class frmEditorAccount extends javax.swing.JDialog {
-
+    
     private DetailedComboBox comboBoxNhanvien;
     private static String option;
     private String idNhanVien;
     private boolean checkUser = false;
     private boolean checkPass = false;
     private boolean checkConfirmPass = false;
-
+    
     public frmEditorAccount(java.awt.Frame parent, boolean modal, String option) {
         super(parent, modal);
         frmEditorAccount.option = option;
@@ -39,7 +39,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
             cbTrangThai.setVisible(false);
         }
     }
-
+    
     public void loadThongTin() {
         Account acc = MDAccount.getAccount(option);
         txtUsername.setText(acc.getUsername());
@@ -48,14 +48,14 @@ public class frmEditorAccount extends javax.swing.JDialog {
         int index = 0;
         ArrayList<nhanVien> data = MDNhanVien.getData();
         for (int i = 0; i < data.size(); i++) {
-
+            
             if (acc.getIdNhanVien().equals(data.get(i).getIdNhanVien())) {
                 index = i;
                 comboBoxNhanvien.setSelectedIndex(i);
                 break;
             }
         }
-
+        cbTrangThai.setSelectedIndex(acc.isTrangThai() == true ? 0 : 1);
         comboBoxNhanvien.setSelectedIndex(index);
         checkboxBanHang.setSelected(acc.isBanHang());
         checkboxHangHoa.setSelected(acc.isHangHoa());
@@ -65,7 +65,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
         checkboxBaoCao.setSelected(acc.isBaoCao());
         checkboxThuChi.setSelected(acc.isPhieuChi());
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -315,9 +315,9 @@ public class frmEditorAccount extends javax.swing.JDialog {
         String[] columns = new String[]{"Mã nhân viên", "Tên", "Điện thoại", "Địa chỉ"};
         int[] widths = new int[]{80, 300, 120, 360};
         this.comboBoxNhanvien = new DetailedComboBox(columns, widths, 1);
-
+        
         List<List<?>> tableData = new ArrayList<List<?>>();
-
+        
         for (nhanVien nv : data) {
             tableData.add(new ArrayList<>(
                     Arrays.asList(nv.getIdNhanVien(), nv.getName(), nv.getSoDienthoai(), nv.getDiaChi())));

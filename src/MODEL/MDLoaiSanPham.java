@@ -24,7 +24,7 @@ public class MDLoaiSanPham {
         Random r = new Random();
         String alphabet = "1234567890";
         String random = "";
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             random += r.nextInt(alphabet.length());
         }
         return id + date + random;

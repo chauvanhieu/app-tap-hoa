@@ -26,7 +26,10 @@ public class CTRLKhachHang {
             checkName = true;
         }
         checkSoDienThoai = HELPER.helper.isNumberPhone(kh.getSoDienThoai());
-
+        if (checkSoDienThoai == false) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không đúng !");
+            return;
+        }
         if (kh.getDiaChi().equals("")) {
             JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;
@@ -58,7 +61,10 @@ public class CTRLKhachHang {
             checkName = true;
         }
         checkSoDienThoai = HELPER.helper.isNumberPhone(kh.getSoDienThoai());
-
+        if (checkSoDienThoai == false) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không đúng !");
+            return;
+        }
         if (kh.getDiaChi().equals("")) {
             JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;

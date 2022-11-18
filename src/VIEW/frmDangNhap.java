@@ -204,6 +204,10 @@ public class frmDangNhap extends javax.swing.JFrame {
             txtUsername.requestFocus();
             txtUsername.selectAll();
         } else {
+            if (account.isTrangThai() == false) {
+                JOptionPane.showMessageDialog(this, "Tài khoản đã bị vô hiệu hóa !");
+                return;
+            }
             if (checkboxNhoMatKhau.isSelected()) {
                 config newConfig = new config(username, password, config.getTheme());
                 helper.setConfig(newConfig);

@@ -9,11 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class frmEditorKhachHang extends javax.swing.JDialog {
-    
+
     private khachHang khachhang;
     public static String idKhachHang;
     private boolean mode = false;
-    
+
     public frmEditorKhachHang(java.awt.Frame parent, boolean modal, String idKhachHang) {
         super(parent, modal);
         this.idKhachHang = idKhachHang;
@@ -22,7 +22,7 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         loadDuLieu();
         helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
         editMode(mode);
-        
+
         btnLuu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,8 +30,8 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
                 editMode(mode);
                 String name = txtName.getText().trim();
                 String soDienThoai = txtSDT.getText().trim();
-                String diaChi = txtSDT.getText().trim();
-                String ghiChu = txtSDT.getText().trim();
+                String diaChi = txtAddress.getText().trim();
+                String ghiChu = txtNote.getText().trim();
                 long congNo = helper.SoLong(txtCongNo.getText());
                 boolean trangThai = cbTrangThaiLamViec.getSelectedIndex() == 0 ? true : false;
                 khachHang khach = new khachHang(
@@ -46,18 +46,18 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
                 CTRLKhachHang.checkUpdate(khach);
             }
         });
-        
+
     }
-    
+
     public frmEditorKhachHang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
-        
+
         txtID.setText(MDKhachHang.createID());
         btnSua.setEnabled(false);
-        
+
         btnLuu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,8 +66,8 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
                 editMode(mode);
                 String name = txtName.getText().trim();
                 String soDienThoai = txtSDT.getText().trim();
-                String diaChi = txtSDT.getText().trim();
-                String ghiChu = txtSDT.getText().trim();
+                String diaChi = txtAddress.getText().trim();
+                String ghiChu = txtNote.getText().trim();
                 long congNo = helper.SoLong(txtCongNo.getText());
                 khachHang khach = new khachHang(
                         txtID.getText(),
@@ -79,12 +79,11 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
                         true
                 );
                 CTRLKhachHang.checkAdd(khach);
-                setVisible(false);
             }
         });
-        
+
     }
-    
+
     public void editMode(boolean mode) {
         txtAddress.setEditable(mode);
         txtCongNo.setEditable(mode);
@@ -95,7 +94,7 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         btnLuu.setEnabled(mode);
         btnSua.setEnabled(!mode);
     }
-    
+
     public void loadDuLieu() {
         txtID.setText(khachhang.getIdKhachHang());
         txtAddress.setText(khachhang.getDiaChi());
@@ -112,7 +111,7 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         // load bảng hóa đơn
         MDHoaDon.getHoaDonTheoKhachHang(tableDanhSachHoaDonBanHang, idKhachHang);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

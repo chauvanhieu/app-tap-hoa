@@ -70,7 +70,7 @@ public class CTRLNhanVien {
         }
         if (checkDiaChi == true && checkSoDienThoai == true && checkName == true && checkLuong == true) {
             MDNhanVien.update(nhanvien);
-            JOptionPane.showMessageDialog(null, "cập nhật thành công !");
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công !");
         }
     }
 }
