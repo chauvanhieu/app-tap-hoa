@@ -1,100 +1,74 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CONTROLLER;
 
 import CLASS.nhaCungCap;
 import MODEL.MDNhaCungCap;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Admin
- */
 public class CTRLNhaCungCap {
 
     public static void checkAdd(nhaCungCap ncc) {
-        boolean checkIdNhaCungCap = false;
         boolean checkName = false;
         boolean checkSoDienThoai = false;
         boolean checkDiaChi = false;
-
-        if (ncc.getIdNhaCungCap().equals("")) {
-            JOptionPane.showMessageDialog(null, " Mã nhà cung cấp không để trống", " lỗi", 1);
-            return;
-        } else {
-            checkIdNhaCungCap = true;
-        }
-
+        boolean congNo = false;
         if (ncc.getName().equals("")) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập tên nhà cung cấp !", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Tên nhà cung cấp không được để trống !");
             return;
         } else {
             checkName = true;
         }
-        if (HELPER.helper.isNumberPhone(ncc.getSoDienThoai()) == true && ncc.getSoDienThoai() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập số điện thoại", " lỗi", 1);
-            return;
-        } else {
-            checkSoDienThoai = true;
-        }
+
+        checkSoDienThoai = HELPER.helper.isNumberPhone(ncc.getSoDienThoai());
+
         if (ncc.getDiaChi().equals("")) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;
         } else {
             checkDiaChi = true;
         }
 
-        if (checkIdNhaCungCap == false || checkName == false
-                || checkDiaChi == false || checkSoDienThoai == false) {
+        if (ncc.getCongNo() < 0) {
+            JOptionPane.showMessageDialog(null, "Công nợ không được âm !");
             return;
         } else {
+            congNo = true;
+        }
+        if (checkDiaChi == true && checkName == true && checkSoDienThoai == true && congNo == true) {
             MDNhaCungCap.add(ncc);
-            JOptionPane.showMessageDialog(null, "Thêm thành  thành công");
-
+            JOptionPane.showMessageDialog(null, "Thêm thành công !");
         }
     }
 
     public static void checkUpdate(nhaCungCap ncc) {
-        boolean checkIdNhaCungCap = false;
         boolean checkName = false;
         boolean checkSoDienThoai = false;
         boolean checkDiaChi = false;
-
-        if (ncc.getIdNhaCungCap().equals("")) {
-            JOptionPane.showMessageDialog(null, " Mã nhà cung cấp không để trống", " lỗi", 1);
-            return;
-        } else {
-            checkIdNhaCungCap = true;
-        }
-
+        boolean congNo = false;
         if (ncc.getName().equals("")) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập tên nhà cung cấp !", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Tên nhà cung cấp không được để trống !");
             return;
         } else {
             checkName = true;
         }
-        if (HELPER.helper.isNumberPhone(ncc.getSoDienThoai()) == true && ncc.getSoDienThoai() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập số điện thoại", " lỗi", 1);
-            return;
-        } else {
-            checkSoDienThoai = true;
-        }
+
+        checkSoDienThoai = HELPER.helper.isNumberPhone(ncc.getSoDienThoai());
+
         if (ncc.getDiaChi().equals("")) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;
         } else {
             checkDiaChi = true;
         }
 
-        if (checkIdNhaCungCap == false || checkName == false
-                || checkDiaChi == false || checkSoDienThoai == false) {
+        if (ncc.getCongNo() < 0) {
+            JOptionPane.showMessageDialog(null, "Công nợ không được âm !");
             return;
         } else {
+            congNo = true;
+        }
+        if (checkDiaChi == true && checkName == true && checkSoDienThoai == true && congNo == true) {
             MDNhaCungCap.update(ncc);
-            JOptionPane.showMessageDialog(null, "Cập nhật thành  thành công");
-
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công !");
         }
     }
 }

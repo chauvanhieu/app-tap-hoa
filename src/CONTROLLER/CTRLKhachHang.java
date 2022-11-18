@@ -15,86 +15,66 @@ import javax.swing.JOptionPane;
 public class CTRLKhachHang {
 
     public static void checkAdd(khachHang kh) {
-        boolean checkIdKhachHang = false;
         boolean checkName = false;
         boolean checkSoDienThoai = false;
         boolean checkDiaChi = false;
-
-        if (kh.getIdKhachHang() == " ") {
-            JOptionPane.showMessageDialog(null, " Mã Khách hàng không để trống", " lỗi", 1);
-            return;
-        } else {
-            checkIdKhachHang = true;
-        }
-
-        if (HELPER.helper.isFullname(kh.getName()) == true && kh.getName() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập đầy đủ họ tên !", " lỗi", 1);
+        boolean congNo = false;
+        if (kh.getName().equals("") || HELPER.helper.isFullname(kh.getName()) == false) {
+            JOptionPane.showMessageDialog(null, "Tên khách hàng không đúng !");
             return;
         } else {
             checkName = true;
         }
-        if (HELPER.helper.isNumberPhone(kh.getSoDienThoai()) == true && kh.getSoDienThoai() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập số điện thoại", " lỗi", 1);
-            return;
-        } else {
-            checkSoDienThoai = true;
-        }
-        if (kh.getDiaChi() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
+        checkSoDienThoai = HELPER.helper.isNumberPhone(kh.getSoDienThoai());
+
+        if (kh.getDiaChi().equals("")) {
+            JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;
         } else {
             checkDiaChi = true;
         }
 
-        if (checkIdKhachHang == false || checkName == false
-                || checkDiaChi == false || checkSoDienThoai == false) {
+        if (kh.getNo() < 0) {
+            JOptionPane.showMessageDialog(null, "Công nợ không được âm !");
             return;
         } else {
+            congNo = true;
+        }
+        if (checkDiaChi == true && checkName == true && checkSoDienThoai == true && congNo == true) {
             MDKhachHang.add(kh);
-            JOptionPane.showMessageDialog(null, "Thêm thành  thành công");
-
+            JOptionPane.showMessageDialog(null, "Thêm thành công !");
         }
     }
 
     public static void checkUpdate(khachHang kh) {
-        boolean checkIdKhachHang = false;
         boolean checkName = false;
         boolean checkSoDienThoai = false;
         boolean checkDiaChi = false;
-
-        if (kh.getIdKhachHang() == " ") {
-            JOptionPane.showMessageDialog(null, " Mã Khách hàng không để trống", " lỗi", 1);
-            return;
-        } else {
-            checkIdKhachHang = true;
-        }
-
-        if (HELPER.helper.isFullname(kh.getName()) == true && kh.getName() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập đầy đủ họ tên !", " lỗi", 1);
+        boolean congNo = false;
+        if (kh.getName().equals("") || HELPER.helper.isFullname(kh.getName()) == false) {
+            JOptionPane.showMessageDialog(null, "Tên khách hàng không đúng !");
             return;
         } else {
             checkName = true;
         }
-        if (HELPER.helper.isNumberPhone(kh.getSoDienThoai()) == true && kh.getSoDienThoai() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập số điện thoại", " lỗi", 1);
-            return;
-        } else {
-            checkSoDienThoai = true;
-        }
-        if (kh.getDiaChi() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
+        checkSoDienThoai = HELPER.helper.isNumberPhone(kh.getSoDienThoai());
+
+        if (kh.getDiaChi().equals("")) {
+            JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;
         } else {
             checkDiaChi = true;
         }
 
-        if (checkIdKhachHang == false || checkName == false
-                || checkDiaChi == false || checkSoDienThoai == false) {
+        if (kh.getNo() < 0) {
+            JOptionPane.showMessageDialog(null, "Công nợ không được âm !");
             return;
         } else {
+            congNo = true;
+        }
+        if (checkDiaChi == true && checkName == true && checkSoDienThoai == true && congNo == true) {
             MDKhachHang.update(kh);
-            JOptionPane.showMessageDialog(null, "Cập nhật thành công");
-
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công !");
         }
     }
 }

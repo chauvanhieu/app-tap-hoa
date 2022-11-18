@@ -941,6 +941,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
 
     @SuppressWarnings("unchecked")
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        tableSanPham.clearSelection();
 
         if (cbHinhThucThanhToan.getSelectedIndex() == 2 && comboboxKhachHang.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Thanh toán nợ cần có thông tin khách hàng !");

@@ -1,36 +1,39 @@
 package MODEL;
 
+import CLASS.hoaDonThuNo;
 import java.util.Date;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class MDCongNo {
 
-    public static void dataTableThuNoKhachHang(JTable table) {
+    public static ArrayList<hoaDonThuNo> dataTableThuNoKhachHang() {
+
+        ArrayList<hoaDonThuNo> data = new ArrayList<hoaDonThuNo>();
 
         String sql = "SELECT thutienkhachhang.*, khachhang.name as 'tenKhachHang',nhanvien.name as 'tenNhanVien' FROM thutienkhachhang"
                 + " join nhanvien on nhanvien.id =thutienkhachhang.IDNhanVien "
                 + " join khachhang on khachhang.id = thutienkhachhang.IDKhachHang "
                 + " order by thutienkhachhang.thoigian desc";
 
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.setRowCount(0);
         try {
             ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
             while (rs.next()) {
-                model.addRow(new Object[]{
-                    rs.getString("thoigian"),
-                    rs.getString("tennhanvien"),
-                    rs.getString("tenkhachhang"),
-                    HELPER.helper.LongToString(rs.getLong("sotien")),
-                    rs.getString("ghichu")
-                });
+                data.add(new hoaDonThuNo(
+                        rs.getString("thoigian"),
+                        rs.getString("tennhanvien"),
+                        rs.getString("tenkhachhang"),
+                        rs.getString("ghichu"),
+                        rs.getLong("sotien")
+                ));
+
             }
         } catch (Exception e) {
         }
 
-        table.setModel(model);
+        return data;
     }
 
     public static void dataTableTraNoNhaCungCap(JTable table) {

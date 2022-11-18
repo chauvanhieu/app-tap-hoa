@@ -35,7 +35,6 @@ public class frmEditorNhaCungCap extends javax.swing.JDialog {
 
                 CTRLNhaCungCap.checkAdd(newNCC);
 
-//                setVisible(false);
             }
         });
     }

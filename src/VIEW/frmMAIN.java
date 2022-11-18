@@ -1,6 +1,7 @@
 package VIEW;
 
 import CLASS.donViTinh;
+import CLASS.hoaDonThuNo;
 import CLASS.khachHang;
 import CLASS.loaiSanPham;
 import CLASS.nhaCungCap;
@@ -111,7 +112,43 @@ public class frmMAIN extends javax.swing.JFrame {
     }
     
     public void loadTableThuNoKhachHang() {
-        MDCongNo.dataTableThuNoKhachHang(tableThuNoKhachHang);
+        DefaultTableModel model = (DefaultTableModel) tableThuNoKhachHang.getModel();
+        model.setRowCount(0);
+        ArrayList<hoaDonThuNo> data = MDCongNo.dataTableThuNoKhachHang();
+        for (hoaDonThuNo item : data) {
+            model.addRow(new Object[]{
+                item.getThoiGian(),
+                item.getNhanVien(),
+                item.getKhachHang(),
+                helper.SoString(item.getTongTien()),
+                item.getGhiChu()
+            });
+            
+        }
+        tableThuNoKhachHang.setModel(model);
+    }
+    
+    public void loadTableThuNoKhachHang(String keyword) {
+//        MDCongNo.dataTableThuNoKhachHang(tableThuNoKhachHang);
+
+        DefaultTableModel model = (DefaultTableModel) tableThuNoKhachHang.getModel();
+        model.setRowCount(0);
+        ArrayList<hoaDonThuNo> data = MDCongNo.dataTableThuNoKhachHang();
+        for (hoaDonThuNo item : data) {
+            String rs = item.getNhanVien() + " " + item.getKhachHang();
+            if (helper.removeAccent(rs.toLowerCase()).contains(helper.removeAccent(keyword.toLowerCase()))) {
+                
+                model.addRow(new Object[]{
+                    item.getThoiGian(),
+                    item.getNhanVien(),
+                    item.getKhachHang(),
+                    helper.SoString(item.getTongTien()),
+                    item.getGhiChu()
+                });
+            }
+            
+        }
+        tableThuNoKhachHang.setModel(model);
     }
     
     public void traHangNhaCungCap() {
@@ -4263,7 +4300,7 @@ public class frmMAIN extends javax.swing.JFrame {
     }//GEN-LAST:event_tableThuNoKhachHangMousePressed
 
     private void txtTimKiemThuNoKhachHangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemThuNoKhachHangKeyReleased
-        // TODO add your handling code here:
+        loadTableThuNoKhachHang(txtTimKiemThuNoKhachHang.getText().trim());
     }//GEN-LAST:event_txtTimKiemThuNoKhachHangKeyReleased
 
     private void btnTimKiemNhanVien1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemNhanVien1ActionPerformed

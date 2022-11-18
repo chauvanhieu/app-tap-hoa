@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package CONTROLLER;
 
 import CLASS.nhanVien;
@@ -15,98 +11,66 @@ import javax.swing.JOptionPane;
 public class CTRLNhanVien {
 
     public static void checkAdd(nhanVien nhanvien) {
-        boolean checkIdNhanVien = false;
         boolean checkName = false;
         boolean checkSoDienThoai = false;
         boolean checkDiaChi = false;
         boolean checkLuong = false;
 
-        if (nhanvien.getIdNhanVien().equals("")) {
-            JOptionPane.showMessageDialog(null, " Mã nhân viên không để trống", " lỗi", 1);
-            return;
-        } else {
-            checkIdNhanVien = true;
-        }
+        checkName = HELPER.helper.isFullname(nhanvien.getName());
 
-        if (nhanvien.getName().equals("")) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập tên nhà cung cấp !", " lỗi", 1);
-            return;
-        } else {
-            checkName = true;
-        }
-        if (HELPER.helper.isNumberPhone(nhanvien.getSoDienthoai()) == true && nhanvien.getSoDienthoai() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập số điện thoại", " lỗi", 1);
-            return;
-        } else {
-            checkSoDienThoai = true;
-        }
+        checkSoDienThoai = HELPER.helper.isNumberPhone(nhanvien.getSoDienthoai());
+
         if (nhanvien.getDiaChi().equals("")) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;
         } else {
             checkDiaChi = true;
         }
-        if (nhanvien.getLuong() <= 0) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập lương nhân viên !", " lỗi", 1);
+
+        if (nhanvien.getLuong() < 0) {
+            JOptionPane.showMessageDialog(null, "Công nợ không được âm !");
             return;
         } else {
             checkLuong = true;
         }
-        if (checkIdNhanVien == false || checkName == false
-                || checkDiaChi == false || checkSoDienThoai == false || checkLuong == false) {
-            return;
-        } else {
+        if (checkDiaChi == true && checkSoDienThoai == true && checkName == true && checkLuong == true) {
             MDNhanVien.add(nhanvien);
-            JOptionPane.showMessageDialog(null, "Thêm thành  thành công");
-
+            JOptionPane.showMessageDialog(null, "Thêm thành công !");
         }
     }
 
     public static void checkUpdate(nhanVien nhanvien) {
-        boolean checkIdNhanVien = false;
         boolean checkName = false;
         boolean checkSoDienThoai = false;
         boolean checkDiaChi = false;
         boolean checkLuong = false;
 
-        if (nhanvien.getIdNhanVien().equals("")) {
-            JOptionPane.showMessageDialog(null, " Mã nhân viên không để trống", " lỗi", 1);
+        checkName = HELPER.helper.isFullname(nhanvien.getName());
+        checkSoDienThoai = HELPER.helper.isNumberPhone(nhanvien.getSoDienthoai());
+        if (checkName == false) {
+            JOptionPane.showMessageDialog(null, "Tên nhân viên sai !");
             return;
-        } else {
-            checkIdNhanVien = true;
         }
-
-        if (nhanvien.getName().equals("")) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập tên nhà cung cấp !", " lỗi", 1);
+        if (checkSoDienThoai == false) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại sai !");
             return;
-        } else {
-            checkName = true;
-        }
-        if (HELPER.helper.isNumberPhone(nhanvien.getSoDienthoai()) == true && nhanvien.getSoDienthoai() == " ") {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập số điện thoại", " lỗi", 1);
-            return;
-        } else {
-            checkSoDienThoai = true;
         }
         if (nhanvien.getDiaChi().equals("")) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập thông tin địa chỉ !", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;
         } else {
             checkDiaChi = true;
         }
-        if (nhanvien.getLuong() <= 0) {
-            JOptionPane.showMessageDialog(null, " Vui lòng nhập lương nhân viên !", " lỗi", 1);
+
+        if (nhanvien.getLuong() < 0) {
+            JOptionPane.showMessageDialog(null, "Công nợ không được âm !");
             return;
         } else {
             checkLuong = true;
         }
-        if (checkIdNhanVien == false || checkName == false
-                || checkDiaChi == false || checkSoDienThoai == false || checkLuong == false) {
-            return;
-        } else {
+        if (checkDiaChi == true && checkSoDienThoai == true && checkName == true && checkLuong == true) {
             MDNhanVien.update(nhanvien);
-            JOptionPane.showMessageDialog(null, "Cập nhật thành  thành công");
-
+            JOptionPane.showMessageDialog(null, "cập nhật thành công !");
         }
     }
 }

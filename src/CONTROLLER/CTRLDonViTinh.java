@@ -15,27 +15,20 @@ import javax.swing.JOptionPane;
 public class CTRLDonViTinh {
 
     public static void checkAdd(donViTinh item) {
-        boolean checkName = false;
-        if (item.getName() == "") {
-            JOptionPane.showMessageDialog(null, " Tên đơn vị tính không được bỏ trống  ", " lỗi", 1);
-            return;
+        if (item.getName().equals("")) {
+            JOptionPane.showMessageDialog(null, "Tên đơn vị tính không được để trống !");
         } else {
-            checkName = true;
             MDDonViTinh.add(item);
-            JOptionPane.showMessageDialog(null, "Thêm thành công .");
+            JOptionPane.showMessageDialog(null, "Thêm thành công !");
         }
     }
 
     public static void checkUpdate(donViTinh item) {
-        boolean checkName = false;
-        if (!item.getName().equals("")) {
-            checkName = true;
-        }
-        if (checkName == true) {
-            MDDonViTinh.update(item);
-            JOptionPane.showMessageDialog(null, "Cập nhật thành công .");
+        if (item.getName().equals("")) {
+            JOptionPane.showMessageDialog(null, "Tên đơn vị tính không được để trống !");
         } else {
-            JOptionPane.showMessageDialog(null, "Chưa nhập tên đơn vị tính !");
+            MDDonViTinh.update(item);
+            JOptionPane.showMessageDialog(null, "Cập nhật thành công !");
         }
     }
 }

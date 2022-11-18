@@ -2,6 +2,8 @@ package MODEL;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 import src.CLASS.Account;
 
@@ -18,9 +20,9 @@ public class MDAccount {
             while (rs.next()) {
 
                 acc = new Account(
+                        rs.getString("idnhanvien"),
                         rs.getString("UserName"),
                         rs.getString("Password"),
-                        rs.getString("tenNhanVien"),
                         rs.getInt("trangThai") == 1 ? true : false,
                         rs.getInt("banhang") == 1 ? true : false,
                         rs.getInt("nhaphang") == 1 ? true : false,
@@ -148,7 +150,7 @@ public class MDAccount {
     }
 
     //Hàm xóa
-    public static void remove(String Username ) {
+    public static void remove(String Username) {
         // không xóa hoàn toản, đưa trạng thái về 0
         String sql = " Update Account set TrangThai = 0 Where Username = ?";
         HELPER.SQLhelper.executeUpdate(sql, Username);
@@ -156,10 +158,9 @@ public class MDAccount {
 
     //Hàm Update
     public static void updateAccount(Account acc) {
-        String sql = "UPDATE Account set Username = ?, Password = ?, TrangThai = ?, BanHang = ?, NhapHang = ?, TaiKhoan = ?, HangHoa = ?,"
-                + " NhanVien = ?, KhachHang = ?, NhaCungCap = ?, BaoCao = ?, PhieuChi = ? Where IDNhanVien = ?";
+        String sql = "UPDATE Account set  Password = ?, TrangThai = ?, BanHang = ?, NhapHang = ?, TaiKhoan = ?, HangHoa = ?,"
+                + " NhanVien = ?, KhachHang = ?, NhaCungCap = ?, BaoCao = ?, PhieuChi = ? Where username = ?";
         HELPER.SQLhelper.executeUpdate(sql,
-                acc.getUsername(),
                 acc.getPassword(),
                 acc.isTrangThai(),
                 acc.isBanHang(),
@@ -171,7 +172,7 @@ public class MDAccount {
                 acc.isNhaCungCap(),
                 acc.isBaoCao(),
                 acc.isPhieuChi(),
-                acc.getIdNhanVien());
+                acc.getUsername());
     }
 
     public static void reStore(String username) {
@@ -179,19 +180,16 @@ public class MDAccount {
         HELPER.SQLhelper.executeUpdate(sql, username);
     }
 
-    public static String createId() {
-        String id = "";
-        String sql = "select count(id) as 'count' from Account";
-        int count = 0;
-        try {
-            ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
-            while (rs.next()) {
-                count = rs.getInt("count");
-            }
-        } catch (Exception e) {
+    public static String createID() {
+        String id = "ACC";
+        String date = HELPER.helper.LayNgayString(new Date(), "ddMM");
+        Random r = new Random();
+        String alphabet = "1234567890";
+        String random = "";
+        for (int i = 0; i < 4; i++) {
+            random += r.nextInt(alphabet.length());
         }
-        id = "ACC0" + (++count);
-        return id;
+        return id + date + random;
     }
     //Không đùa được đâu :)))
 }

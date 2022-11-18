@@ -721,6 +721,8 @@ public class frmXemHoaDonTraHang extends javax.swing.JDialog {
         tableGioHang.setEnabled(mode);
         tableSanPham.setEnabled(mode);
         cbHinhThuc.setEnabled(mode);
+        tableSanPham.clearSelection();
+
     }
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         editMode(false);

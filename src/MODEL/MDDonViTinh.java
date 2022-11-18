@@ -7,6 +7,8 @@ package MODEL;
 import CLASS.donViTinh;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,19 +18,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MDDonViTinh {
 
-    public static String createId() {
-        String id = "";
-        String sql = "select count(id) as 'count' from donvitinh";
-        int count = 0;
-        try {
-            ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
-            while (rs.next()) {
-                count = rs.getInt("count");
-            }
-        } catch (Exception e) {
+    public static String createID() {
+        String id = "DVT";
+        String date = HELPER.helper.LayNgayString(new Date(), "ddMM");
+        Random r = new Random();
+        String alphabet = "1234567890";
+        String random = "";
+        for (int i = 0; i < 4; i++) {
+            random += r.nextInt(alphabet.length());
         }
-        id = "DVT0" + (++count);
-        return id;
+        return id + date + random;
     }
 
     public static void add(donViTinh item) {

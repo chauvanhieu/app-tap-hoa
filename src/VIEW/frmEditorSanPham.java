@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -146,7 +145,6 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 }
             });
 
-            // set actionlistener btn Lưu
             btnLuu.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -175,10 +173,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                             idLoaiSanPham,
                             ghiChu,
                             cbTrangThai.getSelectedIndex() == 0 ? true : false);
-//                    MDSanPham.update(spUpdate);
                     CTRLSanPham.checkUpdate(spUpdate);
-//                    JOptionPane.showMessageDialog(thisPanel, "Đã cập nhật sản phẩm");
-//                    thisPanel.setVisible(false);
                 }
             });
 
@@ -189,7 +184,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
             btnLuu.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String id = MDSanPham.createId();
+                    String id = MDSanPham.createID();
                     String name = txtTenSanPham.getText();
                     String barcode = txtBarcode.getText();
                     long giaNhap = HELPER.helper.SoLong(txtGiaNhap.getText());
@@ -214,12 +209,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                             idLoaiSanPham,
                             ghiChu,
                             true);
-                    try {
-                        MDSanPham.add(sp);
-                    } catch (IOException ex) {
-                        Logger.getLogger(frmEditorSanPham.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-//                    CTRLSanPham.checkAddSP(sp);
+                    CTRLSanPham.checkAddSP(sp);
                     JOptionPane.showMessageDialog(thisPanel, "Đã Thêm sản phẩm");
                     thisPanel.setVisible(false);
                 }
@@ -681,7 +671,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
 
             System.out.println(file.getPath());
 
-            hinhAnh = file.getPath();
+            this.hinhAnh = file.getPath();
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(file.getPath()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));
             lbHinhAnh.setIcon(imageIcon);
         }

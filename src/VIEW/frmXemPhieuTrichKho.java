@@ -181,6 +181,7 @@ public class frmXemPhieuTrichKho extends javax.swing.JDialog {
         btnLuu.setEnabled(mode);
         btnThemSanPham.setEnabled(mode);
         btnSua.setEnabled(!mode);
+        tableSanPham.clearSelection();
     }
 
     public void loadTableSanPhamKeyReleased(String keyword) {

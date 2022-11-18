@@ -4,6 +4,8 @@ import CLASS.sanPham;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class MDSanPham {
 
@@ -11,12 +13,12 @@ public class MDSanPham {
         String sql = "insert into sanpham(id,name,barcode,giaBan,giasi,hinhAnh,idnhacungcap,idloaisanpham,iddonvitinh,soluong,soluongtoithieu,trangthai,ghichu) "
                 + " values(?,?,?,?,?,?,?,?,?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql,
-                createId(),
+                createID(),
                 ten,
                 barcode,
                 giaBan,
                 0,
-                "empty.png",
+                "",
                 "01",
                 "01",
                 "01",
@@ -151,7 +153,7 @@ public class MDSanPham {
         return item;
     }
 
-    public static void add(sanPham item) throws IOException {
+    public static void add(sanPham item) {
         String sql = "insert into SanPham values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         HELPER.SQLhelper.executeUpdate(sql,
                 item.getIdSanPham(),
@@ -203,19 +205,16 @@ public class MDSanPham {
     }
 
     //hàm auto create ID cho Sanr Phaamr
-    public static String createId() {
-        String id = "";
-        String sql = "select count(id) as 'count' from SanPham";
-        int count = 0;
-        try {
-            ResultSet rs = HELPER.SQLhelper.executeQuery(sql);
-            while (rs.next()) {
-                count = rs.getInt("count");
-            }
-        } catch (Exception e) {
+    public static String createID() {
+        String id = "PRD";
+        String date = HELPER.helper.LayNgayString(new Date(), "ddMM");
+        Random r = new Random();
+        String alphabet = "1234567890";
+        String random = "";
+        for (int i = 0; i < 4; i++) {
+            random += r.nextInt(alphabet.length());
         }
-        id = "SP0" + (++count);
-        return id;
+        return id + date + random;
     }
 
     public static ArrayList<sanPham> getSPsapHetHang() {

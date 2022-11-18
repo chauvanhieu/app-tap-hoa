@@ -55,7 +55,7 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         
         helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
         
-        txtID.setText(MDKhachHang.createId());
+        txtID.setText(MDKhachHang.createID());
         btnSua.setEnabled(false);
         
         btnLuu.addActionListener(new ActionListener() {

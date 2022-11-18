@@ -14,7 +14,7 @@ import MODEL.MDKhachHang;
  */
 public class frmThemNhanhKhachHang extends javax.swing.JDialog {
 
-    public static String idKH = MDKhachHang.createId();
+    public static String idKH = MDKhachHang.createID();
 
     public frmThemNhanhKhachHang(java.awt.Frame parent, boolean modal, String idKhachHang) {
         super(parent, modal);

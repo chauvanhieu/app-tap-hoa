@@ -91,6 +91,8 @@ public class frmXemHoaDonNhapHang extends javax.swing.JDialog {
         btnEnter.setEnabled(mode);
         btnLuu.setEnabled(mode);
         btnSua.setEnabled(!mode);
+        tableSanPham.clearSelection();
+
     }
 
     public void loadGioHang(ArrayList<chiTietHoaDon> data) {

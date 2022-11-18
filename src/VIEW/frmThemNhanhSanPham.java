@@ -1,12 +1,8 @@
 package VIEW;
 
 import CLASS.sanPham;
-import CONTROLLER.CTRLSanPham;
 import MODEL.MDSanPham;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
@@ -179,7 +175,7 @@ public class frmThemNhanhSanPham extends javax.swing.JDialog {
         String barcode = txtBarcode.getText();
         long giaBan = HELPER.helper.SoLong(txtGiaBan.getText());
         sanPham sp = new sanPham(
-                MDSanPham.createId(),
+                MDSanPham.createID(),
                 ten,
                 barcode,
                 getClass().getResource("/IMAGE/empty.png").toString(),
@@ -194,11 +190,9 @@ public class frmThemNhanhSanPham extends javax.swing.JDialog {
                 "",
                 true
         );
-        try {
-            MDSanPham.add(sp);
-        } catch (IOException ex) {
-            Logger.getLogger(frmThemNhanhSanPham.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        MDSanPham.add(sp);
+
         JOptionPane.showMessageDialog(this, "Thêm thành công !");
         this.setVisible(false);
 

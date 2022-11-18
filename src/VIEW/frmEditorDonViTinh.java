@@ -131,10 +131,10 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
         String moTa = txtMoTa.getText();
         if (option == "add") {
 
-            donViTinh item = new donViTinh(MDDonViTinh.createId(), name, moTa, true);
+            donViTinh item = new donViTinh(MDDonViTinh.createID(), name, moTa, true);
             CTRLDonViTinh.checkAdd(item);
         } else {
-            donViTinh item = new donViTinh(MDDonViTinh.createId(), name, moTa, true);
+            donViTinh item = new donViTinh(MDDonViTinh.createID(), name, moTa, true);
             CTRLDonViTinh.checkUpdate(item);
         }
     }//GEN-LAST:event_btnLuuActionPerformed

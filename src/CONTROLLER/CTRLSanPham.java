@@ -20,160 +20,97 @@ public class CTRLSanPham {
         return check;
     }
 
-    public static void checkAddSP(sanPham sp) throws IOException {
-        boolean checkName = false;
-        boolean checkGiaNhap = false;
-        boolean checkGiaBan = false;
-        boolean checkGiaSi = false;
-        boolean checkSoLuong = false;
-        boolean checkSoLuongToiThieu = false;
-        boolean checkIDNCC = false;
-        boolean checkIDDVT = false;
-        boolean checkLoaiSP = false;
+    public static void checkAddSP(sanPham sp) {
+//        boolean checkName = false;
+//        boolean checkGiaNhap = false;
+//        boolean checkGiaBan = false;
+//        boolean checkGiaSi = false;
+//        boolean checkSoLuong = false;
 //        boolean checkIDNCC = false;
+//        boolean checkIDDVT = false;
+//        boolean checkLoaiSP = false;
+
         if (sp.getName().equals("")) {
-            JOptionPane.showMessageDialog(null, " Tên không để trống .", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Tên sản phẩm không được để trống !");
             return;
-        } else {
-            checkName = true;
-        }
-        if (sp.getGiaBan() < 0 && sp.getGiaBan() < sp.getGiaNhap()) {
-            JOptionPane.showMessageDialog(null, "Giá nhập không được hơn giá bán và phải lớn hơn 0", " lỗi", 1);
-            return;
-        } else {
-            checkGiaBan = true;
-        }
-        if (sp.getGiaNhap() < 0 && sp.getGiaBan() < sp.getGiaNhap()) {
-            JOptionPane.showMessageDialog(null, "Giá nhập không được hơn giá bán và phải lớn hơn 0", " lỗi", 1);
-            return;
-        } else {
-            checkGiaBan = true;
         }
 
         if (sp.getIdDonViTinh().equals("")) {
-            JOptionPane.showMessageDialog(null, " Đơn vị tính không để trống", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Chưa chọn đơn vị tính !");
             return;
-        } else {
-            checkIDDVT = true;
         }
 
         if (sp.getIdLoaiSanPham().equals("")) {
-            JOptionPane.showMessageDialog(null, " Loại sản phẩm không để trống", " lỗi", 1);
-
+            JOptionPane.showMessageDialog(null, "Chưa chọn loại sản phẩm !");
             return;
-        } else {
-            checkLoaiSP = true;
         }
 
         if (sp.getIdNhaCungCap().equals("")) {
-            JOptionPane.showMessageDialog(null, " Nhà cung cấp ko để trống", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Chưa chọn nhà cung cấp !");
             return;
-        } else {
-            checkIDNCC = true;
         }
-        if (sp.getSoLuong() <= 0 && sp.getSoLuong() > sp.getSoLuongToiThieu()) {
-            JOptionPane.showMessageDialog(null, " Số lượng không lớn hơn số lượng tối thiểu", " lỗi", 1);
-
+        if (sp.getSoLuong() < 0) {
+            JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0 !");
             return;
-        } else {
-            checkIDDVT = true;
-        }
-        if (sp.getSoLuongToiThieu() <= 0 && sp.getSoLuongToiThieu() < sp.getSoLuong()) {
-            JOptionPane.showMessageDialog(null, " Số lượng tối thiểu ko nhỏ hơn số lượng", " lỗi", 1);
-            return;
-        } else {
-            checkSoLuongToiThieu = true;
         }
 
-        if (checkName == true && checkGiaBan == true && checkGiaNhap == true && checkGiaSi == true
-                && checkSoLuong == true && checkSoLuongToiThieu == true && checkLoaiSP == true && checkIDDVT == true
-                && checkIDNCC == true) {
-            MDSanPham.add(sp);
-            JOptionPane.showMessageDialog(null, "Thêm thành công");
+        if (sp.getGiaBan() < 0) {
+            JOptionPane.showMessageDialog(null, "Giá bán phải lớn hơn 0 !");
+            return;
         }
+        if (sp.getGiaNhap() < 0) {
+            JOptionPane.showMessageDialog(null, "Giá nhập phải lớn hơn 0 !");
+            return;
+        }
+        if (sp.getGiaSi() < 0) {
+            JOptionPane.showMessageDialog(null, "Giá sĩ phải lớn hơn 0 !");
+            return;
+        }
+
+        MDSanPham.add(sp);
+        JOptionPane.showMessageDialog(null, "Thêm thành công !");
     }
 
-    public static void checkUpdate(sanPham sp)  {
-        boolean checkName = false;
-        boolean checkGiaNhap = false;
-        boolean checkGiaBan = false;
-        boolean checkGiaSi = false;
-        boolean checkSoLuong = false;
-        boolean checkSoLuongToiThieu = false;
-        boolean checkIDNCC = false;
-        boolean checkIDDVT = false;
-        boolean checkLoaiSP = false;
-
+    public static void checkUpdate(sanPham sp) {
         if (sp.getName().equals("")) {
-            JOptionPane.showMessageDialog(null, " Tên không để trống", " lỗi", 1);
+            JOptionPane.showMessageDialog(null, "Tên sản phẩm không được để trống !");
             return;
-        } else {
-            checkName = true;
-        }
-        if (sp.getGiaBan() < 0 && sp.getGiaBan() < sp.getGiaNhap()) {
-            JOptionPane.showMessageDialog(null, "Giá nhập không được hơn giá bán và phải lớn hơn 0", " lỗi", 1);
-
-            return;
-        } else {
-            checkGiaBan = true;
-
-        }
-        if (sp.getGiaNhap() < 0 && sp.getGiaBan() < sp.getGiaNhap()) {
-            JOptionPane.showMessageDialog(null, "Giá nhập không được hơn giá bán và phải lớn hơn 0", " lỗi", 1);
-
-            return;
-        } else {
-            checkGiaBan = true;
-
         }
 
         if (sp.getIdDonViTinh().equals("")) {
-            JOptionPane.showMessageDialog(null, " Đơn vị tính không để trống", " lỗi", 1);
-
+            JOptionPane.showMessageDialog(null, "Chưa chọn đơn vị tính !");
             return;
-        } else {
-            checkIDDVT = true;
         }
 
         if (sp.getIdLoaiSanPham().equals("")) {
-            JOptionPane.showMessageDialog(null, " Loại sản phẩm không để trống", " lỗi", 1);
-
+            JOptionPane.showMessageDialog(null, "Chưa chọn loại sản phẩm !");
             return;
-        } else {
-            checkLoaiSP = true;
         }
 
         if (sp.getIdNhaCungCap().equals("")) {
-            JOptionPane.showMessageDialog(null, " Nhà cung cấp không để trống", " lỗi", 1);
-
+            JOptionPane.showMessageDialog(null, "Chưa chọn nhà cung cấp !");
             return;
-        } else {
-            checkIDNCC = true;
         }
-        if (sp.getSoLuong() <= 0 && sp.getSoLuong() > sp.getSoLuongToiThieu()) {
-            JOptionPane.showMessageDialog(null, " Số lượng không lớn hơn số lượng tối thiểu", " lỗi", 1);
-
-            return;
-        } else {
-            checkIDDVT = true;
-        }
-        if (sp.getSoLuongToiThieu() <= 0 && sp.getSoLuongToiThieu() < sp.getSoLuong()) {
-            JOptionPane.showMessageDialog(null, " Số lượng tối thiểu không nhỏ hơn số lượng", " lỗi", 1);
-
-            return;
-        } else {
-            checkSoLuongToiThieu = true;
-        }
-
-        if (checkName == true && checkGiaBan == true && checkGiaNhap == true && checkGiaSi == true
-                && checkSoLuong == true && checkSoLuongToiThieu == true && checkLoaiSP == true && checkIDDVT == true
-                && checkIDNCC == true) {
-            MDSanPham.update(sp);
-            JOptionPane.showMessageDialog(null, "Cập nhật thành công");
-        } else {
+        if (sp.getSoLuong() < 0) {
+            JOptionPane.showMessageDialog(null, "Số lượng phải lớn hơn 0 !");
             return;
         }
 
+        if (sp.getGiaBan() < 0) {
+            JOptionPane.showMessageDialog(null, "Giá bán phải lớn hơn 0 !");
+            return;
+        }
+        if (sp.getGiaNhap() < 0) {
+            JOptionPane.showMessageDialog(null, "Giá nhập phải lớn hơn 0 !");
+            return;
+        }
+        if (sp.getGiaSi() < 0) {
+            JOptionPane.showMessageDialog(null, "Giá sĩ phải lớn hơn 0 !");
+            return;
+        }
+
+        MDSanPham.update(sp);
+        JOptionPane.showMessageDialog(null, "Cập nhật thành công !");
     }
 
 }

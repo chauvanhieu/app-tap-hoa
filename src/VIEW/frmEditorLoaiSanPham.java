@@ -146,10 +146,10 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
         String name = txtName.getText();
         String moTa = txtMoTa.getText();
         if (option == "add") {
-            loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createId(), name, moTa, true);
+            loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createID(), name, moTa, true);
             CTRLLoaiSanPham.checkAdd(item);
         } else {
-            loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createId(), name, moTa, true);
+            loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createID(), name, moTa, true);
             CTRLLoaiSanPham.checkUpdate(item);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
