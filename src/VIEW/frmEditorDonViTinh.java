@@ -15,7 +15,7 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
         initComponents();
         if (option == "add") {
             lb.setVisible(false);
-            cbboc.setVisible(false);
+            cbTrangThai.setVisible(false);
         } else {
             loadThongTin();
         }
@@ -25,7 +25,7 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
         donViTinh dvt = MDDonViTinh.getDonViTinh(option);
         txtName.setText(dvt.getName());
         txtMoTa.setText(dvt.getGhiChu());
-        cbboc.setSelectedIndex(dvt.isTrangThai() == true ? 0 : 1);
+        cbTrangThai.setSelectedIndex(dvt.isTrangThai() == true ? 0 : 1);
     }
 
     @SuppressWarnings("unchecked")
@@ -40,7 +40,7 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
         txtMoTa = new javax.swing.JTextField();
         btnLuu = new javax.swing.JButton();
         lb = new javax.swing.JLabel();
-        cbboc = new javax.swing.JComboBox<>();
+        cbTrangThai = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -68,8 +68,8 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
         lb.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lb.setText("Trạng thái :");
 
-        cbboc.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cbboc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang sử dụng", "Ngưng sử dụng" }));
+        cbTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang sử dụng", "Ngưng sử dụng" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,7 +93,7 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
                             .addComponent(txtMoTa, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                             .addComponent(txtName)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbboc, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 40, Short.MAX_VALUE)))
@@ -117,7 +117,7 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbboc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
@@ -130,11 +130,10 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
         String name = txtName.getText();
         String moTa = txtMoTa.getText();
         if (option == "add") {
-
             donViTinh item = new donViTinh(MDDonViTinh.createID(), name, moTa, true);
             CTRLDonViTinh.checkAdd(item);
         } else {
-            donViTinh item = new donViTinh(option, name, moTa, true);
+            donViTinh item = new donViTinh(option, name, moTa, cbTrangThai.getSelectedIndex() == 0 ? true : false);
             CTRLDonViTinh.checkUpdate(item);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
@@ -183,7 +182,7 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
-    private javax.swing.JComboBox<String> cbboc;
+    private javax.swing.JComboBox<String> cbTrangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -9,10 +9,10 @@ import javax.swing.border.LineBorder;
 import src.CLASS.Account;
 
 public class frmDoiMatKhau extends javax.swing.JDialog {
-
+    
     public static Account acc;
     public static nhanVien nv;
-
+    
     public frmDoiMatKhau(java.awt.Frame parent, boolean modal, Account account) {
         super(parent, modal);
         this.acc = account;
@@ -26,7 +26,7 @@ public class frmDoiMatKhau extends javax.swing.JDialog {
         lbDiaChi.setText(nv.getDiaChi());
         txtUsername.setText(acc.getUsername());
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -226,14 +226,22 @@ public class frmDoiMatKhau extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String pass = new String(txtPassMoi.getPassword());
+        String passCu = new String(txtPassCu.getPassword());
         String confirmPass = new String(txtNhapLaiPassMoi.getPassword());
-        if (pass.equals(confirmPass)) {
-            acc.setPassword(pass);
+        if (acc.getPassword().equals(passCu.trim())) {
+            if (pass.equals(confirmPass)) {
+                acc.setPassword(pass);
+                CTRLAccount.checkUpdate(acc);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại chưa trùng khớp.");
+                return;
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại chưa trùng khớp.");
+            JOptionPane.showMessageDialog(this, "Mật khẩu cũ chưa chính sác !");
             return;
         }
-        CTRLAccount.checkUpdate(acc);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtPassCuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassCuKeyReleased
@@ -243,7 +251,7 @@ public class frmDoiMatKhau extends javax.swing.JDialog {
             txtPassCu.setBorder(new LineBorder(Color.red, 1));
         }
     }//GEN-LAST:event_txtPassCuKeyReleased
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

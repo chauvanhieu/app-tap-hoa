@@ -28,7 +28,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
         initComponents();
         if (option == "add") {
             lb.setVisible(false);
-            cbboc.setVisible(false);
+            cbTrangThai.setVisible(false);
         } else {
             loadThongTin();
         }
@@ -38,7 +38,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
         loaiSanPham lsp = MDLoaiSanPham.getLoaiSanPham(option);
         txtName.setText(lsp.getName());
         txtMoTa.setText(lsp.getGhiChu());
-        cbboc.setSelectedIndex(lsp.isTrangThai() == true ? 0 : 1);
+        cbTrangThai.setSelectedIndex(lsp.isTrangThai() == true ? 0 : 1);
     }
 
     /**
@@ -57,7 +57,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txtMoTa = new javax.swing.JTextField();
         btnLuu = new javax.swing.JButton();
-        cbboc = new javax.swing.JComboBox<>();
+        cbTrangThai = new javax.swing.JComboBox<>();
         lb = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -83,8 +83,8 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
             }
         });
 
-        cbboc.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cbboc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang sử dụng", "Ngưng sử dụng" }));
+        cbTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        cbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang sử dụng", "Ngưng sử dụng" }));
 
         lb.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lb.setText("Trạng thái :");
@@ -102,7 +102,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbboc, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtMoTa, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
@@ -133,7 +133,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbboc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -149,7 +149,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
             loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createID(), name, moTa, true);
             CTRLLoaiSanPham.checkAdd(item);
         } else {
-            loaiSanPham item = new loaiSanPham(option, name, moTa, true);
+            loaiSanPham item = new loaiSanPham(option, name, moTa, cbTrangThai.getSelectedIndex() == 0 ? true : false);
             CTRLLoaiSanPham.checkUpdate(item);
         }
     }//GEN-LAST:event_btnLuuActionPerformed
@@ -199,7 +199,7 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLuu;
-    private javax.swing.JComboBox<String> cbboc;
+    private javax.swing.JComboBox<String> cbTrangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -34,7 +34,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="cbboc" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="cbTrangThai" min="-2" pref="183" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnLuu" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
@@ -73,7 +73,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="btnLuu" alignment="2" min="-2" pref="51" max="-2" attributes="0"/>
-                  <Component id="cbboc" alignment="2" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="cbTrangThai" alignment="2" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="lb" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="38" max="32767" attributes="0"/>
@@ -130,7 +130,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLuuActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbboc">
+    <Component class="javax.swing.JComboBox" name="cbTrangThai">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="16" style="0"/>

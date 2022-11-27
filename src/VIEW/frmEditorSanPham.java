@@ -30,7 +30,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -57,7 +56,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         initComponents();
         loadComboBox();
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("/IMAGE/empty.png")).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_SMOOTH));
-        hinhAnh = getClass().getResource("/IMAGE/empty.png").toString().substring(6);
+        hinhAnh = getClass().getResource("/IMAGE/empty.png").toString().replaceAll("jar:file:/", "");
         lbHinhAnh.setIcon(imageIcon);
         if (this.option != "add") {
             loadThongTinSanPham(this.option);
@@ -667,7 +666,6 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         if (rVal == JFileChooser.APPROVE_OPTION) {
 
             File file = new File(chooser.getSelectedFile().getAbsolutePath());
-
 
             this.hinhAnh = file.getPath();
             ImageIcon imageIcon = new ImageIcon(new ImageIcon(file.getPath()).getImage().getScaledInstance(lbHinhAnh.getWidth(), lbHinhAnh.getHeight(), Image.SCALE_DEFAULT));

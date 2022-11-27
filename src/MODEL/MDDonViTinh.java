@@ -28,7 +28,7 @@ public class MDDonViTinh {
     }
 
     public static void remove(String id) {
-        String sql = "update donvitinh set trangthai=0 where id=?";
+        String sql = "update donvitinh set trangthai = 0 where id=?";
         HELPER.SQLhelper.executeUpdate(sql, id);
     }
 
@@ -39,7 +39,11 @@ public class MDDonViTinh {
 
     public static void update(donViTinh item) {
         String sql = "update donvitinh set name=?,ghichu=?,trangthai=? where id=?";
-        HELPER.SQLhelper.executeUpdate(sql, item.getName(), item.getGhiChu(), item.isTrangThai() == true ? 1 : 0, item.getIdDonViTinh());
+        HELPER.SQLhelper.executeUpdate(sql,
+                item.getName(),
+                item.getGhiChu(),
+                item.isTrangThai() == true ? 1 : 0,
+                item.getIdDonViTinh());
     }
 
     public static donViTinh getDonViTinh(String id) {
