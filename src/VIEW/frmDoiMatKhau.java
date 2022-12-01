@@ -9,10 +9,10 @@ import javax.swing.border.LineBorder;
 import src.CLASS.Account;
 
 public class frmDoiMatKhau extends javax.swing.JDialog {
-    
+
     public static Account acc;
     public static nhanVien nv;
-    
+
     public frmDoiMatKhau(java.awt.Frame parent, boolean modal, Account account) {
         super(parent, modal);
         this.acc = account;
@@ -26,7 +26,7 @@ public class frmDoiMatKhau extends javax.swing.JDialog {
         lbDiaChi.setText(nv.getDiaChi());
         txtUsername.setText(acc.getUsername());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -225,9 +225,9 @@ public class frmDoiMatKhau extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String pass = new String(txtPassMoi.getPassword());
-        String passCu = new String(txtPassCu.getPassword());
-        String confirmPass = new String(txtNhapLaiPassMoi.getPassword());
+        String pass = new String(txtPassMoi.getPassword()).trim();
+        String passCu = new String(txtPassCu.getPassword()).trim();
+        String confirmPass = new String(txtNhapLaiPassMoi.getPassword()).trim();
         if (acc.getPassword().equals(passCu.trim())) {
             if (pass.equals(confirmPass)) {
                 acc.setPassword(pass);
@@ -251,7 +251,7 @@ public class frmDoiMatKhau extends javax.swing.JDialog {
             txtPassCu.setBorder(new LineBorder(Color.red, 1));
         }
     }//GEN-LAST:event_txtPassCuKeyReleased
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

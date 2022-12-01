@@ -143,8 +143,8 @@ public class frmEditorLoaiSanPham extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        String name = txtName.getText();
-        String moTa = txtMoTa.getText();
+        String name = txtName.getText().trim();
+        String moTa = txtMoTa.getText().trim();
         if (option == "add") {
             loaiSanPham item = new loaiSanPham(MDLoaiSanPham.createID(), name, moTa, true);
             CTRLLoaiSanPham.checkAdd(item);

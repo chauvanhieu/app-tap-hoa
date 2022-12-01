@@ -148,14 +148,14 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String id = option;
-                    String name = txtTenSanPham.getText();
-                    String barcode = txtBarcode.getText();
+                    String name = txtTenSanPham.getText().trim();
+                    String barcode = txtBarcode.getText().trim();
                     long giaNhap = HELPER.helper.SoLong(txtGiaNhap.getText());
                     long giaBan = HELPER.helper.SoLong(txtGiaBan.getText());
                     long giaSi = HELPER.helper.SoLong(txtGiaSi.getText());
                     int soLuong = Integer.parseInt(txtSoLuong.getValue() + "");
                     int soLuongToiThieu = Integer.parseInt(txtSoLuongToiThieu.getValue() + "");
-                    String ghiChu = txtGhiChu.getText();
+                    String ghiChu = txtGhiChu.getText().trim();
 
                     sanPham spUpdate = new sanPham(
                             id,
@@ -184,14 +184,14 @@ public class frmEditorSanPham extends javax.swing.JDialog {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String id = MDSanPham.createID();
-                    String name = txtTenSanPham.getText();
-                    String barcode = txtBarcode.getText();
+                    String name = txtTenSanPham.getText().trim();
+                    String barcode = txtBarcode.getText().trim();
                     long giaNhap = HELPER.helper.SoLong(txtGiaNhap.getText());
                     long giaBan = HELPER.helper.SoLong(txtGiaBan.getText());
                     long giaSi = HELPER.helper.SoLong(txtGiaSi.getText());
                     int soLuong = Integer.parseInt(txtSoLuong.getValue() + "");
                     int soLuongToiThieu = Integer.parseInt(txtSoLuongToiThieu.getValue() + "");
-                    String ghiChu = txtGhiChu.getText();
+                    String ghiChu = txtGhiChu.getText().trim();
 
                     sanPham sp = new sanPham(
                             id,

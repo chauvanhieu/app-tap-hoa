@@ -21,14 +21,6 @@ public class CTRLSanPham {
     }
 
     public static void checkAddSP(sanPham sp) {
-//        boolean checkName = false;
-//        boolean checkGiaNhap = false;
-//        boolean checkGiaBan = false;
-//        boolean checkGiaSi = false;
-//        boolean checkSoLuong = false;
-//        boolean checkIDNCC = false;
-//        boolean checkIDDVT = false;
-//        boolean checkLoaiSP = false;
 
         if (sp.getName().equals("")) {
             JOptionPane.showMessageDialog(null, "Tên sản phẩm không được để trống !");

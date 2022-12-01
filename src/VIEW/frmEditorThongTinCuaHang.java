@@ -218,7 +218,6 @@ public class frmEditorThongTinCuaHang extends javax.swing.JDialog {
         txtSoDienThoai.setFocusable(mode);
         txtFooter.setFocusable(mode);
         txtEmail.setFocusable(mode);
-
         btnSua.setEnabled(!mode);
         btnLuu.setEnabled(mode);
     }

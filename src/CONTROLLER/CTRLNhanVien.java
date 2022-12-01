@@ -17,9 +17,24 @@ public class CTRLNhanVien {
         boolean checkLuong = false;
 
         checkName = HELPER.helper.isFullname(nhanvien.getName());
-
         checkSoDienThoai = HELPER.helper.isNumberPhone(nhanvien.getSoDienthoai());
+        if (checkName == false) {
+            JOptionPane.showMessageDialog(null, "Tên nhân viên sai !");
+            return;
+        }
+        if (checkSoDienThoai == false) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại sai !");
+            return;
+        }
+        if (checkName == false) {
+            JOptionPane.showMessageDialog(null, "Tên không đúng !");
+            return;
+        }
 
+        if (checkSoDienThoai == false) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không đúng !");
+            return;
+        }
         if (nhanvien.getDiaChi().equals("")) {
             JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;

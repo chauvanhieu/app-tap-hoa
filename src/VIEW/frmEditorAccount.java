@@ -364,8 +364,8 @@ public class frmEditorAccount extends javax.swing.JDialog {
             }
             Account acc = new Account(
                     idNhanVien,
-                    txtUsername.getText(),
-                    new String(txtPassword.getPassword()),
+                    txtUsername.getText().trim(),
+                    new String(txtPassword.getPassword()).trim(),
                     cbTrangThai.getSelectedIndex() == 0 ? true : false,
                     checkboxBanHang.isSelected(),
                     checkboxNhapHang.isSelected(),

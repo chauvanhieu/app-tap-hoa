@@ -70,10 +70,10 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
 
     public void themNhanVien() {
         String id = txtIDNhanVien.getText();
-        String name = txtTenNhanVien.getText();
-        String soDienThoai = txtSoDienThoai.getText();
-        String diaChi = txtDiaChi.getText();
-        String ghiChu = txtGhiChu.getText();
+        String name = txtTenNhanVien.getText().trim();
+        String soDienThoai = txtSoDienThoai.getText().trim();
+        String diaChi = txtDiaChi.getText().trim();
+        String ghiChu = txtGhiChu.getText().trim();
         String ngaySinh = HELPER.helper.LayNgayString(dateNgaySinh.getDate(), "yyyy-MM-dd");
         String ngayVaoLam = HELPER.helper.LayNgayString(dateNgayVaoLam.getDate(), "yyyy-MM-dd");
         boolean gioiTinh;
@@ -95,10 +95,10 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
 
     public void suaNhanVien() {
         String id = txtIDNhanVien.getText();
-        String name = txtTenNhanVien.getText();
-        String soDienThoai = txtSoDienThoai.getText();
-        String diaChi = txtDiaChi.getText();
-        String ghiChu = txtGhiChu.getText();
+        String name = txtTenNhanVien.getText().trim();
+        String soDienThoai = txtSoDienThoai.getText().trim();
+        String diaChi = txtDiaChi.getText().trim();
+        String ghiChu = txtGhiChu.getText().trim();
         String ngaySinh = HELPER.helper.LayNgayString(dateNgaySinh.getDate(), "yyyy-MM-dd");
         String ngayVaoLam = HELPER.helper.LayNgayString(dateNgayVaoLam.getDate(), "yyyy-MM-dd");
         boolean gioiTinh;

@@ -8,15 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class frmEditorNhaCungCap extends javax.swing.JDialog {
-
+    
     private nhaCungCap ncc;
     public static String id = "";
-
+    
     public frmEditorNhaCungCap(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         HELPER.helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
-
+        
         btnSua.setEnabled(false);
         txtID.setText(MDNhaCungCap.createId());
         txtCongNo.setText("0");
@@ -32,23 +32,23 @@ public class frmEditorNhaCungCap extends javax.swing.JDialog {
                 long congNo = HELPER.helper.SoLong(txtCongNo.getText().trim());
                 boolean trangthai = cbTrangThai.getSelectedIndex() == 0 ? true : false;
                 nhaCungCap newNCC = new nhaCungCap(idMoi, name, sdt, diaChi, ghiChu, congNo, trangthai);
-
+                
                 CTRLNhaCungCap.checkAdd(newNCC);
-
+                
             }
         });
     }
-
+    
     public frmEditorNhaCungCap(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         this.id = id;
         this.ncc = MDNhaCungCap.getNhaCungCap(id);
-
+        
         initComponents();
         HELPER.helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
         loadDuLieu();
         editMode(false);
-
+        
         btnLuu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,14 +62,14 @@ public class frmEditorNhaCungCap extends javax.swing.JDialog {
                 long congNo = HELPER.helper.SoLong(txtCongNo.getText().trim());
                 boolean trangthai = cbTrangThai.getSelectedIndex() == 0 ? true : false;
                 nhaCungCap newNCC = new nhaCungCap(idMoi, name, sdt, diaChi, ghiChu, congNo, trangthai);
-
+                
                 CTRLNhaCungCap.checkUpdate(newNCC);
-
+                
                 editMode(false);
             }
         });
     }
-
+    
     public void editMode(boolean mode) {
         txtID.setEnabled(mode);
         txtName.setEnabled(mode);
@@ -80,9 +80,9 @@ public class frmEditorNhaCungCap extends javax.swing.JDialog {
         cbTrangThai.setEnabled(mode);
         btnLuu.setEnabled(mode);
         btnSua.setEnabled(!mode);
-
+        
     }
-
+    
     public void loadDuLieu() {
         txtID.setText(ncc.getIdNhaCungCap());
         txtName.setText(ncc.getName());
@@ -94,10 +94,10 @@ public class frmEditorNhaCungCap extends javax.swing.JDialog {
         if (ncc.isTrangThai() == false) {
             cbTrangThai.setSelectedIndex(1);
         }
-
+        
         MDNhapHang.showHoaDonNhapHangTheoNhaCungCap(tableDanhSachHoaDonBanHang, id);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -364,10 +364,13 @@ public class frmEditorNhaCungCap extends javax.swing.JDialog {
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMouseClicked
 
     private void tableDanhSachHoaDonBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangMousePressed
-
+        if (evt.getClickCount() == 2 && tableDanhSachHoaDonBanHang.getSelectedRows().length == 1) {
+            new frmXemHoaDonNhapHang(null, true, tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "").setVisible(true);
+            this.setVisible(false);
+        }
 
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMousePressed
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

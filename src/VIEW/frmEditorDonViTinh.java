@@ -127,8 +127,8 @@ public class frmEditorDonViTinh extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        String name = txtName.getText();
-        String moTa = txtMoTa.getText();
+        String name = txtName.getText().trim();
+        String moTa = txtMoTa.getText().trim();
         if (option == "add") {
             donViTinh item = new donViTinh(MDDonViTinh.createID(), name, moTa, true);
             CTRLDonViTinh.checkAdd(item);
