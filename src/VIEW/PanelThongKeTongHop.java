@@ -31,8 +31,8 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         hienThiSanPhamSapHetHang();
         loadDuLieu();
         MDHoaDon.showHoaDonTrongNgay(tableHoaDonTrongNgay);
-        MDHoaDon.showDoanhThuTrongNgay(tableDoanhThuLoiNhuan);
-        HELPER.helper.setTableTextCenterFullColumn(tableDoanhThuLoiNhuan);
+        MDHoaDon.showCongNoKhachHang(tableCongNoKhachHang);
+        HELPER.helper.setTableTextCenterFullColumn(tableCongNoKhachHang);
     }
 
     @SuppressWarnings("unchecked")
@@ -65,7 +65,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableDoanhThuLoiNhuan = new javax.swing.JTable();
+        tableCongNoKhachHang = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setRequestFocusEnabled(false);
@@ -351,7 +351,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 153, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("DOANH THU LỢI NHUẬN TRONG NGÀY");
+        jLabel9.setText("CÔNG NỢ KHÁCH HÀNG CHƯA THU HỒI");
 
         tableSanPhamSapHetHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableSanPhamSapHetHang.setModel(new javax.swing.table.DefaultTableModel(
@@ -393,38 +393,38 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("SẢN PHẨM SẮP HẾT HÀNG");
 
-        tableDoanhThuLoiNhuan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tableDoanhThuLoiNhuan.setModel(new javax.swing.table.DefaultTableModel(
+        tableCongNoKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tableCongNoKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Sản phẩm", "Giá", "Số lượng", "Thời gian", "Doanh thu", "Lợi nhuận"
+                "Tên khách hàng", "Số điện thoại", "Địa chỉ", "Công nợ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tableDoanhThuLoiNhuan.setFocusable(false);
-        tableDoanhThuLoiNhuan.setRowHeight(35);
-        tableDoanhThuLoiNhuan.setRowMargin(3);
-        tableDoanhThuLoiNhuan.addFocusListener(new java.awt.event.FocusAdapter() {
+        tableCongNoKhachHang.setFocusable(false);
+        tableCongNoKhachHang.setRowHeight(35);
+        tableCongNoKhachHang.setRowMargin(3);
+        tableCongNoKhachHang.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tableDoanhThuLoiNhuanFocusLost(evt);
+                tableCongNoKhachHangFocusLost(evt);
             }
         });
-        jScrollPane3.setViewportView(tableDoanhThuLoiNhuan);
-        if (tableDoanhThuLoiNhuan.getColumnModel().getColumnCount() > 0) {
-            tableDoanhThuLoiNhuan.getColumnModel().getColumn(0).setMinWidth(120);
-            tableDoanhThuLoiNhuan.getColumnModel().getColumn(3).setMinWidth(110);
+        jScrollPane3.setViewportView(tableCongNoKhachHang);
+        if (tableCongNoKhachHang.getColumnModel().getColumnCount() > 0) {
+            tableCongNoKhachHang.getColumnModel().getColumn(0).setMinWidth(120);
+            tableCongNoKhachHang.getColumnModel().getColumn(3).setMinWidth(110);
         }
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/reload.png"))); // NOI18N
@@ -553,9 +553,9 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
         tableHoaDonTrongNgay.clearSelection();
     }//GEN-LAST:event_tableHoaDonTrongNgayFocusLost
 
-    private void tableDoanhThuLoiNhuanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableDoanhThuLoiNhuanFocusLost
-        tableDoanhThuLoiNhuan.clearSelection();
-    }//GEN-LAST:event_tableDoanhThuLoiNhuanFocusLost
+    private void tableCongNoKhachHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableCongNoKhachHangFocusLost
+        tableCongNoKhachHang.clearSelection();
+    }//GEN-LAST:event_tableCongNoKhachHangFocusLost
 
     private void tableSanPhamSapHetHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tableSanPhamSapHetHangFocusLost
         tableSanPhamSapHetHang.clearSelection();
@@ -576,8 +576,8 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
 
         loadDuLieu();
         MDHoaDon.showHoaDonTrongNgay(tableHoaDonTrongNgay);
-        MDHoaDon.showDoanhThuTrongNgay(tableDoanhThuLoiNhuan);
-        HELPER.helper.setTableTextCenterFullColumn(tableDoanhThuLoiNhuan);
+        MDHoaDon.showCongNoKhachHang(tableCongNoKhachHang);
+        HELPER.helper.setTableTextCenterFullColumn(tableCongNoKhachHang);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void hienThiSanPhamSapHetHang() {
@@ -633,7 +633,7 @@ public class PanelThongKeTongHop extends javax.swing.JPanel {
     private javax.swing.JLabel numDonHangTrongNgay;
     private javax.swing.JLabel numDonHangTrongTuan;
     private javax.swing.JPanel panelThongKe;
-    private javax.swing.JTable tableDoanhThuLoiNhuan;
+    private javax.swing.JTable tableCongNoKhachHang;
     private javax.swing.JTable tableHoaDonTrongNgay;
     private javax.swing.JTable tableSanPhamSapHetHang;
     // End of variables declaration//GEN-END:variables

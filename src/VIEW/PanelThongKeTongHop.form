@@ -888,7 +888,7 @@
               <Color blue="ff" green="99" red="0" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="DOANH THU L&#x1a0;&#x323;I NHU&#xc2;&#x323;N TRONG NGA&#x300;Y"/>
+            <Property name="text" type="java.lang.String" value="C&#xd4;NG N&#x1a0;&#x323; KHA&#x301;CH HA&#x300;NG CH&#x1af;A THU H&#xd4;&#x300;I"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -979,19 +979,17 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tableDoanhThuLoiNhuan">
+            <Component class="javax.swing.JTable" name="tableCongNoKhachHang">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="4">
-                    <Column editable="false" title="Sa&#x309;n ph&#xe2;&#x309;m" type="java.lang.Object"/>
-                    <Column editable="false" title="Gia&#x301;" type="java.lang.Object"/>
-                    <Column editable="false" title="S&#xf4;&#x301; l&#x1b0;&#x1a1;&#x323;ng" type="java.lang.Object"/>
-                    <Column editable="false" title="Th&#x1a1;&#x300;i gian" type="java.lang.Object"/>
-                    <Column editable="false" title="Doanh thu" type="java.lang.Object"/>
-                    <Column editable="false" title="L&#x1a1;&#x323;i nhu&#xe2;&#x323;n" type="java.lang.Object"/>
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="false" title="T&#xea;n kha&#x301;ch ha&#x300;ng" type="java.lang.Object"/>
+                    <Column editable="false" title="S&#xf4;&#x301; &#x111;i&#xea;&#x323;n thoa&#x323;i" type="java.lang.Object"/>
+                    <Column editable="false" title="&#x110;i&#x323;a chi&#x309;" type="java.lang.Object"/>
+                    <Column editable="false" title="C&#xf4;ng n&#x1a1;&#x323;" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1016,16 +1014,6 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                   </TableColumnModel>
                 </Property>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -1036,7 +1024,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tableDoanhThuLoiNhuanFocusLost"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tableCongNoKhachHangFocusLost"/>
               </Events>
             </Component>
           </SubComponents>

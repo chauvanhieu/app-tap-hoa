@@ -83,7 +83,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
         }
         txtGiaTriGiam.setText(helper.LongToString(hoadon.getGiamGia()));
         this.setTitle("Phiếu bán hàng : " + hoadon.getId());
-        ImageIcon img = new ImageIcon(getClass().getResource("/ICON/favicon.jpg"));
+        ImageIcon img = new ImageIcon(getClass().getResource("/ICON/favicon.png"));
         this.setIconImage(img.getImage());
 
         // load combobox thông tin khách hàng
