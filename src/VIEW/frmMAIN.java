@@ -146,7 +146,6 @@ public class frmMAIN extends javax.swing.JFrame {
                     item.getGhiChu()
                 });
             }
-
         }
         tableThuNoKhachHang.setModel(model);
     }

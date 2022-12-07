@@ -21,6 +21,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -86,6 +87,7 @@ public class helper {
 
     public static void setConfig(config item) {
         try {
+
             FileOutputStream fo = new FileOutputStream("src/TEXT/config.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fo);
             oos.writeObject(item);
@@ -156,6 +158,11 @@ public class helper {
         config item = null;
         Object obj = null;
         try {
+//            helper helper = new helper();
+//            File fileConfig = new File(helper.getClass().getResource("/TEXT/config.txt").toString());
+//            System.out.println(fileConfig.getPath());
+//            FileOutputStream fo = new FileOutputStream(fileConfig.getPath().replace("jar:", ""));
+
             FileInputStream fi = new FileInputStream("src/TEXT/config.txt");
 
             ObjectInputStream ois = new ObjectInputStream(fi);
