@@ -1149,15 +1149,18 @@ public class panelTaoHoaDonBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_cbHinhThucThanhToanItemStateChanged
 
     private void btnLuuInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuInActionPerformed
-        if (dataChiTietHoaDon.size() != 0) {
-            if (comboboxKhachHang.getSelectedIndex() == 0) {
-                idKhachHang = "KH01";
-            }
-            luuIn();
+//        if (dataChiTietHoaDon.size() != 0) {
+//            if (comboboxKhachHang.getSelectedIndex() == 0) {
+//                idKhachHang = "KH01";
+//            }
+//            luuIn();
+//
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Chưa có sản phẩm !");
+//        }
 
-        } else {
-            JOptionPane.showMessageDialog(this, "Chưa có sản phẩm !");
-        }
+        JOptionPane.showMessageDialog(this, "Chức năng in hóa đơn đang hoàn thiện...");
+
     }//GEN-LAST:event_btnLuuInActionPerformed
     public void luuIn() {
         if (cbHinhThucThanhToan.getSelectedIndex() == 2 && idKhachHang == "KH01") {
