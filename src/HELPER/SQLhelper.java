@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class SQLhelper {
 
-    public static String DB_URL = "jdbc:mysql://localhost/fpolymarket";
+    public static String DB_URL = "jdbc:mysql://localhost/racoonmarket";
     public static String USER_NAME = "root";
     public static String PASSWORD = "";
 
@@ -36,7 +36,7 @@ public class SQLhelper {
         Connection conn = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/fpolymarket", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/racoonmarket", "root", "");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

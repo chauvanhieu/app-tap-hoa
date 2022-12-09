@@ -5,6 +5,7 @@
 package HELPER;
 
 import CLASS.config;
+import MODEL.MDConfig;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
@@ -25,8 +26,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.Normalizer;
 import java.text.NumberFormat;
@@ -86,15 +89,7 @@ public class helper {
     }
 
     public static void setConfig(config item) {
-        try {
-
-            FileOutputStream fo = new FileOutputStream("src/TEXT/config.txt");
-            ObjectOutputStream oos = new ObjectOutputStream(fo);
-            oos.writeObject(item);
-            fo.close();
-            oos.close();
-        } catch (Exception e) {
-        }
+        MDConfig.setConfig(item);
     }
 
     public static boolean isPassword(String password) {
@@ -155,27 +150,7 @@ public class helper {
     }
 
     public static config getConfig() {
-        config item = null;
-        Object obj = null;
-        try {
-//            helper helper = new helper();
-//            File fileConfig = new File(helper.getClass().getResource("/TEXT/config.txt").toString());
-//            System.out.println(fileConfig.getPath());
-//            FileOutputStream fo = new FileOutputStream(fileConfig.getPath().replace("jar:", ""));
-
-            FileInputStream fi = new FileInputStream("src/TEXT/config.txt");
-
-            ObjectInputStream ois = new ObjectInputStream(fi);
-            obj = ois.readObject();
-            fi.close();
-            ois.close();
-        } catch (Exception e) {
-        }
-        item = (config) obj;
-        if (item == null) {
-            item = new config("", "", 8);
-        }
-        return item;
+        return MDConfig.getConfig();
     }
 
     public static String removeAccent(String s) {

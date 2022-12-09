@@ -1157,10 +1157,7 @@ public class frmXemHoaDonBanHang extends javax.swing.JDialog {
     private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
         try {
             Hashtable map = new Hashtable();
-            String path = getClass().getResource("/REPORT/hoaDonBanHang.jrxml").getPath().replace("file:/", "");
-            JasperReport jasper = JasperCompileManager.compileReport(path);
-//            String path = getClass().getResource("/REPORT/hoaDonBanHang.jrxml").toString().replaceAll("jar:file:/", "");
-//            JasperReport jasper = JasperCompileManager.compileReport(path);
+            JasperReport jasper = JasperCompileManager.compileReport("D:\\gocHocTap\\app\\DU_AN_1\\build\\classes\\REPORT\\hoaDonBanHang.jrxml");
             map.put("tenCuaHang", admin.getTenCuaHang());
             map.put("diaChiCuaHang", admin.getDiaChi());
             map.put("idHoaDon", hoadon.getId());
