@@ -13,10 +13,10 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class frmEditorNhanVien extends javax.swing.JDialog {
-
+    
     private nhanVien nv;
     public static String idNhanVien;
-
+    
     public frmEditorNhanVien(java.awt.Frame parent, boolean modal, String idNhanVien) {
         // Sữa nhân viên
 
@@ -31,7 +31,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         MDHoaDon.showHoaDonCuaNhanVien(idNhanVien, tableDanhSachHoaDonBanHang);
         HELPER.helper.setTableTextCenterFullColumn(tableDanhSachHoaDonBanHang);
     }
-
+    
     public frmEditorNhanVien(java.awt.Frame parent, boolean modal) {
         // Thêm nhân viên
 
@@ -43,11 +43,11 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         btnXoa.setEnabled(false);
         txtIDNhanVien.setText(MDNhanVien.createID());
         showHide(true);
-        dateNgaySinh.setDate(new Date());
+        dateNgaySinh.setDate(HELPER.helper.LayNgayDate("1-1-2000", "dd-MM-yyyy"));
         dateNgayVaoLam.setDate(new Date());
         setBtnLuu(option);
     }
-
+    
     public void setBtnLuu(String option) {
         if (option == "edit") {
             btnLuu.addActionListener(new ActionListener() {
@@ -67,7 +67,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
             });
         }
     }
-
+    
     public void themNhanVien() {
         String id = txtIDNhanVien.getText();
         String name = txtTenNhanVien.getText().trim();
@@ -89,10 +89,10 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         } else {
             trangThai = false;
         }
-
+        
         CTRLNhanVien.checkAdd(new nhanVien(id, name, soDienThoai, diaChi, ngaySinh, Luong, gioiTinh, ngayVaoLam, ghiChu, trangThai));
     }
-
+    
     public void suaNhanVien() {
         String id = txtIDNhanVien.getText();
         String name = txtTenNhanVien.getText().trim();
@@ -114,10 +114,10 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         } else {
             trangThai = false;
         }
-
+        
         CTRLNhanVien.checkUpdate(new nhanVien(id, name, soDienThoai, diaChi, ngaySinh, Luong, gioiTinh, ngayVaoLam, ghiChu, trangThai));
     }
-
+    
     public void setThongTinNhanVien() {
         txtIDNhanVien.setText(nv.getIdNhanVien());
         txtDiaChi.setText(nv.getDiaChi());
@@ -125,14 +125,14 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
         txtTenNhanVien.setText(nv.getName());
         txtSoDienThoai.setText(nv.getSoDienthoai());
         txtLuong.setText(HELPER.helper.LongToString(nv.getLuong()));
-
+        
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             dateNgaySinh.setDate(dateFormat.parse(nv.getNgaySinh()));
             dateNgayVaoLam.setDate(dateFormat.parse(nv.getNgaySinh()));
         } catch (Exception e) {
         }
-
+        
         if (nv.isGioiTinh() == true) {
             cbGioiTinh.setSelectedIndex(0);
         } else {
@@ -144,7 +144,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
             cbTrangThai.setSelectedIndex(1);
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -462,7 +462,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMouseClicked
 
     private void tableDanhSachHoaDonBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachHoaDonBanHangMousePressed
-
+        
         if (tableDanhSachHoaDonBanHang.getSelectedRows().length == 1 && evt.getClickCount() == 2) {
             String idhoadon = tableDanhSachHoaDonBanHang.getValueAt(tableDanhSachHoaDonBanHang.getSelectedRow(), 0) + "";
             this.setVisible(false);
@@ -472,7 +472,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
     }//GEN-LAST:event_tableDanhSachHoaDonBanHangMousePressed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-
+        
         showHide(true);
     }//GEN-LAST:event_btnSuaActionPerformed
     public void showHide(boolean bool) {
@@ -498,7 +498,7 @@ public class frmEditorNhanVien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "KHÔNG ĐƯỢC XÓA TÀI KHOẢN ĐIỀU HÀNH !!");
             return;
         }
-
+        
         if (JOptionPane.showConfirmDialog(null, "Xóa nhân viên ?") == 0) {
             MDNhanVien.remove(txtIDNhanVien.getText());
         }

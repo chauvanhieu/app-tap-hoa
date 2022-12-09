@@ -19,7 +19,10 @@ public class CTRLNhaCungCap {
         }
 
         checkSoDienThoai = HELPER.helper.isNumberPhone(ncc.getSoDienThoai());
-
+        if (checkSoDienThoai == false) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không đúng !");
+            return;
+        }
         if (ncc.getDiaChi().equals("")) {
             JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;
@@ -52,7 +55,10 @@ public class CTRLNhaCungCap {
         }
 
         checkSoDienThoai = HELPER.helper.isNumberPhone(ncc.getSoDienThoai());
-
+        if (checkSoDienThoai == false) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không đúng !");
+            return;
+        }
         if (ncc.getDiaChi().equals("")) {
             JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống !");
             return;

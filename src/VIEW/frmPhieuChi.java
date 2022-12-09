@@ -91,6 +91,12 @@ public class frmPhieuChi extends javax.swing.JDialog {
         jLabel13.setText("Lý do:");
 
         txtChi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtChi.setText("0");
+        txtChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtChiActionPerformed(evt);
+            }
+        });
         txtChi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtChiKeyReleased(evt);
@@ -197,6 +203,10 @@ public class frmPhieuChi extends javax.swing.JDialog {
             txtChi.setText("0");
         }
     }//GEN-LAST:event_txtChiKeyReleased
+
+    private void txtChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtChiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtChiActionPerformed
 
     /**
      * @param args the command line arguments

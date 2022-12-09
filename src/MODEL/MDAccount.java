@@ -158,9 +158,10 @@ public class MDAccount {
 
     //Hàm Update
     public static void updateAccount(Account acc) {
-        String sql = "UPDATE Account set  Password = ?, TrangThai = ?, BanHang = ?, NhapHang = ?, TaiKhoan = ?, HangHoa = ?,"
+        String sql = "UPDATE Account set idnhanvien=?,  Password = ?, TrangThai = ?, BanHang = ?, NhapHang = ?, TaiKhoan = ?, HangHoa = ?,"
                 + " NhanVien = ?, KhachHang = ?, NhaCungCap = ?, BaoCao = ?, PhieuChi = ? Where username = ?";
         HELPER.SQLhelper.executeUpdate(sql,
+                acc.getIdNhanVien(),
                 acc.getPassword(),
                 acc.isTrangThai(),
                 acc.isBanHang(),

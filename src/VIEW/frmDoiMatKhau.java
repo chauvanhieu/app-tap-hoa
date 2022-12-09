@@ -228,6 +228,7 @@ public class frmDoiMatKhau extends javax.swing.JDialog {
         String pass = new String(txtPassMoi.getPassword()).trim();
         String passCu = new String(txtPassCu.getPassword()).trim();
         String confirmPass = new String(txtNhapLaiPassMoi.getPassword()).trim();
+        
         if (acc.getPassword().equals(passCu.trim())) {
             if (pass.equals(confirmPass)) {
                 acc.setPassword(pass);
@@ -245,11 +246,7 @@ public class frmDoiMatKhau extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtPassCuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassCuKeyReleased
-        if (txtPassCu.getText().equals(acc.getPassword())) {
-            txtPassCu.setBorder(new LineBorder(Color.green, 1));
-        } else {
-            txtPassCu.setBorder(new LineBorder(Color.red, 1));
-        }
+
     }//GEN-LAST:event_txtPassCuKeyReleased
 
     public static void main(String args[]) {

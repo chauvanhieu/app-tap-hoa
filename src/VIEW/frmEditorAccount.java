@@ -19,14 +19,14 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 public class frmEditorAccount extends javax.swing.JDialog {
-    
+
     private DetailedComboBox comboBoxNhanvien;
     private static String option;
     private String idNhanVien;
     private boolean checkUser = false;
     private boolean checkPass = false;
     private boolean checkConfirmPass = false;
-    
+
     public frmEditorAccount(java.awt.Frame parent, boolean modal, String option) {
         super(parent, modal);
         frmEditorAccount.option = option;
@@ -39,7 +39,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
             cbTrangThai.setVisible(false);
         }
     }
-    
+
     public void loadThongTin() {
         Account acc = MDAccount.getAccount(option);
         txtUsername.setText(acc.getUsername());
@@ -48,7 +48,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
         int index = 0;
         ArrayList<nhanVien> data = MDNhanVien.getData();
         for (int i = 0; i < data.size(); i++) {
-            
+
             if (acc.getIdNhanVien().equals(data.get(i).getIdNhanVien())) {
                 index = i;
                 comboBoxNhanvien.setSelectedIndex(i);
@@ -65,7 +65,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
         checkboxBaoCao.setSelected(acc.isBaoCao());
         checkboxThuChi.setSelected(acc.isPhieuChi());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -315,9 +315,9 @@ public class frmEditorAccount extends javax.swing.JDialog {
         String[] columns = new String[]{"Mã nhân viên", "Tên", "Điện thoại", "Địa chỉ"};
         int[] widths = new int[]{80, 300, 120, 360};
         this.comboBoxNhanvien = new DetailedComboBox(columns, widths, 1);
-        
+
         List<List<?>> tableData = new ArrayList<List<?>>();
-        
+
         for (nhanVien nv : data) {
             tableData.add(new ArrayList<>(
                     Arrays.asList(nv.getIdNhanVien(), nv.getName(), nv.getSoDienthoai(), nv.getDiaChi())));
@@ -337,6 +337,12 @@ public class frmEditorAccount extends javax.swing.JDialog {
         panelNhanVien.add(comboBoxNhanvien);
     }
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        if (CTRLAccount.isAccount(txtUsername.getText().trim(),
+                new String(txtPassword.getPassword()).trim(),
+                new String(txtConfirmPassword.getPassword()).trim()) == false) {
+            return;
+        }
+
         if (option.equals("add")) {
             if (comboBoxNhanvien.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "Chưa chọn nhân viên !!");
@@ -358,7 +364,7 @@ public class frmEditorAccount extends javax.swing.JDialog {
                     checkboxThuChi.isSelected());
             CTRLAccount.checkAddAccount(acc);
         } else {
-            if (comboBoxNhanvien.getSelectedIndex() == 0) {
+            if (idNhanVien == "") {
                 JOptionPane.showMessageDialog(this, "Chưa chọn nhân viên !!");
                 return;
             }
@@ -394,40 +400,15 @@ public class frmEditorAccount extends javax.swing.JDialog {
             txtUsername.setBorder(new LineBorder(Color.red, 1));
             checkUser = false;
         }
-//        setBtnLuu();
     }//GEN-LAST:event_txtUsernameKeyReleased
 
-//    public void setBtnLuu() {
-//        if (checkConfirmPass && checkPass && checkUser) {
-//            btnLuu.setEnabled(true);
-//        } else {
-//            btnLuu.setEnabled(false);
-//        }
-//    }
 
     private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
-//        String password = new String(txtPassword.getPassword());
-//        if (helper.isPassword(password) == true) {
-//            txtPassword.setBorder(new LineBorder(Color.green, 1));
-//            checkPass = true;
-//        } else {
-//            txtPassword.setBorder(new LineBorder(Color.red, 1));
-//            checkPass = false;
-//        }
-//        setBtnLuu();
+
     }//GEN-LAST:event_txtPasswordKeyReleased
 
     private void txtConfirmPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmPasswordKeyReleased
-//        String password = new String(txtPassword.getPassword());
-//        String ConfirmPassword = new String(txtConfirmPassword.getPassword());
-//        if (ConfirmPassword.equals(password)) {
-//            txtConfirmPassword.setBorder(new LineBorder(Color.green, 1));
-//            checkConfirmPass = true;
-//        } else {
-//            txtConfirmPassword.setBorder(new LineBorder(Color.red, 1));
-//            checkConfirmPass = false;
-//        }
-//        setBtnLuu();
+
     }//GEN-LAST:event_txtConfirmPasswordKeyReleased
 
     /**

@@ -201,6 +201,7 @@ public class frmEditorKhachHang extends javax.swing.JDialog {
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel32.setText("Công nợ :");
 
+        txtCongNo.setText("0");
         txtCongNo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCongNoKeyReleased(evt);

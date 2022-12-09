@@ -22,8 +22,6 @@ public class chiTietHoaDon {
         this.giaNhap = giaNhap;
     }
 
-    
-
     public chiTietHoaDon(
             String idSanPham,
             String tenSanPham,
@@ -50,9 +48,9 @@ public class chiTietHoaDon {
     }
 
     public int getSoLuongTraHang() {
-        if (soLuongTraHang > tonKho) {
-            return tonKho;
-        }
+//        if (soLuongTraHang > tonKho) {
+//            return tonKho;
+//        }
 
         return soLuongTraHang;
     }
@@ -122,10 +120,10 @@ public class chiTietHoaDon {
     }
 
     public int getSoLuong() {
-        if (soLuong > tonKho) {
-            setSoLuong(tonKho);
-            return tonKho;
-        }
+//        if (soLuong > tonKho) {
+//            setSoLuong(tonKho);
+//            return tonKho;
+//        }
         return soLuong;
     }
 

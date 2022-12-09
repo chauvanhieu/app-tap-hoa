@@ -469,6 +469,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         jLabel7.setText("Giá nhập :");
 
         txtGiaNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtGiaNhap.setText("0");
         txtGiaNhap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtGiaNhapKeyReleased(evt);
@@ -476,6 +477,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         });
 
         txtGiaBan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtGiaBan.setText("0");
         txtGiaBan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtGiaBanKeyReleased(evt);
@@ -492,6 +494,7 @@ public class frmEditorSanPham extends javax.swing.JDialog {
         jLabel10.setText("Ghi chú :");
 
         txtGiaSi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtGiaSi.setText("0");
         txtGiaSi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtGiaSiKeyReleased(evt);

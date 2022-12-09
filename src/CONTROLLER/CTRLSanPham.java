@@ -2,7 +2,6 @@ package CONTROLLER;
 
 import CLASS.sanPham;
 import MODEL.MDSanPham;
-import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class CTRLSanPham {

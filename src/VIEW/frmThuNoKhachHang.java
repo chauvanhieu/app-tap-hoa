@@ -21,28 +21,28 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class frmThuNoKhachHang extends javax.swing.JDialog {
-
+    
     private DetailedComboBox combobox;
     private static Account acc;
     private ArrayList<khachHang> dataKhachHang = MDKhachHang.getAll();
     private String idKhachHang;
     private boolean check = false;
-
+    
     public frmThuNoKhachHang(java.awt.Frame parent, boolean modal, Account acc) {
         super(parent, modal);
         this.acc = acc;
         initComponents();
         loadComboBox();
-
+        
     }
-
+    
     public void loadComboBox() {
         String[] columns = new String[]{"Mã khách hàng", "Tên", "Điện thoại", "Địa chỉ", "Công nợ"};
         int[] widths = new int[]{80, 300, 120, 360, 150};
         this.combobox = new DetailedComboBox(columns, widths, 1);
-
+        
         List<List<?>> tableData = new ArrayList<List<?>>();
-
+        
         for (khachHang kh : dataKhachHang) {
             tableData.add(new ArrayList<>(
                     Arrays.asList(kh.getIdKhachHang(), kh.getName(), kh.getSoDienThoai(), kh.getDiaChi(), helper.LongToString(kh.getNo()))));
@@ -57,7 +57,7 @@ public class frmThuNoKhachHang extends javax.swing.JDialog {
                 check = true;
                 List<?> rowData = combobox.getSelectedRow();
                 idKhachHang = rowData.get(0) + "";
-
+                
                 textSoDienThoai.setText(rowData.get(2) + "");
                 textDiaChi.setText(rowData.get(3) + "");
                 textCongNo.setText(rowData.get(4) + "");
@@ -288,23 +288,24 @@ public class frmThuNoKhachHang extends javax.swing.JDialog {
 
     private void txtThuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtThuKeyReleased
         helper.setTextFieldMoney(txtThu);
-
+        
         textConLai.setText(helper.LongToString(helper.SoLong(textCongNo.getText()) - helper.SoLong(txtThu.getText())));
         if (helper.SoLong(textConLai.getText()) < 0) {
-            txtThu.setText("0");
+            txtThu.setText(textCongNo.getText());
+            textConLai.setText("0");
         }
     }//GEN-LAST:event_txtThuKeyReleased
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here
         if (check == false) {
-
+            
             this.setVisible(false);
         } else {
             if (JOptionPane.showConfirmDialog(this, "Thoát ?") == 0) {
                 this.setVisible(false);
             }
-
+            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

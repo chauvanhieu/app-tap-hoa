@@ -157,6 +157,7 @@ public class frmEditorNhaCungCap extends javax.swing.JDialog {
         jLabel8.setText("Công nợ :");
 
         txtCongNo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCongNo.setText("0");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Trạng thái :");

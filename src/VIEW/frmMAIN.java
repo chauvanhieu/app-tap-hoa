@@ -606,7 +606,6 @@ public class frmMAIN extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         comboBoxNhomHang = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
-        btnThemSanPham1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -1564,18 +1563,6 @@ public class frmMAIN extends javax.swing.JFrame {
             .addGap(0, 119, Short.MAX_VALUE)
         );
 
-        btnThemSanPham1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThemSanPham1.setForeground(new java.awt.Color(0, 153, 255));
-        btnThemSanPham1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/import-excel.png"))); // NOI18N
-        btnThemSanPham1.setText("Excel");
-        btnThemSanPham1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnThemSanPham1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnThemSanPham1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemSanPham1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -1583,9 +1570,7 @@ public class frmMAIN extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(btnThemSanPham)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnThemSanPham1)
-                .addGap(65, 65, 65)
+                .addGap(155, 155, 155)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel10)
@@ -1621,9 +1606,7 @@ public class frmMAIN extends javax.swing.JFrame {
                                     .addComponent(jLabel11)))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(19, 19, 19)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnThemSanPham1)
-                                    .addComponent(btnThemSanPham))))
+                                .addComponent(btnThemSanPham)))
                         .addGap(0, 11, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -4032,6 +4015,7 @@ public class frmMAIN extends javax.swing.JFrame {
     private void menuTaoPhieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTaoPhieuChiActionPerformed
         frmPhieuChi panel = new frmPhieuChi(this, true, acc);
         panel.setVisible(true);
+        loadTableNhatKyChiTien();
     }//GEN-LAST:event_menuTaoPhieuChiActionPerformed
 
     private void btnNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapHangActionPerformed
@@ -4815,10 +4799,6 @@ public class frmMAIN extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTimKiemTraNoNccActionPerformed
 
-    private void btnThemSanPham1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSanPham1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnThemSanPham1ActionPerformed
-
     private void tabBaoCaoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabBaoCaoFocusGained
         tabBaoCao.requestFocus();
     }//GEN-LAST:event_tabBaoCaoFocusGained
@@ -5006,7 +4986,6 @@ public class frmMAIN extends javax.swing.JFrame {
     private javax.swing.JButton btnThemNhaCungCap1;
     private javax.swing.JButton btnThemNhanVien;
     private javax.swing.JButton btnThemSanPham;
-    private javax.swing.JButton btnThemSanPham1;
     private javax.swing.JButton btnTimKiemKhachHang;
     private javax.swing.JButton btnTimKiemNhanVien;
     private javax.swing.JButton btnTimKiemNhanVien1;
